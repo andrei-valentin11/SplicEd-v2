@@ -401,7 +401,14 @@
                     <h1>About Us</h1>
                 </div>
 
-                <div class="about-layout">
+                <div class="section-tabs about-tabs" role="tablist" aria-label="About SplicEd sections">
+                    <button class="active" data-about-tab="overview" role="tab" aria-selected="true" onclick="setAboutTab('overview')">Overview</button>
+                    <button data-about-tab="team" role="tab" aria-selected="false" onclick="setAboutTab('team')">Team</button>
+                    <button data-about-tab="alignment" role="tab" aria-selected="false" onclick="setAboutTab('alignment')">Curriculum Alignment</button>
+                    <button data-about-tab="design" role="tab" aria-selected="false" onclick="setAboutTab('design')">Design Basis</button>
+                </div>
+
+                <div data-about-panel="overview"><div class="about-layout">
                     <article class="panel">
                         <h2>Learning procedures, one step at a time.</h2>
 
@@ -427,7 +434,8 @@
                     </aside>
                 </div>
 
-                <section class="team-section">
+                </div>
+                <div data-about-panel="team" hidden><section class="team-section">
                     <h2>Meet the Team</h2>
 
                     <div class="team-grid">
@@ -458,7 +466,8 @@
                     </div>
                 </section>
 
-                <section class="theory-section">
+                </div>
+                <div data-about-panel="alignment" hidden><section class="theory-section">
                     <span class="eyebrow">COMPETENCY-ALIGNED CONTENT</span>
                     <h2>What the module content is anchored to</h2>
                     <div class="theory-grid">
@@ -485,7 +494,8 @@
                     </div>
                 </section>
 
-                <section class="theory-section">
+                </div>
+                <div data-about-panel="design" hidden><section class="theory-section">
                     <span class="eyebrow">THEORY-ALIGNED DESIGN</span>
                     <h2>Why SplicEd is designed this way</h2>
 
@@ -527,6 +537,7 @@
                         </article>
                     </div>
                 </section>
+            </div>
             </section>
         </main>
 
