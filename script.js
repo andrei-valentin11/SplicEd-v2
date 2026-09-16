@@ -4145,32 +4145,47 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
                         <div class="wire-legend"><span class="wire-a">A: Main wire</span>
                             <span class="wire-b">B: Second / branch wire</span>
                             ${selectedModule === 7 ? '<span class="wire-c">C: Second branch</span>' : ""}</div>
-                        <div id="visualStage" class="visual-stage">${wireDiagram(selectedModule, currentStep, true)}</div>
-                        <p class="study-caption">Training diagram. Turns and dimensions are illustrative.</p>
+                        <div class="visual-reference-workspace">
+                            <div class="animated-illustration-panel">
+                                <span class="visual-panel-label">Animated illustration</span>
+                                <div id="visualStage" class="visual-stage">${wireDiagram(selectedModule, currentStep, true)}</div>
+                            </div>
+                            <figure class="finished-splice-reference">
+                                <span class="visual-panel-label">Finished splice reference</span>
+                                <img src="${esc(module.media?.photo || '')}"
+                                    alt="${esc(module.media?.photoAlt || (module.name + ' finished splice reference'))}"
+                                    loading="lazy"
+                                    onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+                                <div class="finished-photo-placeholder" hidden>
+                                    <strong>${esc(module.name)}</strong>
+                                    <span>Actual finished-splice photo</span>
+                                    <small>Add the verified training-sample photo in <code>images/modules/</code>.</small>
+                                </div>
+                                <figcaption>Compare the simplified animation with the finished training sample.</figcaption>
+                            </figure>
+                        </div>
+                        <p class="study-caption">The animation simplifies the motion. Use the finished-splice reference to connect the illustration with the physical wire.</p>
                         <button type="button" class="secondary" onclick="replayVisual()">Replay This Step</button>
                         ${playbackTimer ? `<div class="study-autoplay" role="status">Auto-play is on.
                             <button type="button" class="secondary" onclick="togglePlayback()">Pause Auto-play</button></div>` : ""}
-                        <details class="study-fold" data-panel="tools" ${open("tools")}>
-                            <summary>More Visual Tools</summary>
-                            <div class="study-fold-body">
-                                <div class="study-tools">
-                                    <button type="button" id="pauseActionButton" class="secondary"
-                                        aria-pressed="false" onclick="pauseAction()">Pause Action</button>
-                                    <button type="button" id="zoomButton" class="secondary"
-                                        aria-pressed="false" onclick="toggleZoom()">Close-up</button>
-                                    <label class="study-speed" for="motionSpeed">Animation speed
-                                        <select id="motionSpeed" onchange="setAnimationSpeed(Number(this.value))">
-                                            ${[[0.5, "Slow (0.5×)"], [1, "Normal (1×)"], [1.5, "Fast (1.5×)"]].map(([value, label]) =>
-                                                `<option value="${value}" ${animationSpeed === value ? "selected" : ""}>${label}</option>`).join("")}
-                                        </select>
-                                    </label>
-                                    <button type="button" id="playStepsButton" class="secondary"
-                                        aria-pressed="${Boolean(playbackTimer)}" onclick="togglePlayback()">
-                                        ${playbackTimer ? "Pause Auto-play" : "Auto-play Steps"}</button>
-                                </div>
-                                <p class="study-caption">Auto-play moves through the steps automatically. Pause whenever you need more time.</p>
+                        <div class="visual-tools-inline" aria-label="Animation controls">
+                            <div class="visual-tools-label"><strong>Animation controls</strong><span>Control the illustration while you study.</span></div>
+                            <div class="study-tools">
+                                <button type="button" id="pauseActionButton" class="secondary"
+                                    aria-pressed="false" onclick="pauseAction()">Pause / Resume</button>
+                                <button type="button" id="zoomButton" class="secondary"
+                                    aria-pressed="false" onclick="toggleZoom()">Close-up</button>
+                                <label class="study-speed" for="motionSpeed">Speed
+                                    <select id="motionSpeed" onchange="setAnimationSpeed(Number(this.value))">
+                                        ${[[0.5, "0.5×"], [1, "1×"], [1.5, "1.5×"]].map(([value, label]) =>
+                                            `<option value="${value}" ${animationSpeed === value ? "selected" : ""}>${label}</option>`).join("")}
+                                    </select>
+                                </label>
+                                <button type="button" id="playStepsButton" class="secondary"
+                                    aria-pressed="${Boolean(playbackTimer)}" onclick="togglePlayback()">
+                                    ${playbackTimer ? "Pause Steps" : "Play All Steps"}</button>
                             </div>
-                        </details>
+                        </div>
                         <details class="study-fold" data-panel="compare" ${open("compare")}>
                             <summary>Compare Before and After</summary>
                             <div class="study-fold-body before-after">
@@ -4389,6 +4404,14 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
         navigate("practice");
     }
 
+    let progressTab = "overview";
+    function setProgressTab(tab) {
+        progressTab = tab;
+        renderProgress();
+        const target = document.querySelector(`[data-progress-panel="${tab}"]`);
+        if (target) target.focus({preventScroll:true});
+    }
+
     function renderProgress() {
         originalProgress();
         $$("#progressContent th").forEach(cell => {
@@ -4399,6 +4422,30 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
             button.textContent = `Open Checklist · ${count(index)}/5 checked`;
             button.setAttribute("aria-label", `Practical checklist for ${MODULES[index].name}: ${count(index)} of 5 items checked`);
         });
+
+        const host = $("#progressContent");
+        const children = [...host.children];
+        const stats = children.find(el => el.classList?.contains("stats-grid"));
+        const summary = children.find(el => el.matches?.("article.panel"));
+        const tableWrap = children.find(el => el.classList?.contains("table-wrap"));
+        const history = children.find(el => el.classList?.contains("history"));
+        const review = children.find(el => el.textContent?.includes("My Review List"));
+        const guidedText = children.find(el => el !== review && el.textContent?.includes("Guided ordering:"));
+
+        const bucket = document.createElement("div");
+        bucket.className = "progress-tab-shell";
+        bucket.innerHTML = `<div class="progress-tabs" role="tablist" aria-label="Progress sections">
+            <button role="tab" class="${progressTab==='overview'?'active':''}" aria-selected="${progressTab==='overview'}" onclick="setProgressTab('overview')">Overview</button>
+            <button role="tab" class="${progressTab==='modules'?'active':''}" aria-selected="${progressTab==='modules'}" onclick="setProgressTab('modules')">Module Progress</button>
+            <button role="tab" class="${progressTab==='review'?'active':''}" aria-selected="${progressTab==='review'}" onclick="setProgressTab('review')">Review & History</button>
+        </div>
+        <section class="progress-tab-panel" data-progress-panel="${progressTab}" tabindex="-1"></section>`;
+        const panel=bucket.querySelector('.progress-tab-panel');
+        const add=el=>{if(el) panel.appendChild(el)};
+        if(progressTab==='overview'){ add(stats); add(summary); }
+        if(progressTab==='modules'){ add(tableWrap); }
+        if(progressTab==='review'){ add(review); add(guidedText); add(history); }
+        host.replaceChildren(bucket);
     }
 
     function openRubric(index) {
@@ -4445,7 +4492,7 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
         navigate, openGuidedOrder, renderPractice, acceptSafety, toggleStepComplete,
         toggleSavedStep, jumpStep, nextStep, stopPlayback, prepareNextQuestion,
         renderNextPractice, chooseGuidedAnswer, checkGuidedAnswer, answerNextStep,
-        advanceNextQuestion, reviewGuidedStep, renderProgress, openRubric,
+        advanceNextQuestion, reviewGuidedStep, renderProgress, setProgressTab, openRubric,
         saveRubric, closeRubric, updateChecklistCount
     });
 
