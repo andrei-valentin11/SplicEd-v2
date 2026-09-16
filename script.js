@@ -42,7 +42,7 @@ const MODULES = [
 
         media: {
             photo: "assets/images/actual/rat-tail-actual.webp",
-            clip: "media/rat-tail-demo.gif",
+            clip: "assets/media/gifs/rat-tail-demo.gif",
             photoAlt: "Verified actual training-sample photo of the Rat Tail / Pigtail Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Rat Tail / Pigtail Joint"
         },
@@ -93,7 +93,7 @@ const MODULES = [
 
         media: {
             photo: "assets/images/actual/western-union-short-tie-actual.webp",
-            clip: "media/western-short-demo.gif",
+            clip: "assets/media/gifs/western-union-short-tie-demo.gif",
             photoAlt: "Verified actual training-sample photo of the Western Union Short-Tie held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Western Union Short-Tie"
         },
@@ -149,7 +149,7 @@ const MODULES = [
 
         media: {
             photo: "assets/images/actual/western-union-long-tie-actual.webp",
-            clip: "media/western-long-demo.gif",
+            clip: "assets/media/gifs/western-union-long-tie-demo.gif",
             photoAlt: "Verified actual training-sample photo of the Western Union Long-Tie held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Western Union Long-Tie"
         },
@@ -205,7 +205,7 @@ const MODULES = [
 
         media: {
             photo: "assets/images/actual/plain-tap-actual.webp",
-            clip: "media/plain-tap-demo.gif",
+            clip: "assets/media/gifs/plain-tap-demo.gif",
             photoAlt: "Verified actual training-sample photo of the Plain Tap Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Plain Tap Joint"
         },
@@ -261,7 +261,7 @@ const MODULES = [
 
         media: {
             photo: "assets/images/actual/knotted-tap-actual.webp",
-            clip: "media/knotted-tap-demo.gif",
+            clip: "assets/media/gifs/knotted-tap-demo.gif",
             photoAlt: "Verified actual training-sample photo of the Knotted Tap Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Knotted Tap Joint"
         },
@@ -317,7 +317,7 @@ const MODULES = [
 
         media: {
             photo: "assets/images/actual/aerial-tap-actual.webp",
-            clip: "media/aerial-tap-demo.gif",
+            clip: "assets/media/gifs/aerial-tap-demo.gif",
             photoAlt: "Verified actual training-sample photo of the Aerial Tap Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Aerial Tap Joint"
         },
@@ -373,7 +373,7 @@ const MODULES = [
 
         media: {
             photo: "assets/images/actual/fixture-joint-actual.webp",
-            clip: "media/fixture-joint-demo.gif",
+            clip: "assets/media/gifs/fixture-joint-demo.gif",
             photoAlt: "Verified actual training-sample photo of the Fixture Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Fixture Joint"
         },
@@ -429,7 +429,7 @@ const MODULES = [
 
         media: {
             photo: "assets/images/actual/cross-joint-actual.webp",
-            clip: "media/cross-joint-demo.gif",
+            clip: "assets/media/gifs/cross-joint-demo.gif",
             photoAlt: "Verified actual training-sample photo of the Cross Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Cross Joint"
         },
@@ -1566,6 +1566,40 @@ function renderPractice() {
             "selectPractice"
         )}
 
+        <section class="practice-step-dock panel" aria-label="Step-by-step procedure">
+            <div class="practice-step-dock-head">
+                <div>
+                    <span class="eyebrow">STEP-BY-STEP PROCEDURE</span>
+                    <strong>Choose a step — visible immediately</strong>
+                </div>
+                <span class="tag">Step ${currentStep + 1} of ${module.steps.length}</span>
+            </div>
+            <div class="practice-step-tabs" role="tablist">
+                ${module.steps.map((item,index)=>`
+                    <button type="button" role="tab"
+                        class="practice-step-tab ${index===currentStep?"current":""}"
+                        aria-selected="${index===currentStep}"
+                        onclick="jumpStep(${index})">
+                        <span>Step ${index+1}</span>
+                        <small>${escapeHTML(item[0])}</small>
+                    </button>`).join("")}
+            </div>
+            <div class="practice-current-instruction">
+                <div>
+                    <span class="eyebrow">CURRENT STEP</span>
+                    <h2>${escapeHTML(step[0])}</h2>
+                    <p>${escapeHTML(step[1])}</p>
+                </div>
+                <div class="button-row">
+                    <button class="secondary" onclick="previousStep()" ${currentStep===0?"disabled":""}>← Previous</button>
+                    <button class="secondary" onclick="replayVisual()">↻ Replay</button>
+                    <button class="primary" onclick="nextStep()" ${!stepComplete||!safetyAccepted?"disabled":""}>
+                        ${currentStep===module.steps.length-1?"What Comes Next? →":"Next Step →"}
+                    </button>
+                </div>
+            </div>
+        </section>
+
         <aside class="safety-panel">
             <strong>Safety reminder before practical work</strong>
             <p class="small-text">
@@ -1728,7 +1762,7 @@ function renderPractice() {
                 </section>
 
                 <section class="practice-section step-navigation">
-                    <h3 class="practice-section-title">Step Navigation</h3>
+                    <h3 class="practice-section-title">Detailed Step List (Optional)</h3>
 
                     <div class="step-list">
                     ${module.steps.map((item, index) => `
