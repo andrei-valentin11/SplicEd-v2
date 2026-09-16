@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="google-site-verification" content="UtWwapqv9-n4_0UC2a3u9n4DhUMqULc14oYUTb9WJiA" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="description"
+        content="SplicEd: guided lessons and procedural practice for electrical splices and joints."
+    >
+
+    <title>SplicEd — Electrical Splices & Joints</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+
+    <!-- LEARNER START -->
+
+    <main id="authPage" class="auth-page">
+        <section class="auth-intro">
+            <a class="brand" href="#">
+                <span class="brand-mark">S</span>
+                <span>Splic<span class="copper-text">Ed</span></span>
+            </a>
+
+            <span class="eyebrow">INDUSTRIAL ARTS • ELECTRICAL LEARNING</span>
+
+            <h1>
+                Understand the steps.
+                <span>Build the connection.</span>
+            </h1>
+
+            <p>
+                Learn electrical splices and joints through visual lessons,
+                guided practice, sequencing activities, and module assessments.
+            </p>
+
+            <div class="auth-diagram">
+                <div class="panel-heading">
+                    <span>THE WORKBENCH</span>
+                    <span>Splices & Joints</span>
+                </div>
+
+                <div id="authDiagram"></div>
+
+                <p class="small-text">
+                    Observe the procedure. Practice the order.
+                    Review what needs more attention.
+                </p>
+            </div>
+
+            <!--
+                OPTIONAL CUSTOM ANIMATION:
+
+                Replace the auth-diagram above with your animation if needed.
+
+                <video controls muted playsinline preload="none">
+                    <source src="your-animation.mp4" type="video/mp4">
+                </video>
+            -->
+        </section>
+
+        <section class="auth-card">
+            <span class="eyebrow">LEARNER START</span>
+            <h2>Welcome to SplicEd</h2>
+
+            <p class="muted">
+                Enter a nickname to open your lessons and continue progress saved on this browser.
+            </p>
+
+            <form id="profileForm" class="profile-form" onsubmit="handleProfileStart(event)">
+                <label for="profileName">Learner nickname</label>
+                <input
+                    id="profileName"
+                    name="profileName"
+                    autocomplete="nickname"
+                    maxlength="40"
+                    placeholder="e.g., Andrei"
+                    required
+                >
+
+                <button class="primary full-width" type="submit">
+                    Start Learning →
+                </button>
+
+                <p id="profileMessage" class="form-message" role="status" aria-live="polite"></p>
+            </form>
+
+            <div id="returningProfiles" class="profile-list" hidden>
+                <p class="small-text">Saved learner profiles on this browser</p>
+                <div id="profileButtons" class="profile-buttons"></div>
+            </div>
+
+            <p class="small-text auth-note">
+                SplicEd asks only for a nickname. Your nickname and learning progress stay in this browser; no password or personal email is needed.
+            </p>
+        </section>
+    </main>
+
+    <!-- MAIN APPLICATION -->
+
+    <div id="mainApplication" hidden>
+
+        <header class="navbar">
+            <button
+                class="brand brand-button"
+                type="button"
+                onclick="navigate('home')"
+                aria-label="SplicEd home"
+            >
+                <span class="brand-mark">S</span>
+                <span>Splic<span class="copper-text">Ed</span></span>
+            </button>
+
+            <nav aria-label="Main navigation">
+                <button data-page="home" onclick="navigate('home')">
+                    Home
+                </button>
+
+                <button data-page="learn" onclick="navigate('learn')">
+                    Learn
+                </button>
+
+                <button data-page="practice" onclick="navigate('practice')">
+                    Practice
+                </button>
+
+                <button data-page="practice" onclick="startNextPractice(selectedModule)">
+                    Guided Order
+                </button>
+
+                <button data-page="challenge" onclick="navigate('challenge')">
+                    Challenge
+                </button>
+
+                <button data-page="assessment" onclick="navigate('assessment')">
+                    Assessment
+                </button>
+
+                <button data-page="progress" onclick="navigate('progress')">
+                    Progress
+                </button>
+
+                <button data-page="teacher" onclick="navigate('teacher')">
+                    Teacher Guide
+                </button>
+
+                <button data-page="about" onclick="navigate('about')">
+                    About Us
+                </button>
+            </nav>
+
+            <div class="account-menu">
+                <span id="userLabel"></span>
+                <button class="secondary small-button" onclick="logout()">
+                    Change Learner
+                </button>
+            </div>
+        </header>
+
+        <main class="app-content">
+
+            <!-- HOME -->
+
+            <section id="home" class="page active">
+                <div class="home-layout">
+                    <div class="hero-copy">
+                        <span class="eyebrow">
+                            GAMIFIED WEB-BASED LEARNING SYSTEM
+                        </span>
+
+                        <h1>
+                            Understand the steps.
+                            <span>Master the procedure.</span>
+                        </h1>
+
+                        <p>
+                            SplicEd supports procedural understanding of
+                            electrical splices and joints through structured
+                            lessons, visual demonstrations, guided sequencing,
+                            feedback, and repeated practice.
+                        </p>
+
+                        <div class="button-row">
+                            <button
+                                class="primary"
+                                onclick="navigate('learn')"
+                            >
+                                Start Learning →
+                            </button>
+
+                            <button
+                                class="secondary"
+                                onclick="showHowItWorks()"
+                            >
+                                How It Works
+                            </button>
+                        </div>
+
+                        <div class="home-facts">
+                            <div><strong>8</strong><span>Learning modules</span></div>
+                            <div><strong>47</strong><span>Guided steps</span></div>
+                            <div><strong>80</strong><span>Assessment items</span></div>
+                        </div>
+                    </div>
+
+                    <article class="workbench-card">
+                        <div class="panel-heading">
+                            <span>PROCEDURAL WORKBENCH</span>
+                            <span>Module Preview</span>
+                        </div>
+
+                        <div id="homeDiagram"></div>
+
+                        <div class="workbench-caption">
+                            <span class="eyebrow">WESTERN UNION SHORT-TIE</span>
+                            <h2>See how each step connects.</h2>
+                            <p>
+                                Compare the visual with the instruction,
+                                then practice the correct order.
+                            </p>
+                        </div>
+                    </article>
+                </div>
+
+                <div id="howItWorks" class="how-grid" hidden>
+                    <article class="panel">
+                        <span class="step-number">01</span>
+                        <h3>Read & Observe</h3>
+                        <p>Study the lesson, diagrams, and related tutorial.</p>
+                    </article>
+
+                    <article class="panel">
+                        <span class="step-number">02</span>
+                        <h3>Practice the Order</h3>
+                        <p>Answer what comes next, then arrange the complete sequence.</p>
+                    </article>
+
+                    <article class="panel">
+                        <span class="step-number">03</span>
+                        <h3>Assess & Review</h3>
+                        <p>Take the module assessment and revisit difficult steps.</p>
+                    </article>
+                </div>
+            </section>
+
+            <!-- LEARN -->
+
+            <section id="learn" class="page">
+                <div class="section-heading">
+                    <span class="eyebrow">THE LEARNING BENCH</span>
+                    <h1>Electrical Splices & Joints</h1>
+                    <p>
+                        Open a module to study its purpose, procedure,
+                        visual diagrams, and quality checks.
+                    </p>
+                </div>
+
+                <div id="lessonCards" class="lesson-grid"></div>
+                <div id="lessonViewer" hidden></div>
+            </section>
+
+            <!-- PRACTICE -->
+
+            <section id="practice" class="page">
+                <div class="section-heading">
+                    <span class="eyebrow">OBSERVE • REPLAY • UNDERSTAND</span>
+                    <h1>Guided Practice</h1>
+                    <p>
+                        Study one action at a time.
+                        Save difficult steps to your review list.
+                    </p>
+                </div>
+
+                <div id="practiceContent"></div>
+            </section>
+
+            <!-- WHAT COMES NEXT -->
+
+            <section id="nextPractice" class="page">
+                <div class="section-heading">
+                    <span class="eyebrow">GUIDED ORDERING</span>
+                    <h1>What Comes Next?</h1>
+                    <p>
+                        Practice the connection between steps before arranging
+                        the full procedure independently.
+                    </p>
+                </div>
+
+                <div id="nextPracticeContent"></div>
+            </section>
+
+            <!-- SEQUENCING -->
+
+            <section id="challenge" class="page">
+                <div class="section-heading">
+                    <span class="eyebrow">INDEPENDENT SEQUENCING</span>
+                    <h1>Arrange the Procedure</h1>
+                    <p>
+                        Drag the steps, use the arrow buttons, or select two
+                        step titles to swap their positions.
+                    </p>
+                </div>
+
+                <div id="challengeContent"></div>
+            </section>
+
+            <!-- ASSESSMENT -->
+
+            <section id="assessment" class="page">
+                <div class="section-heading">
+                    <span class="eyebrow">CHECK YOUR UNDERSTANDING</span>
+                    <h1>Module Assessment</h1>
+                    <p>
+                        Each module contains 10 multiple-choice questions.
+                        The target score is 8 out of 10.
+                    </p>
+                </div>
+
+                <div id="quizBox" class="panel"></div>
+            </section>
+
+            <!-- PROGRESS -->
+
+            <section id="progress" class="page">
+                <div class="section-heading">
+                    <span class="eyebrow">YOUR LEARNING RECORD</span>
+                    <h1>Learning Progress</h1>
+                    <p>
+                        Monitor completed activities, assessment results,
+                        and the steps you want to review.
+                    </p>
+                </div>
+
+                <div id="progressContent"></div>
+            </section>
+
+            <!-- TEACHER GUIDE / LOCAL EDUCATOR VIEW -->
+
+            <section id="teacher" class="page">
+                <div class="section-heading">
+                    <span class="eyebrow">EDUCATOR SUPPORT</span>
+                    <h1>Teacher Guide & Local Progress View</h1>
+                    <p>Use SplicEd before or alongside supervised laboratory work. This prototype can summarize learner profiles saved on this browser; cross-device real-time monitoring requires an authenticated database/backend.</p>
+                </div>
+
+                <div class="teacher-grid">
+                    <article class="panel">
+                        <span class="step-number">01</span>
+                        <h3>Recommended lesson flow</h3>
+                        <p>Orient learners to safety and objectives → Learn/Reference → Guided Mode → Guided Order → Independent Challenge → Assessment → hands-on laboratory performance with instructor supervision.</p>
+                    </article>
+                    <article class="panel">
+                        <span class="step-number">02</span>
+                        <h3>Differentiation</h3>
+                        <p>Use Guided Mode for learners who need prompts, step labels, review, and feedback. Use Independent Mode when learners are ready for reduced cues and procedural recall.</p>
+                    </article>
+                    <article class="panel">
+                        <span class="step-number">03</span>
+                        <h3>How to interpret progress</h3>
+                        <p>Progress indicators show exposure, practice, sequencing attempts, and assessment results. They do not by themselves prove practical electrical competence or long-term mastery.</p>
+                    </article>
+                    <article class="panel">
+                        <span class="step-number">04</span>
+                        <h3>Practical boundary</h3>
+                        <p>Verify conductor preparation, turns, finishing, tool handling, and safety using the instructor-approved procedure and actual laboratory performance.</p>
+                    </article>
+                </div>
+
+                <section class="theory-section">
+                    <span class="eyebrow">CURRICULUM BASELINE ALIGNMENT</span>
+                    <h2>How SplicEd positions its content</h2>
+                    <div class="theory-grid">
+                        <article class="panel"><h3>CHED / TUP</h3><p>Defines the higher-education and Industrial Arts program context of the intended users and local course implementation.</p></article>
+                        <article class="panel"><h3>DepEd EIM</h3><p>Provides a baseline instructional curriculum reference for Electrical Installation and Maintenance concepts, terminology, and progression where applicable.</p></article>
+                        <article class="panel"><h3>TESDA EIM NC II</h3><p>Provides technical competency and performance-standard reference for electrical wiring termination/connection and splice-related competencies.</p></article>
+                        <article class="panel"><h3>Instructor validation</h3><p>Exact classroom procedures, strip lengths, turns, materials, and safety requirements follow the validated local instructional specification.</p></article>
+                    </div>
+                </section>
+
+                <section class="theory-section">
+                    <div class="section-heading compact-heading">
+                        <span class="eyebrow">THIS BROWSER</span>
+                        <h2>Learner Progress Snapshot</h2>
+                        <p>For classroom demonstration and prototype evaluation only. Data shown here are stored locally on this device.</p>
+                    </div>
+                    <div class="button-row"><button class="secondary" onclick="exportLocalProgressCSV()">Export Local Progress CSV</button></div>
+                    <div id="teacherProgressContent"></div>
+                </section>
+            </section>
+
+            <!-- ABOUT US -->
+
+            <section id="about" class="page">
+                <div class="section-heading">
+                    <span class="eyebrow">THE PEOPLE BEHIND SPLICED</span>
+                    <h1>About Us</h1>
+                </div>
+
+                <div class="about-layout">
+                    <article class="panel">
+                        <h2>Learning procedures, one step at a time.</h2>
+
+                        <p>
+                            SplicEd is a gamified web-based learning system
+                            developed by Group 5, BSIE-ICT 4A, at the
+                            Technological University of the Philippines — Manila.
+                        </p>
+
+                        <p>
+                            It supports procedural understanding of electrical
+                            splices and joints through lessons, visual
+                            demonstrations, sequencing practice, feedback,
+                            and module assessments.
+                        </p>
+                    </article>
+
+                    <aside class="group-card">
+                        <span class="eyebrow">DEVELOPED BY</span>
+                        <strong>GROUP 5</strong>
+                        <p>BSIE-ICT 4A</p>
+                        <p>TUP Manila</p>
+                    </aside>
+                </div>
+
+                <section class="team-section">
+                    <h2>Meet the Team</h2>
+
+                    <div class="team-grid">
+                        <article class="team-card leader-card">
+                            <span class="eyebrow">LEADER</span>
+                            <h3>Andrei N. Valentin</h3>
+                        </article>
+
+                        <article class="team-card">
+                            <span class="eyebrow">MEMBER</span>
+                            <h3>Chrizmhelo S. Santos</h3>
+                        </article>
+
+                        <article class="team-card">
+                            <span class="eyebrow">MEMBER</span>
+                            <h3>John Joven C. Baguisa</h3>
+                        </article>
+
+                        <article class="team-card">
+                            <span class="eyebrow">MEMBER</span>
+                            <h3>Mark John G. Valenzuela</h3>
+                        </article>
+
+                        <article class="team-card">
+                            <span class="eyebrow">MEMBER</span>
+                            <h3>Neinard D. Ignacio</h3>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="theory-section">
+                    <span class="eyebrow">COMPETENCY-ALIGNED CONTENT</span>
+                    <h2>What the module content is anchored to</h2>
+                    <div class="theory-grid">
+                        <article class="panel">
+                            <span class="step-number">01</span>
+                            <h3>Higher-education context: CHED + TUP</h3>
+                            <p>SplicEd is designed for TUP Manila Industrial Arts students. CHED provides the higher-education program context, while the local course and instructor-validated procedure provide the immediate classroom basis.</p>
+                        </article>
+                        <article class="panel">
+                            <span class="step-number">02</span>
+                            <h3>Baseline instructional alignment: DepEd EIM</h3>
+                            <p>DepEd Electrical Installation and Maintenance curriculum materials are used as a baseline instructional reference for relevant concepts, terminology, and progression where the same electrical competencies are addressed.</p>
+                        </article>
+                        <article class="panel">
+                            <span class="step-number">03</span>
+                            <h3>Technical competency reference: TESDA EIM NC II</h3>
+                            <p>TESDA Electrical Installation and Maintenance NC II provides technical competency and performance-standard reference for terminating/connecting electrical wiring and splice-related competencies.</p>
+                        </article>
+                        <article class="panel">
+                            <span class="step-number">04</span>
+                            <h3>Practical boundary</h3>
+                            <p>SplicEd prepares learners cognitively. Actual competency still requires supervised hands-on performance, safety checks, and instructor assessment.</p>
+                        </article>
+                    </div>
+                </section>
+
+                <section class="theory-section">
+                    <span class="eyebrow">THEORY-ALIGNED DESIGN</span>
+                    <h2>Why SplicEd is designed this way</h2>
+
+                    <div class="theory-grid">
+                        <article class="panel">
+                            <span class="step-number">01</span>
+                            <h3>Cognitive Load</h3>
+                            <p>
+                                Procedures are divided into manageable segments
+                                to avoid overwhelming the learner.
+                            </p>
+                        </article>
+
+                        <article class="panel">
+                            <span class="step-number">02</span>
+                            <h3>Multimedia Learning</h3>
+                            <p>
+                                Visual demonstrations are paired with
+                                concise explanations.
+                            </p>
+                        </article>
+
+                        <article class="panel">
+                            <span class="step-number">03</span>
+                            <h3>Scaffolding</h3>
+                            <p>
+                                Learners move from guided demonstration
+                                toward independent practice.
+                            </p>
+                        </article>
+
+                        <article class="panel">
+                            <span class="step-number">04</span>
+                            <h3>Mastery Learning</h3>
+                            <p>
+                                Learners can review procedures, retry activities,
+                                and improve before moving forward.
+                            </p>
+                        </article>
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <footer>
+            <strong>SplicEd</strong>
+            <span>Group 5 • BSIE-ICT 4A • TUP Manila</span>
+        </footer>
+    </div>
+
+    <div id="rubricModal" class="modal-backdrop" hidden></div>
+
+    <div id="toast" class="toast" role="status" hidden></div>
+
+</body>
+</html>
