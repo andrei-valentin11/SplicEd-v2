@@ -260,6 +260,7 @@
                     </p>
                 </div>
 
+                <nav class="section-subtabs" aria-label="Learn sections"><button class="secondary" type="button" onclick="document.getElementById('lessonCards').scrollIntoView({block:'start'})">Modules</button><button class="secondary" type="button" onclick="document.getElementById('lessonViewer').scrollIntoView({block:'start'})">Open Lesson</button></nav>
                 <div id="lessonCards" class="lesson-grid"></div>
                 <div id="lessonViewer" hidden></div>
             </section>
@@ -348,7 +349,8 @@
                     <p>Use SplicEd before or alongside supervised laboratory work. This prototype can summarize learner profiles saved on this browser; cross-device real-time monitoring requires an authenticated database/backend.</p>
                 </div>
 
-                <div class="teacher-grid">
+                <nav class="section-subtabs" aria-label="Teacher Guide sections"><button class="secondary" type="button" onclick="document.getElementById('teacherGuideCards').scrollIntoView({block:'start'})">Teaching Guide</button><button class="secondary" type="button" onclick="document.getElementById('teacherProgressView').scrollIntoView({block:'start'})">Local Progress</button></nav>
+                <div id="teacherGuideCards" class="teacher-grid">
                     <article class="panel">
                         <span class="step-number">01</span>
                         <h3>Recommended lesson flow</h3>
