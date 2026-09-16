@@ -41,9 +41,9 @@ const MODULES = [
         name: "Rat Tail / Pigtail Joint",
 
         media: {
-            photo: "images/modules/rat-tail-actual.jpg",
+            photo: "assets/images/actual/rat-tail-actual.webp",
             clip: "media/rat-tail-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Rat Tail / Pigtail Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative reference of the Rat Tail / Pigtail Joint",
             clipAlt: "Short looping procedural demonstration for Rat Tail / Pigtail Joint"
         },
 
@@ -92,9 +92,9 @@ const MODULES = [
         name: "Western Union Short-Tie",
 
         media: {
-            photo: "images/modules/western-short-actual.jpg",
+            photo: "assets/images/actual/western-union-short-tie-actual.webp",
             clip: "media/western-short-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Western Union Short-Tie held for scale and visual reference",
+            photoAlt: "AI-generated illustrative reference of the Western Union Short-Tie",
             clipAlt: "Short looping procedural demonstration for Western Union Short-Tie"
         },
 
@@ -148,9 +148,9 @@ const MODULES = [
         name: "Western Union Long-Tie",
 
         media: {
-            photo: "images/modules/western-long-actual.jpg",
+            photo: "assets/images/actual/western-union-long-tie-actual.webp",
             clip: "media/western-long-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Western Union Long-Tie held for scale and visual reference",
+            photoAlt: "AI-generated illustrative reference of the Western Union Long-Tie",
             clipAlt: "Short looping procedural demonstration for Western Union Long-Tie"
         },
 
@@ -204,9 +204,9 @@ const MODULES = [
         name: "Plain Tap Joint",
 
         media: {
-            photo: "images/modules/plain-tap-actual.jpg",
+            photo: "assets/images/actual/plain-tap-actual.webp",
             clip: "media/plain-tap-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Plain Tap Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative reference of the Plain Tap Joint",
             clipAlt: "Short looping procedural demonstration for Plain Tap Joint"
         },
 
@@ -260,9 +260,9 @@ const MODULES = [
         name: "Knotted Tap Joint",
 
         media: {
-            photo: "images/modules/knotted-tap-actual.jpg",
+            photo: "assets/images/actual/knotted-tap-actual.webp",
             clip: "media/knotted-tap-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Knotted Tap Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative reference of the Knotted Tap Joint",
             clipAlt: "Short looping procedural demonstration for Knotted Tap Joint"
         },
 
@@ -316,9 +316,9 @@ const MODULES = [
         name: "Aerial Tap Joint",
 
         media: {
-            photo: "images/modules/aerial-tap-actual.jpg",
+            photo: "assets/images/actual/aerial-tap-actual.webp",
             clip: "media/aerial-tap-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Aerial Tap Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative reference of the Aerial Tap Joint",
             clipAlt: "Short looping procedural demonstration for Aerial Tap Joint"
         },
 
@@ -372,9 +372,9 @@ const MODULES = [
         name: "Fixture Joint",
 
         media: {
-            photo: "images/modules/fixture-joint-actual.jpg",
+            photo: "assets/images/actual/fixture-joint-actual.webp",
             clip: "media/fixture-joint-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Fixture Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative reference of the Fixture Joint",
             clipAlt: "Short looping procedural demonstration for Fixture Joint"
         },
 
@@ -428,9 +428,9 @@ const MODULES = [
         name: "Cross Joint",
 
         media: {
-            photo: "images/modules/cross-joint-actual.jpg",
+            photo: "assets/images/actual/cross-joint-actual.webp",
             clip: "media/cross-joint-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Cross Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative reference of the Cross Joint",
             clipAlt: "Short looping procedural demonstration for Cross Joint"
         },
 
@@ -1247,12 +1247,12 @@ function mediaReferenceCard(index, compact = false) {
     const media = module.media || {};
 
     return `
-        <section class="media-reference-card" aria-label="Actual reference and short demonstration">
+        <section class="media-reference-card" aria-label="Illustrative reference and short demonstration">
             <div class="media-card-heading">
                 <div>
-                    <span class="eyebrow">REAL-WIRE REFERENCE + SHORT DEMONSTRATION</span>
+                    <span class="eyebrow">ILLUSTRATIVE REFERENCE + SHORT DEMONSTRATION</span>
                     <h3>Connect the illustration to the real wire</h3>
-                    <p>Compare the simplified diagram with a verified training-sample photo (or a clearly labeled illustrative reference), then replay the short local demonstration before practice.</p>
+                    <p>Compare the simplified diagram with the illustrative finished-splice reference, then replay the short local demonstration before practice.</p>
                 </div>
                 <span class="offline-badge">No YouTube required</span>
             </div>
@@ -1263,14 +1263,15 @@ function mediaReferenceCard(index, compact = false) {
                         src="${escapeHTML(media.photo || "")}" 
                         alt="${escapeHTML(media.photoAlt || (module.name + " actual reference"))}"
                         loading="lazy"
+                        decoding="async"
                         onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
                     >
                     <div class="media-placeholder" hidden>
-                        <strong>Verified actual photo slot</strong>
+                        <strong>Illustrative reference image</strong>
                         <span>${escapeHTML(module.name)}</span>
-                        <small>Add the researchers’ own photo of a disconnected training sample being held by hand for scale.</small>
+                        <small>This reference image supports visual comparison with the schematic demonstration.</small>
                     </div>
-                    <figcaption>Actual training-sample reference • use your own verified photo</figcaption>
+                    <figcaption>AI-generated illustrative reference • verify construction against the instructor-approved procedure</figcaption>
                 </figure>
 
                 <figure class="demo-clip-frame">
@@ -1278,6 +1279,7 @@ function mediaReferenceCard(index, compact = false) {
                         src="${escapeHTML(media.clip || "")}" 
                         alt="${escapeHTML(media.clipAlt || (module.name + " short demonstration"))}"
                         loading="lazy"
+                        decoding="async"
                         onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
                     >
                     <div class="media-placeholder" hidden>
@@ -4151,20 +4153,21 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
                                 <div id="visualStage" class="visual-stage">${wireDiagram(selectedModule, currentStep, true)}</div>
                             </div>
                             <figure class="finished-splice-reference">
-                                <span class="visual-panel-label">Finished splice reference</span>
+                                <span class="visual-panel-label">Illustrative finished-splice reference</span>
                                 <img src="${esc(module.media?.photo || '')}"
                                     alt="${esc(module.media?.photoAlt || (module.name + ' finished splice reference'))}"
                                     loading="lazy"
+                                    decoding="async"
                                     onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
                                 <div class="finished-photo-placeholder" hidden>
                                     <strong>${esc(module.name)}</strong>
-                                    <span>Actual finished-splice photo</span>
-                                    <small>Add the verified training-sample photo in <code>images/modules/</code>.</small>
+                                    <span>Illustrative finished-splice reference</span>
+                                    <small>Expected file location: <code>assets/images/actual/</code>.</small>
                                 </div>
-                                <figcaption>Compare the simplified animation with the finished training sample.</figcaption>
+                                <figcaption>AI-generated illustrative reference. Compare it with the animation and instructor-approved procedure.</figcaption>
                             </figure>
                         </div>
-                        <p class="study-caption">The animation simplifies the motion. Use the finished-splice reference to connect the illustration with the physical wire.</p>
+                        <p class="study-caption">The animation simplifies the motion. Use the illustrative reference to connect the diagram with the expected finished form; verify exact construction with your instructor.</p>
                         <button type="button" class="secondary" onclick="replayVisual()">Replay This Step</button>
                         ${playbackTimer ? `<div class="study-autoplay" role="status">Auto-play is on.
                             <button type="button" class="secondary" onclick="togglePlayback()">Pause Auto-play</button></div>` : ""}
