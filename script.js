@@ -1320,9 +1320,9 @@ function mediaReferenceCard(index, compact = false) {
                     <div class="media-placeholder" hidden>
                         <strong>10–15 second demo slot</strong>
                         <span>${escapeHTML(module.name)}</span>
-                        <small>Export a close-up, looping GIF recorded by the researchers. Show one major action at a time.</small>
+                        <small>Add the module animated procedural illustration here. Show one major action at a time.</small>
                     </div>
-                    <figcaption>Short looping demonstration • pause mentally, replay as needed</figcaption>
+                    <figcaption>Animated procedural illustration • loops automatically while visible</figcaption>
                 </figure>
             </div>
 
@@ -4206,6 +4206,10 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
                 ${moduleSelect("practiceModule", selectedModule, "selectPractice")}
                 ${returnAction}
             </div>
+            <nav class="practice-step-strip panel" aria-label="Step-by-step procedure">
+                <div class="practice-step-strip-heading"><div><span class="eyebrow">STEP-BY-STEP PROCEDURE</span><strong>Jump directly to any step</strong></div><span class="tag">Step ${currentStep + 1} of ${module.steps.length}</span></div>
+                <div class="practice-step-buttons">${module.steps.map((item,index)=>`<button type="button" class="practice-step-button ${index===currentStep?"active":""}" aria-current="${index===currentStep?"step":"false"}" onclick="jumpStep(${index})"><b>Step ${index+1}</b><span>${esc(item[0])}</span></button>`).join("")}</div>
+            </nav>
             <details class="study-fold safety-fold" data-panel="safety"
                 ${!record.safetyAccepted ? "open" : open("safety")}>
                 <summary>Safety reminder <span id="safetyStatus" class="study-status">
@@ -4302,16 +4306,6 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
                     </div>
                 </div>
             </article>
-            <details class="study-fold" data-panel="steps" ${open("steps")}>
-                <summary>All Steps in This Module</summary>
-                <div class="study-fold-body"><ol class="study-step-list">
-                    ${module.steps.map((item, index) => `<li><button type="button" class="step-link"
-                        ${index === currentStep ? 'aria-current="step"' : ""} onclick="jumpStep(${index})">
-                        <span class="study-step-number">${index + 1}</span><span>${esc(item[0])}</span>
-                        <small id="practiceStepStatus${index}">${record.completedSteps.includes(index) ? "Checked" : record.viewed.includes(index) ? "Viewed" : "Not viewed"}</small>
-                        </button></li>`).join("")}
-                </ol></div>
-            </details>
             <details class="study-fold" data-panel="resources" ${open("resources")}>
                 <summary>Lesson, Tutorial and More Practice</summary>
                 <div class="study-fold-body"><div class="study-actions">
