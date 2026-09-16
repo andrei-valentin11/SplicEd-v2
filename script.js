@@ -43,7 +43,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/rat-tail-actual.webp",
             clip: "media/rat-tail-demo.gif",
-            photoAlt: "AI-generated illustrative reference of the Rat Tail / Pigtail Joint",
+            photoAlt: "Verified actual training-sample photo of the Rat Tail / Pigtail Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Rat Tail / Pigtail Joint"
         },
 
@@ -94,7 +94,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/western-union-short-tie-actual.webp",
             clip: "media/western-short-demo.gif",
-            photoAlt: "AI-generated illustrative reference of the Western Union Short-Tie",
+            photoAlt: "Verified actual training-sample photo of the Western Union Short-Tie held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Western Union Short-Tie"
         },
 
@@ -150,7 +150,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/western-union-long-tie-actual.webp",
             clip: "media/western-long-demo.gif",
-            photoAlt: "AI-generated illustrative reference of the Western Union Long-Tie",
+            photoAlt: "Verified actual training-sample photo of the Western Union Long-Tie held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Western Union Long-Tie"
         },
 
@@ -206,7 +206,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/plain-tap-actual.webp",
             clip: "media/plain-tap-demo.gif",
-            photoAlt: "AI-generated illustrative reference of the Plain Tap Joint",
+            photoAlt: "Verified actual training-sample photo of the Plain Tap Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Plain Tap Joint"
         },
 
@@ -262,7 +262,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/knotted-tap-actual.webp",
             clip: "media/knotted-tap-demo.gif",
-            photoAlt: "AI-generated illustrative reference of the Knotted Tap Joint",
+            photoAlt: "Verified actual training-sample photo of the Knotted Tap Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Knotted Tap Joint"
         },
 
@@ -318,7 +318,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/aerial-tap-actual.webp",
             clip: "media/aerial-tap-demo.gif",
-            photoAlt: "AI-generated illustrative reference of the Aerial Tap Joint",
+            photoAlt: "Verified actual training-sample photo of the Aerial Tap Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Aerial Tap Joint"
         },
 
@@ -374,7 +374,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/fixture-joint-actual.webp",
             clip: "media/fixture-joint-demo.gif",
-            photoAlt: "AI-generated illustrative reference of the Fixture Joint",
+            photoAlt: "Verified actual training-sample photo of the Fixture Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Fixture Joint"
         },
 
@@ -430,7 +430,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/cross-joint-actual.webp",
             clip: "media/cross-joint-demo.gif",
-            photoAlt: "AI-generated illustrative reference of the Cross Joint",
+            photoAlt: "Verified actual training-sample photo of the Cross Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Cross Joint"
         },
 
@@ -1205,6 +1205,43 @@ function learningPathComplete(index) {
    MODULE CARDS AND LESSONS
    ========================================================= */
 
+function diagramWithReference(moduleIndex, stepIndex, animate = false) {
+    const module = MODULES[moduleIndex];
+    const media = module?.media || {};
+    const image = media.photo || "";
+    const alt = `Illustrative finished-splice reference for ${module?.name || "selected module"}`;
+
+    return `
+        <div class="diagram-hover-reference" tabindex="0" aria-label="Illustration. Hover or focus to view the illustrative finished-splice reference.">
+            ${wireDiagram(moduleIndex, stepIndex, animate)}
+            <div class="diagram-hover-card" role="img" aria-label="${escapeHTML(alt)}">
+                <span class="hover-reference-label">Illustrative Reference</span>
+                <img src="${escapeHTML(image)}" alt="${escapeHTML(alt)}" loading="lazy" decoding="async">
+                <small>${escapeHTML(module?.name || "")}</small>
+            </div>
+            <span class="hover-reference-hint">Hover / focus for finished-splice reference</span>
+        </div>
+    `;
+}
+
+function jumpToLessonStep(stepIndex) {
+    const target = document.getElementById(`lesson-step-${stepIndex}`);
+    if (!target) return;
+    target.open = true;
+    target.scrollIntoView({behavior: "smooth", block: "start"});
+}
+
+function setAboutTab(tab) {
+    document.querySelectorAll('[data-about-panel]').forEach(panel => {
+        panel.hidden = panel.dataset.aboutPanel !== tab;
+    });
+    document.querySelectorAll('[data-about-tab]').forEach(button => {
+        const active = button.dataset.aboutTab === tab;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+}
+
 function renderModules() {
     $("#lessonCards").innerHTML = MODULES.map((module, index) => {
         const record = recordFor(index);
@@ -1222,7 +1259,7 @@ function renderModules() {
                 </span>
 
                 <div class="module-thumbnail">
-                    ${wireDiagram(index, module.steps.length - 1)}
+                    ${diagramWithReference(index, module.steps.length - 1)}
                 </div>
 
                 <h2>${escapeHTML(module.name)}</h2>
@@ -1247,12 +1284,12 @@ function mediaReferenceCard(index, compact = false) {
     const media = module.media || {};
 
     return `
-        <section class="media-reference-card" aria-label="Illustrative reference and short demonstration">
+        <section class="media-reference-card" aria-label="Actual reference and short demonstration">
             <div class="media-card-heading">
                 <div>
                     <span class="eyebrow">ILLUSTRATIVE REFERENCE + SHORT DEMONSTRATION</span>
                     <h3>Connect the illustration to the real wire</h3>
-                    <p>Compare the simplified diagram with the illustrative finished-splice reference, then replay the short local demonstration before practice.</p>
+                    <p>Compare the simplified diagram with a clearly labeled illustrative reference, then replay the short local demonstration before practice.</p>
                 </div>
                 <span class="offline-badge">No YouTube required</span>
             </div>
@@ -1263,15 +1300,14 @@ function mediaReferenceCard(index, compact = false) {
                         src="${escapeHTML(media.photo || "")}" 
                         alt="${escapeHTML(media.photoAlt || (module.name + " actual reference"))}"
                         loading="lazy"
-                        decoding="async"
                         onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
                     >
                     <div class="media-placeholder" hidden>
-                        <strong>Illustrative reference image</strong>
+                        <strong>Illustrative reference slot</strong>
                         <span>${escapeHTML(module.name)}</span>
-                        <small>This reference image supports visual comparison with the schematic demonstration.</small>
+                        <small>Add or replace with an instructor-verified training-sample photo when available.</small>
                     </div>
-                    <figcaption>AI-generated illustrative reference • verify construction against the instructor-approved procedure</figcaption>
+                    <figcaption>AI-generated illustrative reference • compare with instructor-verified samples</figcaption>
                 </figure>
 
                 <figure class="demo-clip-frame">
@@ -1279,7 +1315,6 @@ function mediaReferenceCard(index, compact = false) {
                         src="${escapeHTML(media.clip || "")}" 
                         alt="${escapeHTML(media.clipAlt || (module.name + " short demonstration"))}"
                         loading="lazy"
-                        decoding="async"
                         onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
                     >
                     <div class="media-placeholder" hidden>
@@ -1327,9 +1362,23 @@ function openLesson(index) {
             <p>${escapeHTML(module.purpose)}</p>
         </header>
 
+        <nav class="lesson-step-quicknav panel" aria-label="Quick step navigation">
+            <div>
+                <span class="eyebrow">STEP-BY-STEP QUICK ACCESS</span>
+                <strong>Jump directly to a procedure step</strong>
+                <p class="small-text">Use this selector so you do not need to scroll through the whole lesson.</p>
+            </div>
+            <select aria-label="Choose a procedure step" onchange="jumpToLessonStep(Number(this.value))">
+                <option value="" selected disabled>Choose step…</option>
+                ${module.steps.map((item, stepIndex) => `
+                    <option value="${stepIndex}">Step ${stepIndex + 1}: ${escapeHTML(item[0])}</option>
+                `).join("")}
+            </select>
+        </nav>
+
         <div class="lesson-layout">
             <figure>
-                ${wireDiagram(index, module.steps.length - 1)}
+                ${diagramWithReference(index, module.steps.length - 1)}
                 <figcaption>
                     Completed configuration • schematic, not to scale
                 </figcaption>
@@ -1371,14 +1420,14 @@ function openLesson(index) {
 
         <div class="lesson-steps">
             ${module.steps.map((step, stepIndex) => `
-                <details ${stepIndex === 0 ? "open" : ""}>
+                <details id="lesson-step-${stepIndex}" ${stepIndex === 0 ? "open" : ""}>
                     <summary>
                         ${stepIndex + 1}. ${escapeHTML(step[0])}
                     </summary>
 
                     <div class="lesson-step-body">
                         <figure>
-                            ${wireDiagram(index, stepIndex)}
+                            ${diagramWithReference(index, stepIndex)}
                             <figcaption>${escapeHTML(step[2])}</figcaption>
                         </figure>
 
@@ -2501,7 +2550,7 @@ function renderNextPractice() {
 
             <div class="next-layout">
                 <figure>
-                    ${wireDiagram(round.module, round.index)}
+                    ${diagramWithReference(round.module, round.index)}
 
                     <figcaption>
                         Current step: ${escapeHTML(current[0])}
@@ -2903,12 +2952,12 @@ function showMistakeSimulation() {
 
         <div class="mistake-simulation-grid">
             <figure>
-                ${wireDiagram(selectedModule, Math.max(0, module.steps.length - 2))}
+                ${diagramWithReference(selectedModule, Math.max(0, module.steps.length - 2))}
                 <figcaption>Review the step before final inspection.</figcaption>
             </figure>
 
             <figure>
-                ${wireDiagram(selectedModule, module.steps.length - 1)}
+                ${diagramWithReference(selectedModule, module.steps.length - 1)}
                 <figcaption>Expected construction for inspection.</figcaption>
             </figure>
         </div>
@@ -4153,21 +4202,20 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
                                 <div id="visualStage" class="visual-stage">${wireDiagram(selectedModule, currentStep, true)}</div>
                             </div>
                             <figure class="finished-splice-reference">
-                                <span class="visual-panel-label">Illustrative finished-splice reference</span>
+                                <span class="visual-panel-label">Finished splice reference</span>
                                 <img src="${esc(module.media?.photo || '')}"
                                     alt="${esc(module.media?.photoAlt || (module.name + ' finished splice reference'))}"
                                     loading="lazy"
-                                    decoding="async"
                                     onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
                                 <div class="finished-photo-placeholder" hidden>
                                     <strong>${esc(module.name)}</strong>
-                                    <span>Illustrative finished-splice reference</span>
-                                    <small>Expected file location: <code>assets/images/actual/</code>.</small>
+                                    <span>Actual finished-splice photo</span>
+                                    <small>Add the verified training-sample photo in <code>images/modules/</code>.</small>
                                 </div>
-                                <figcaption>AI-generated illustrative reference. Compare it with the animation and instructor-approved procedure.</figcaption>
+                                <figcaption>Compare the simplified animation with the finished training sample.</figcaption>
                             </figure>
                         </div>
-                        <p class="study-caption">The animation simplifies the motion. Use the illustrative reference to connect the diagram with the expected finished form; verify exact construction with your instructor.</p>
+                        <p class="study-caption">The animation simplifies the motion. Use the finished-splice reference to connect the illustration with the physical wire.</p>
                         <button type="button" class="secondary" onclick="replayVisual()">Replay This Step</button>
                         ${playbackTimer ? `<div class="study-autoplay" role="status">Auto-play is on.
                             <button type="button" class="secondary" onclick="togglePlayback()">Pause Auto-play</button></div>` : ""}
@@ -4310,7 +4358,7 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
             <div class="study-columns guided-columns">
                 <div class="study-current"><span class="eyebrow">CURRENT STEP ${round.index + 1}</span>
                     <h2 id="guidedTitle" tabindex="-1">${esc(current[0])}</h2>
-                    <figure>${wireDiagram(round.module, round.index)}
+                    <figure>${diagramWithReference(round.module, round.index)}
                         <figcaption>${esc(current[2])}</figcaption></figure>
                     <p>${esc(current[1])}</p>
                 </div>
