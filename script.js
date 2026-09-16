@@ -3993,7 +3993,7 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
 
     // Change these paths when you add the actual member photographs.
     const team = [
-        ["Andrei N. Valentin", "Leader", "AV", "images/andrei.png"],
+        ["Andrei N. Valentin", "Leader", "AV", "images/andrei.jpg"],
         ["Chrizmhelo S. Santos", "Member", "CS", "images/chrizmhelo.jpg"],
         ["John Joven C. Baguisa", "Member", "JB", "images/john-joven.jpg"],
         ["Mark John G. Valenzuela", "Member", "MV", "images/mark-john.jpg"],
