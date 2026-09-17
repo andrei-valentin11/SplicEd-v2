@@ -1904,3 +1904,395 @@ progress {
 .page-subtabs button,.section-subtabs button{flex:0 0 auto;font-weight:800}
 @media(max-width:1000px){.study-columns{grid-template-columns:1fr}.animated-illustration-panel .visual-stage,.animated-illustration-panel .wire-diagram{min-height:360px}}
 @media(max-width:900px){.practice-step-strip{position:static}.practice-step-button{flex-basis:125px}}
+/* =========================================================
+   SPLICED — REAL INTERNAL SUBTABS
+   Learn + Teacher Guide
+   FINAL FIX
+   ========================================================= */
+
+/*
+   Shared internal tab container
+   Used by:
+   - Learn: Modules / Open Lesson
+   - Teacher Guide: Teaching Guide / Local Progress
+*/
+.page-subtabs,
+.section-subtabs {
+    position: sticky;
+    top: 74px;
+    z-index: 17;
+
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 0.5rem;
+
+    width: 100%;
+    overflow-x: auto;
+
+    margin: 0.75rem 0 1.25rem;
+    padding: 0.55rem;
+
+    background: rgba(37, 43, 46, 0.97);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    scrollbar-width: thin;
+}
+
+
+/* =========================================================
+   SUBTAB BUTTONS
+   ========================================================= */
+
+.page-subtabs button,
+.section-subtabs button {
+    position: relative;
+
+    flex: 0 0 auto;
+    min-height: 48px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+
+    padding: 0.7rem 1.15rem;
+
+    background: var(--surface-raised);
+    color: var(--muted);
+
+    border: 1px solid var(--border-strong);
+    border-radius: 9px;
+
+    font-weight: 800;
+    line-height: 1.4;
+
+    cursor: pointer;
+
+    transition:
+        background-color 0.16s ease,
+        border-color 0.16s ease,
+        color 0.16s ease,
+        transform 0.16s ease,
+        box-shadow 0.16s ease;
+}
+
+
+/* Hover */
+
+.page-subtabs button:hover,
+.section-subtabs button:hover {
+    background: #40484e;
+    border-color: var(--copper);
+    color: var(--text);
+
+    transform: translateY(-1px);
+}
+
+
+/* Keyboard accessibility */
+
+.page-subtabs button:focus-visible,
+.section-subtabs button:focus-visible {
+    outline: 3px solid var(--copper);
+    outline-offset: 3px;
+}
+
+
+/* =========================================================
+   ACTIVE SUBTAB
+   ========================================================= */
+
+.page-subtabs button.active,
+.section-subtabs button.active {
+    background: var(--copper-soft);
+    border-color: var(--copper);
+
+    color: #f3c49f;
+
+    box-shadow:
+        inset 0 -3px 0 var(--copper),
+        0 4px 12px rgb(0 0 0 / 15%);
+}
+
+
+/* Prevent normal secondary styling from overriding tab state */
+
+.section-subtabs .secondary.active,
+.page-subtabs .secondary.active {
+    background: var(--copper-soft);
+    border-color: var(--copper);
+    color: #f3c49f;
+}
+
+
+/* Inactive secondary tab */
+
+.section-subtabs .secondary:not(.active),
+.page-subtabs .secondary:not(.active) {
+    background: var(--surface-raised);
+    border-color: var(--border-strong);
+    color: var(--muted);
+}
+
+
+/* =========================================================
+   LEARN INTERNAL PANELS
+   ========================================================= */
+
+#learnModulesPanel,
+#learnLessonPanel {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/*
+   Give module grid a little breathing room after tabs.
+*/
+#learnModulesPanel .lesson-grid {
+    margin-top: 0.25rem;
+}
+
+
+/*
+   Open Lesson panel
+*/
+#learnLessonPanel {
+    animation: splicedTabReveal 0.18s ease;
+}
+
+
+/*
+   Lesson viewer itself should occupy full available width.
+*/
+#lessonViewer {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   TEACHER GUIDE INTERNAL PANELS
+   ========================================================= */
+
+#teacherGuidePanel,
+#teacherProgressPanel {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/*
+   Teacher guide content
+*/
+#teacherGuidePanel {
+    animation: splicedTabReveal 0.18s ease;
+}
+
+
+/*
+   Local progress content
+*/
+#teacherProgressPanel {
+    animation: splicedTabReveal 0.18s ease;
+}
+
+
+#teacherProgressView {
+    width: 100%;
+    min-width: 0;
+}
+
+
+/* =========================================================
+   TAB PANEL REVEAL
+   Small and non-distracting.
+   ========================================================= */
+
+@keyframes splicedTabReveal {
+    from {
+        opacity: 0;
+        transform: translateY(4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+/* =========================================================
+   IMPORTANT HIDDEN STATE
+   Ensures inactive panels really disappear.
+   ========================================================= */
+
+#learnModulesPanel[hidden],
+#learnLessonPanel[hidden],
+#teacherGuidePanel[hidden],
+#teacherProgressPanel[hidden] {
+    display: none !important;
+}
+
+
+/* =========================================================
+   LEARN MODULE TAB POLISH
+   ========================================================= */
+
+#learnModulesTab,
+#learnLessonTab,
+#teacherGuideTab,
+#teacherProgressTab {
+    white-space: nowrap;
+}
+
+
+/*
+   Active indicator
+*/
+#learnModulesTab.active::after,
+#learnLessonTab.active::after,
+#teacherGuideTab.active::after,
+#teacherProgressTab.active::after {
+    content: "";
+
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 3px;
+
+    height: 2px;
+
+    background: var(--copper);
+    border-radius: 999px;
+}
+
+
+/* =========================================================
+   TEACHER PROGRESS TABLE
+   Keeps Local Progress usable after tab switching.
+   ========================================================= */
+
+#teacherProgressPanel .teacher-table-wrap,
+#teacherProgressPanel .table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+#teacherProgressPanel .teacher-table,
+#teacherProgressPanel .progress-table {
+    width: 100%;
+}
+
+
+/* =========================================================
+   MOBILE / TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+    .page-subtabs,
+    .section-subtabs {
+        position: static;
+
+        width: 100%;
+        margin: 0.65rem 0 1rem;
+
+        overflow-x: auto;
+    }
+
+
+    .page-subtabs button,
+    .section-subtabs button {
+        flex: 0 0 auto;
+        min-height: 46px;
+
+        padding: 0.65rem 1rem;
+    }
+}
+
+
+@media (max-width: 560px) {
+
+    .page-subtabs,
+    .section-subtabs {
+        gap: 0.4rem;
+        padding: 0.45rem;
+        border-radius: 11px;
+    }
+
+
+    .page-subtabs button,
+    .section-subtabs button {
+        min-height: 44px;
+
+        padding: 0.6rem 0.85rem;
+
+        font-size: 0.9rem;
+    }
+
+
+    /*
+       Learn tabs can share screen width on small phones.
+    */
+    #learnModulesTab,
+    #learnLessonTab {
+        flex: 1 0 auto;
+    }
+
+
+    /*
+       Teacher tabs remain readable.
+    */
+    #teacherGuideTab,
+    #teacherProgressTab {
+        flex: 1 0 auto;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    #learnLessonPanel,
+    #teacherGuidePanel,
+    #teacherProgressPanel {
+        animation: none !important;
+    }
+
+
+    .page-subtabs button,
+    .section-subtabs button {
+        transition: none !important;
+    }
+}
+
+
+/* =========================================================
+   FORCED COLORS / HIGH CONTRAST
+   ========================================================= */
+
+@media (forced-colors: active) {
+
+    .page-subtabs button.active,
+    .section-subtabs button.active {
+        border: 3px solid Highlight;
+    }
+
+
+    #learnModulesTab.active::after,
+    #learnLessonTab.active::after,
+    #teacherGuideTab.active::after,
+    #teacherProgressTab.active::after {
+        background: Highlight;
+    }
+}
