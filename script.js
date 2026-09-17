@@ -4861,3 +4861,27 @@ document.addEventListener(
 
     }
 );
+
+
+/* =========================================================
+   SPLICED — FINAL SUB-TAB SAFETY
+   Prevent blank Open Lesson panel before a module is opened.
+   ========================================================= */
+(() => {
+    "use strict";
+
+    const previousSetLearnTab = window.setLearnTab;
+
+    window.setLearnTab = function(tab) {
+        const viewer = document.getElementById("lessonViewer");
+
+        if (tab === "lesson" && (!viewer || !viewer.innerHTML.trim())) {
+            tab = "modules";
+            if (typeof notify === "function") {
+                notify("Open a module first to view its lesson.");
+            }
+        }
+
+        return previousSetLearnTab(tab);
+    };
+})();
