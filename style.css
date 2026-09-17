@@ -2398,3 +2398,47 @@ progress {
     }
 
 }
+
+
+/* =========================================================
+   SPLICED — CLEAN REAL SUB-TABS (FINAL HARDENING)
+   ========================================================= */
+#learn .sub-tabs,
+#teacher .sub-tabs {
+    display: flex;
+    align-items: center;
+    gap: .6rem;
+    width: fit-content;
+    max-width: 100%;
+    margin: 0 0 1.5rem;
+}
+
+#learn .sub-tab,
+#teacher .sub-tab {
+    min-width: 140px;
+}
+
+#lessonCards[hidden],
+#lessonViewer[hidden],
+#teacherGuidePanel[hidden],
+#teacherProgressPanel[hidden] {
+    display: none !important;
+}
+
+#teacherGuidePanel,
+#teacherProgressPanel {
+    width: 100%;
+}
+
+@media (max-width: 650px) {
+    #learn .sub-tabs,
+    #teacher .sub-tabs {
+        width: 100%;
+    }
+
+    #learn .sub-tab,
+    #teacher .sub-tab {
+        flex: 1 1 0;
+        min-width: 0;
+    }
+}
