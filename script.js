@@ -4663,4 +4663,201 @@ function exportLocalProgressCSV() {
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob); a.download = "SplicEd_Local_Progress.csv"; a.click();
     setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}/* =========================================================
+   SPLICED — REAL SUB-TABS
+   Learn: Modules / Open Lesson
+   Teacher Guide: Teaching Guide / Local Progress
+   ========================================================= */
+
+let learnTab = "modules";
+let teacherTab = "guide";
+
+/* -------------------------
+   LEARN TABS
+   ------------------------- */
+
+function setLearnTab(tab) {
+    if (!["modules", "lesson"].includes(tab)) return;
+
+    learnTab = tab;
+
+    const modulesPanel = document.getElementById("lessonCards");
+    const lessonPanel = document.getElementById("lessonViewer");
+
+    const modulesButton = document.querySelector(
+        '[data-learn-tab="modules"]'
+    );
+
+    const lessonButton = document.querySelector(
+        '[data-learn-tab="lesson"]'
+    );
+
+    if (!modulesPanel || !lessonPanel) return;
+
+    const showingModules = tab === "modules";
+
+    modulesPanel.hidden = !showingModules;
+    lessonPanel.hidden = showingModules;
+
+    if (modulesButton) {
+        modulesButton.classList.toggle("active", showingModules);
+        modulesButton.setAttribute(
+            "aria-selected",
+            String(showingModules)
+        );
+    }
+
+    if (lessonButton) {
+        lessonButton.classList.toggle("active", !showingModules);
+        lessonButton.setAttribute(
+            "aria-selected",
+            String(!showingModules)
+        );
+    }
 }
+
+
+/* -------------------------
+   TEACHER GUIDE TABS
+   ------------------------- */
+
+function setTeacherTab(tab) {
+    if (!["guide", "progress"].includes(tab)) return;
+
+    teacherTab = tab;
+
+    const guidePanel = document.getElementById(
+        "teacherGuidePanel"
+    );
+
+    const progressPanel = document.getElementById(
+        "teacherProgressPanel"
+    );
+
+    const guideButton = document.querySelector(
+        '[data-teacher-tab="guide"]'
+    );
+
+    const progressButton = document.querySelector(
+        '[data-teacher-tab="progress"]'
+    );
+
+    if (!guidePanel || !progressPanel) return;
+
+    const showingGuide = tab === "guide";
+
+    guidePanel.hidden = !showingGuide;
+    progressPanel.hidden = showingGuide;
+
+    if (guideButton) {
+        guideButton.classList.toggle("active", showingGuide);
+        guideButton.setAttribute(
+            "aria-selected",
+            String(showingGuide)
+        );
+    }
+
+    if (progressButton) {
+        progressButton.classList.toggle(
+            "active",
+            !showingGuide
+        );
+
+        progressButton.setAttribute(
+            "aria-selected",
+            String(!showingGuide)
+        );
+    }
+
+    if (!showingGuide) {
+        renderTeacherProgress();
+    }
+}
+
+
+/* =========================================================
+   CONNECT EXISTING LESSON FUNCTIONS TO NEW TABS
+   ========================================================= */
+
+const splicedOriginalOpenLesson = window.openLesson;
+
+window.openLesson = function(index) {
+    if (!MODULES[index]) return;
+
+    /*
+       Run your existing Open Lesson function first.
+       This preserves all existing lesson content,
+       diagrams, objectives, media, etc.
+    */
+    splicedOriginalOpenLesson(index);
+
+    /*
+       Then switch the Learn page to Open Lesson.
+    */
+    learnTab = "lesson";
+    setLearnTab("lesson");
+};
+
+
+const splicedOriginalCloseLesson = window.closeLesson;
+
+window.closeLesson = function() {
+    /*
+       Run the existing closeLesson logic.
+    */
+    splicedOriginalCloseLesson();
+
+    /*
+       Return to Modules tab.
+    */
+    learnTab = "modules";
+    setLearnTab("modules");
+};
+
+
+/* =========================================================
+   KEEP TAB STATE WHEN NAVIGATING
+   ========================================================= */
+
+const splicedOriginalNavigateTabs = window.navigate;
+
+window.navigate = function(page) {
+
+    splicedOriginalNavigateTabs(page);
+
+    if (page === "learn") {
+
+        /*
+           If no lesson is currently open,
+           always show Modules.
+        */
+        const viewer = document.getElementById(
+            "lessonViewer"
+        );
+
+        if (!viewer || !viewer.innerHTML.trim()) {
+            learnTab = "modules";
+        }
+
+        setLearnTab(learnTab);
+    }
+
+    if (page === "teacher") {
+        setTeacherTab(teacherTab);
+    }
+};
+
+
+/* =========================================================
+   INITIAL TAB STATE
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        setLearnTab("modules");
+        setTeacherTab("guide");
+
+    }
+);
