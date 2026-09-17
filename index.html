@@ -260,7 +260,29 @@
                     </p>
                 </div>
 
-                <nav class="section-subtabs" aria-label="Learn sections"><button class="secondary" type="button" onclick="document.getElementById('lessonCards').scrollIntoView({block:'start'})">Modules</button><button class="secondary" type="button" onclick="document.getElementById('lessonViewer').scrollIntoView({block:'start'})">Open Lesson</button></nav>
+                <nav class="sub-tabs" role="tablist" aria-label="Learn sections">
+                    <button
+                        class="sub-tab active"
+                        type="button"
+                        role="tab"
+                        data-learn-tab="modules"
+                        aria-selected="true"
+                        onclick="setLearnTab('modules')"
+                    >
+                        Modules
+                    </button>
+                    <button
+                        class="sub-tab"
+                        type="button"
+                        role="tab"
+                        data-learn-tab="lesson"
+                        aria-selected="false"
+                        onclick="setLearnTab('lesson')"
+                    >
+                        Open Lesson
+                    </button>
+                </nav>
+
                 <div id="lessonCards" class="lesson-grid"></div>
                 <div id="lessonViewer" hidden></div>
             </section>
@@ -346,10 +368,37 @@
                 <div class="section-heading">
                     <span class="eyebrow">EDUCATOR SUPPORT</span>
                     <h1>Teacher Guide & Local Progress View</h1>
-                    <p>Use SplicEd before or alongside supervised laboratory work. This prototype can summarize learner profiles saved on this browser; cross-device real-time monitoring requires an authenticated database/backend.</p>
+                    <p>
+                        Use SplicEd before or alongside supervised laboratory work.
+                        This prototype can summarize learner profiles saved on this browser;
+                        cross-device real-time monitoring requires an authenticated database/backend.
+                    </p>
                 </div>
 
-                <nav class="section-subtabs" aria-label="Teacher Guide sections"><button class="secondary" type="button" onclick="document.getElementById('teacherGuideCards').scrollIntoView({block:'start'})">Teaching Guide</button><button class="secondary" type="button" onclick="document.getElementById('teacherProgressView').scrollIntoView({block:'start'})">Local Progress</button></nav>
+                <nav class="sub-tabs" role="tablist" aria-label="Teacher Guide sections">
+                    <button
+                        class="sub-tab active"
+                        type="button"
+                        role="tab"
+                        data-teacher-tab="guide"
+                        aria-selected="true"
+                        onclick="setTeacherTab('guide')"
+                    >
+                        Teaching Guide
+                    </button>
+                    <button
+                        class="sub-tab"
+                        type="button"
+                        role="tab"
+                        data-teacher-tab="progress"
+                        aria-selected="false"
+                        onclick="setTeacherTab('progress')"
+                    >
+                        Local Progress
+                    </button>
+                </nav>
+
+                <div id="teacherGuidePanel">
                 <div id="teacherGuideCards" class="teacher-grid">
                     <article class="panel">
                         <span class="step-number">01</span>
@@ -383,7 +432,9 @@
                         <article class="panel"><h3>Instructor validation</h3><p>Exact classroom procedures, strip lengths, turns, materials, and safety requirements follow the validated local instructional specification.</p></article>
                     </div>
                 </section>
+                </div>
 
+                <div id="teacherProgressPanel" hidden>
                 <section class="theory-section">
                     <div class="section-heading compact-heading">
                         <span class="eyebrow">THIS BROWSER</span>
@@ -393,6 +444,7 @@
                     <div class="button-row"><button class="secondary" onclick="exportLocalProgressCSV()">Export Local Progress CSV</button></div>
                     <div id="teacherProgressContent"></div>
                 </section>
+                </div>
             </section>
 
             <!-- ABOUT US -->
