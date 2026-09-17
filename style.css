@@ -2295,4 +2295,106 @@ progress {
     #teacherProgressTab.active::after {
         background: Highlight;
     }
+}/* =========================================================
+   REAL SUB-TABS
+   ========================================================= */
+
+.sub-tabs {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    margin: 0 0 1.5rem;
+
+    padding: 0.4rem;
+
+    border: 1px solid var(--border);
+
+    border-radius: 14px;
+
+    background: rgba(255, 255, 255, 0.025);
+
+    width: fit-content;
+    max-width: 100%;
+
+    overflow-x: auto;
+}
+
+
+.sub-tab {
+    appearance: none;
+
+    border: 1px solid transparent;
+
+    border-radius: 10px;
+
+    background: transparent;
+
+    color: var(--muted);
+
+    padding: 0.75rem 1.1rem;
+
+    font: inherit;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.18s ease,
+        color 0.18s ease,
+        border-color 0.18s ease;
+}
+
+
+.sub-tab:hover {
+    color: var(--text);
+
+    background: rgba(255, 255, 255, 0.045);
+}
+
+
+.sub-tab.active,
+.sub-tab[aria-selected="true"] {
+    color: var(--text);
+
+    background: rgba(140, 201, 227, 0.12);
+
+    border-color: var(--border);
+}
+
+
+.sub-tab:focus-visible {
+    outline: 3px solid rgba(140, 201, 227, 0.3);
+
+    outline-offset: 2px;
+}
+
+
+/* Prevent hidden tab panels from appearing */
+#lessonCards[hidden],
+#lessonViewer[hidden],
+#teacherGuidePanel[hidden],
+#teacherProgressPanel[hidden] {
+    display: none !important;
+}
+
+
+#teacherProgressPanel {
+    margin-top: 0;
+}
+
+
+@media (max-width: 650px) {
+
+    .sub-tabs {
+        width: 100%;
+    }
+
+    .sub-tab {
+        flex: 1;
+        text-align: center;
+    }
+
 }
