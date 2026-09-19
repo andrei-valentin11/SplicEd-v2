@@ -43,7 +43,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/rat-tail-actual.webp",
             clip: "assets/media/gifs/rat-tail-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Rat Tail / Pigtail Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Rat Tail / Pigtail Joint for visual learning support",
             clipAlt: "Short looping procedural demonstration for Rat Tail / Pigtail Joint"
         },
 
@@ -94,7 +94,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/western-union-short-tie-actual.webp",
             clip: "assets/media/gifs/western-union-short-tie-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Western Union Short-Tie held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Western Union Short-Tie for visual learning support",
             clipAlt: "Short looping procedural demonstration for Western Union Short-Tie"
         },
 
@@ -150,7 +150,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/western-union-long-tie-actual.webp",
             clip: "assets/media/gifs/western-union-long-tie-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Western Union Long-Tie held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Western Union Long-Tie for visual learning support",
             clipAlt: "Short looping procedural demonstration for Western Union Long-Tie"
         },
 
@@ -206,7 +206,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/plain-tap-actual.webp",
             clip: "assets/media/gifs/plain-tap-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Plain Tap Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Plain Tap Joint for visual learning support",
             clipAlt: "Short looping procedural demonstration for Plain Tap Joint"
         },
 
@@ -262,7 +262,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/knotted-tap-actual.webp",
             clip: "assets/media/gifs/knotted-tap-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Knotted Tap Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Knotted Tap Joint for visual learning support",
             clipAlt: "Short looping procedural demonstration for Knotted Tap Joint"
         },
 
@@ -318,7 +318,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/aerial-tap-actual.webp",
             clip: "assets/media/gifs/aerial-tap-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Aerial Tap Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Aerial Tap Joint for visual learning support",
             clipAlt: "Short looping procedural demonstration for Aerial Tap Joint"
         },
 
@@ -374,7 +374,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/fixture-joint-actual.webp",
             clip: "assets/media/gifs/fixture-joint-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Fixture Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Fixture Joint for visual learning support",
             clipAlt: "Short looping procedural demonstration for Fixture Joint"
         },
 
@@ -430,7 +430,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/cross-joint-actual.webp",
             clip: "assets/media/gifs/cross-joint-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Cross Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Cross Joint for visual learning support",
             clipAlt: "Short looping procedural demonstration for Cross Joint"
         },
 
@@ -4067,8 +4067,6 @@ initialize();
 /* SplicEd: paste once at the END of your existing script.js. */
 (() => {
     "use strict";
-
-let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
     if (window.splicedInclusiveUIInstalled) return;
     window.splicedInclusiveUIInstalled = true;
     const originalNavigate = window.navigate;
@@ -4208,7 +4206,7 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
             </div>
             <nav class="practice-step-strip panel" aria-label="Step-by-step procedure">
                 <div class="practice-step-strip-heading"><div><span class="eyebrow">STEP-BY-STEP PROCEDURE</span><strong>Jump directly to any step</strong></div><span class="tag">Step ${currentStep + 1} of ${module.steps.length}</span></div>
-                <div class="practice-step-buttons">${module.steps.map((item,index)=>`<button type="button" class="practice-step-button ${index===currentStep?"active":""}" aria-current="${index===currentStep?"step":"false"}" onclick="jumpStep(${index})"><b>Step ${index+1}</b><span>${esc(item[0])}</span></button>`).join("")}</div>
+                <div class="practice-step-buttons">${module.steps.map((item,index)=>`<button type="button" class="practice-step-button ${index===currentStep?"active":""}" aria-current="${index===currentStep?"step":"false"}" onclick="jumpStep(${index})"><b>Step ${index+1}</b>${learningMode === "guided" ? `<span>${esc(item[0])}</span>` : `<span>Recall step</span>`}</button>`).join("")}</div>
             </nav>
             <details class="study-fold safety-fold" data-panel="safety"
                 ${!record.safetyAccepted ? "open" : open("safety")}>
@@ -4284,12 +4282,21 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
                         </details>
                     </div>
                     <div class="study-instruction">
+                        <span class="eyebrow">${learningMode === "guided" ? "GUIDED MODE" : "INDEPENDENT MODE — REDUCED SUPPORT"}</span>
                         <h2 id="practiceStepTitle" tabindex="-1">${esc(step[0])}</h2>
-                        <p>${esc(step[1])}</p>
-                        <aside class="note"><strong>Look for this</strong><p>${esc(step[2])}</p></aside>
-                        <details class="study-fold" data-panel="hint" ${open("hint")}>
-                            <summary>Show a Hint</summary><div class="study-fold-body"><p>${esc(hint)}</p></div>
-                        </details>
+                        ${learningMode === "guided" ? `
+                            <p>${esc(step[1])}</p>
+                            <aside class="note"><strong>Look for this</strong><p>${esc(step[2])}</p></aside>
+                            <details class="study-fold" data-panel="hint" ${open("hint")}>
+                                <summary>Show a Hint</summary><div class="study-fold-body"><p>${esc(hint)}</p></div>
+                            </details>
+                        ` : `
+                            <p class="study-caption">Recall how this action should be performed before revealing additional support.</p>
+                            <aside class="note independent-mode-note"><strong>Independent Recall</strong>
+                                <p>Detailed explanations, look-for cues, and hints are hidden in Independent Mode.</p>
+                                <button type="button" class="secondary" onclick="setLearningMode('guided')">I Need Support — Return to Guided Mode</button>
+                            </aside>
+                        `}
                         <label class="study-check"><input type="checkbox" onchange="toggleStepComplete(this.checked)"
                             ${record.completedSteps.includes(currentStep) ? "checked" : ""}>
                             <span>I understand this step.</span></label>
@@ -4615,7 +4622,9 @@ function setLearningMode(mode) {
     if (!["guided", "independent"].includes(mode)) return;
     learningMode = mode;
     localStorage.setItem("splicedLearningMode", mode);
-    notify(mode === "guided" ? "Guided Mode enabled." : "Independent Mode enabled — explanatory cues are reduced.");
+    notify(mode === "guided"
+        ? "Guided Mode enabled — prompts, hints, and detailed step support are available."
+        : "Independent Mode enabled — prompts and explanatory cues are reduced for procedural recall.");
     if (currentPage === "learn" && $("#lessonViewer") && !$("#lessonViewer").hidden) openLesson(selectedModule);
     if (currentPage === "practice") renderPractice();
 }
@@ -4628,18 +4637,22 @@ function localProfileNames() {
 function summarizeProgressFor(username) {
     const saved = readJSON(progressKey(username), {});
     const learning = saved.learning || {};
+    const completedSequences = new Set(Array.isArray(saved.completedModules) ? saved.completedModules : []);
     let lessons = 0, viewed = 0, totalSteps = 0, sequencing = 0, assessments = 0, scoreSum = 0;
-    MODULES.forEach(m => {
-        const r = learning[m.name] || {};
-        if (r.lesson) lessons++;
-        viewed += Array.isArray(r.viewed) ? r.viewed.length : 0;
-        totalSteps += m.steps.length;
-        if (r.sequenceCompleted || r.challengeCompleted || r.sequencing) sequencing++;
-        const q = r.quiz || r.assessment || {};
-        const score = Number(q.bestScore ?? q.score);
-        if (Number.isFinite(score)) { assessments++; scoreSum += score; }
+    MODULES.forEach(module => {
+        const record = learning[module.name] || {};
+        if (record.lesson) lessons++;
+        viewed += Array.isArray(record.viewed) ? record.viewed.length : 0;
+        totalSteps += module.steps.length;
+        if (completedSequences.has(module.name)) sequencing++;
+        const attempts = Array.isArray(record.attempts) ? record.attempts : [];
+        if (attempts.length) {
+            const scores = attempts.map(a => Number(a.score)).filter(Number.isFinite);
+            if (scores.length) { assessments++; scoreSum += Math.max(...scores); }
+        }
     });
-    return {username, lessons, viewed, totalSteps, sequencing, assessments, averageScore: assessments ? Math.round(scoreSum / assessments) : null};
+    return { username, lessons, viewed, totalSteps, sequencing, assessments,
+        averageScore: assessments ? Number((scoreSum / assessments).toFixed(1)) : null };
 }
 
 function renderTeacherProgress() {
@@ -4647,22 +4660,25 @@ function renderTeacherProgress() {
     if (!host) return;
     const names = localProfileNames();
     if (!names.length) {
-        host.innerHTML = `<div class="panel"><p>No learner profiles are saved on this browser yet.</p></div>`;
+        host.innerHTML = `<div class="panel"><p>No learner profiles are saved on this browser yet.</p><p class="small-text">This prototype reads local progress only from profiles stored on the current device and browser.</p></div>`;
         return;
     }
     const rows = names.map(summarizeProgressFor);
-    host.innerHTML = `<div class="teacher-table-wrap"><table class="teacher-table"><thead><tr><th>Learner</th><th>Lessons</th><th>Viewed steps</th><th>Sequencing</th><th>Assessments</th><th>Avg. score</th></tr></thead><tbody>${rows.map(r => `<tr><td>${escapeHTML(r.username)}</td><td>${r.lessons}/8</td><td>${r.viewed}/${r.totalSteps}</td><td>${r.sequencing}/8</td><td>${r.assessments}/8</td><td>${r.averageScore === null ? "—" : r.averageScore}</td></tr>`).join("")}</tbody></table></div><p class="small-text">Prototype limitation: this is a local-device snapshot, not authenticated cross-device real-time analytics.</p>`;
+    host.innerHTML = `<div class="teacher-table-wrap"><table class="teacher-table"><thead><tr><th>Learner</th><th>Lessons</th><th>Viewed Steps</th><th>Sequencing</th><th>Assessments</th><th>Avg. Best Score</th></tr></thead><tbody>${rows.map(r => `<tr><td>${escapeHTML(r.username)}</td><td>${r.lessons}/${MODULES.length}</td><td>${r.viewed}/${r.totalSteps}</td><td>${r.sequencing}/${MODULES.length}</td><td>${r.assessments}/${MODULES.length}</td><td>${r.averageScore === null ? "—" : `${r.averageScore}/10`}</td></tr>`).join("")}</tbody></table></div><aside class="note"><strong>Prototype Limitation</strong><p>This view summarizes learner progress saved on the current browser and device only. It is not an authenticated cross-device or real-time learning analytics system.</p></aside>`;
 }
 
 function exportLocalProgressCSV() {
     const rows = localProfileNames().map(summarizeProgressFor);
     if (!rows.length) { notify("No local learner progress to export."); return; }
-    const csv = ["Learner,Lessons Completed,Viewed Steps,Total Steps,Sequencing Completed,Assessments,Average Score", ...rows.map(r => [r.username,r.lessons,r.viewed,r.totalSteps,r.sequencing,r.assessments,r.averageScore ?? ""].map(v => `"${String(v).replaceAll('"','""')}"`).join(","))].join("\
-");
+    const header = ["Learner", "Lessons Completed", "Viewed Steps", "Total Steps", "Sequencing Completed", "Assessments", "Average Best Score"];
+    const csvRows = [header, ...rows.map(r => [r.username, r.lessons, r.viewed, r.totalSteps, r.sequencing, r.assessments, r.averageScore ?? ""])];
+    const csv = csvRows.map(row => row.map(value => `"${String(value).replaceAll('"', '""')}"`).join(",")).join("\n");
     const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob); a.download = "SplicEd_Local_Progress.csv"; a.click();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    a.href = url; a.download = "SplicEd_Local_Progress.csv";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
 }/* =========================================================
    SPLICED — REAL SUB-TABS
    Learn: Modules / Open Lesson
