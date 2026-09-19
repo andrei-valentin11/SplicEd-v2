@@ -2442,3 +2442,12 @@ progress {
         min-width: 0;
     }
 }
+
+
+/* ============================================================
+   GUIDED / INDEPENDENT LEARNING MODE — V2 DEFENSE REFINEMENT
+   ============================================================ */
+.independent-mode-note { margin-top: 1rem; }
+.independent-mode-note button { margin-top: .75rem; }
+.mode-selector .button-row { align-items: center; }
+.mode-selector button.primary { font-weight: 700; }
