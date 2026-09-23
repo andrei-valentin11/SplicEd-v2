@@ -2511,3 +2511,56 @@ progress {
 #practiceContent .practice-help-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.practice-help-item{padding:14px;border-radius:12px;background:var(--soft,#f6f7f9)}.practice-help-item p{margin:6px 0 10px}.practice-help-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.practice-help-actions label{display:flex;gap:6px;align-items:center}
 #practiceContent details.practice-extra-section,#practiceContent details.practice-more-tools,#practiceContent details.practice-help-fold{display:none!important}
 @media(max-width:760px){#practiceContent .practice-help-grid{grid-template-columns:1fr}.practice-safety-title{align-items:flex-start;flex-direction:column}}
+
+/* =========================================================
+   PRACTICE V7 — COMPACT ONE-SCREEN PLAYER + HELP DRAWER
+   Practice-only overrides; no other page is changed.
+   ========================================================= */
+#practice .section-heading{margin-bottom:.55rem!important}
+#practice .section-heading .eyebrow{display:none}
+#practice .section-heading h1{font-size:clamp(1.55rem,2.4vw,2.05rem);margin:0 0 .2rem!important}
+#practice .section-heading p{font-size:.9rem;margin:0;max-width:60ch}
+#practiceContent .practice-simple-topbar{margin-bottom:.55rem;align-items:center}
+#practiceContent .practice-mini-label{font-size:.72rem}
+#practiceContent .practice-module-picker .module-select{margin-top:.2rem;min-height:40px}
+#practiceContent .practice-simple-shell{gap:.55rem}
+#practiceContent .practice-simple-header{padding:.65rem .85rem;align-items:center}
+#practiceContent .practice-simple-header .eyebrow,#practiceContent .practice-simple-header p{display:none}
+#practiceContent .practice-simple-header h2{font-size:1.05rem;margin:0}
+#practiceContent .practice-progress-summary{display:flex;gap:.7rem;align-items:center;font-size:.82rem}
+#practiceContent .practice-simple-shell>progress{height:6px;margin:-.25rem 0 0}
+#practiceContent .practice-simple-steps{padding:.3rem;gap:.3rem}
+#practiceContent .practice-simple-step{min-height:43px;flex-basis:55px;padding:.25rem}
+#practiceContent .practice-simple-step>span{width:23px;height:23px;font-size:.78rem}
+#practiceContent .practice-simple-step small{font-size:.65rem}
+#practiceContent .practice-safety-compact{padding:.48rem .7rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+#practiceContent .practice-safety-title{margin:0;min-width:max-content}
+#practiceContent .practice-safety-title strong{font-size:.82rem}
+#practiceContent .practice-safety-title span{font-size:.7rem}
+#practiceContent .practice-safety-body{padding:0;display:flex;align-items:center;gap:.7rem;flex:1;justify-content:flex-end}
+#practiceContent .practice-safety-body p{display:none}
+#practiceContent .practice-safety-body .study-check{margin:0;padding:0;background:transparent;border:0;font-size:.78rem}
+#practiceContent .practice-safety-body .study-check input{width:18px;height:18px;min-height:0}
+#practiceContent .practice-focus-grid{grid-template-columns:minmax(0,1.18fr) minmax(320px,.82fr);gap:.65rem;align-items:stretch}
+#practiceContent .practice-visual-card,#practiceContent .practice-instruction-card{padding:.75rem;box-shadow:none}
+#practiceContent .practice-card-label{margin-bottom:.35rem}
+#practiceContent .practice-main-visual,#practiceContent .practice-main-visual .wire-diagram{min-height:300px!important;height:min(42vh,390px)!important;max-height:390px!important}
+#practiceContent .practice-visual-note{display:none}
+#practiceContent .practice-step-badge{margin:.15rem 0 .3rem;font-size:.68rem}
+#practiceContent .practice-instruction-card h2{font-size:1.2rem;margin:.15rem 0 .35rem}
+#practiceContent .practice-main-instruction{font-size:.94rem;line-height:1.45;margin:.2rem 0}
+#practiceContent .practice-look-for{margin:.45rem 0;padding:.55rem .7rem;font-size:.86rem}
+#practiceContent .practice-understand-check{margin:.45rem 0;padding:.55rem .65rem}
+#practiceContent .practice-understand-check small{display:none}
+#practiceContent .practice-main-actions{grid-template-columns:.85fr .85fr 1.2fr;gap:.4rem}
+#practiceContent .practice-main-actions button{min-height:40px;padding:.55rem .6rem}
+#practiceContent .practice-requirement{font-size:.72rem;margin:.3rem 0 0}
+#practiceContent .practice-more-help-button{position:fixed;right:22px;bottom:22px;width:auto!important;margin:0!important;z-index:1001;background:var(--copper)!important;color:#1f1b18!important;border:0!important;border-radius:999px!important;padding:.75rem 1rem!important;box-shadow:0 10px 30px rgba(0,0,0,.28);font-weight:900}
+#practiceContent .practice-help-panel{position:fixed;z-index:1002;right:18px;top:76px;bottom:18px;width:min(390px,calc(100vw - 36px));margin:0!important;padding:1rem!important;overflow:auto;background:var(--surface)!important;border:1px solid var(--border-strong)!important;box-shadow:0 18px 55px rgba(0,0,0,.42);transform:translateX(115%);opacity:0;transition:transform .2s ease,opacity .2s ease}
+#practiceContent .practice-help-panel.open{transform:translateX(0);opacity:1}
+#practiceContent .practice-help-grid{grid-template-columns:1fr!important;gap:.55rem!important;margin-top:.7rem!important}
+#practiceContent .practice-help-item{padding:.7rem!important}
+#practiceContent .practice-help-item p{font-size:.84rem;margin:.25rem 0 .5rem!important}
+body.practice-help-open::after{content:"";position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:1000;pointer-events:none}
+@media(max-width:980px){#practiceContent .practice-focus-grid{grid-template-columns:1fr 1fr}#practiceContent .practice-main-visual,#practiceContent .practice-main-visual .wire-diagram{min-height:250px!important;height:32vh!important}}
+@media(max-width:760px){#practiceContent .practice-focus-grid{grid-template-columns:1fr}#practiceContent .practice-main-visual,#practiceContent .practice-main-visual .wire-diagram{height:280px!important}.practice-safety-compact{align-items:flex-start!important;flex-direction:column}.practice-safety-body{justify-content:flex-start!important}.practice-progress-summary{display:none!important}}
