@@ -4234,13 +4234,13 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
                         </button>`).join("")}
                 </nav>
 
-                <details class="practice-safety-compact" ${record.safetyAccepted ? "" : "open"}>
-                    <summary><strong>Safety first</strong><span id="safetyStatus">${record.safetyAccepted ? "✓ Confirmed" : "Confirm before continuing"}</span></summary>
+                <section class="practice-safety-compact">
+                    <div class="practice-safety-title"><strong>Safety first</strong><span id="safetyStatus">${record.safetyAccepted ? "✓ Confirmed" : "Confirm before continuing"}</span></div>
                     <div class="practice-safety-body">
                         <p>Use disconnected training wires, wear the required protective equipment, and follow your instructor. Never practise on a live circuit.</p>
                         <label class="study-check"><input type="checkbox" onchange="acceptSafety(this.checked)" ${record.safetyAccepted ? "checked" : ""}><span>I understand and will follow these safety reminders.</span></label>
                     </div>
-                </details>
+                </section>
 
                 <div class="practice-focus-grid">
                     <article class="practice-visual-card">
@@ -4248,16 +4248,13 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
                         <div id="visualStage" class="visual-stage practice-main-visual">${wireDiagram(selectedModule, currentStep, true)}</div>
                         <p class="practice-visual-note">Use the illustration as a guide. Focus only on the movement shown for this step.</p>
 
-                        <details class="practice-more-tools">
-                            <summary>More visual controls</summary>
-                            <div class="practice-tool-row">
+                        <div class="practice-tool-row practice-optional-control" hidden>
                                 <button type="button" id="pauseActionButton" class="secondary" aria-pressed="false" onclick="pauseAction()">Pause / Resume</button>
                                 <button type="button" id="zoomButton" class="secondary" aria-pressed="false" onclick="toggleZoom()">Close-up</button>
                                 <label for="motionSpeed">Speed<select id="motionSpeed" onchange="setAnimationSpeed(Number(this.value))">
                                     ${[[0.5,"0.5× Slow"],[1,"1× Normal"],[1.5,"1.5× Fast"]].map(([value,label])=>`<option value="${value}" ${animationSpeed===value?"selected":""}>${label}</option>`).join("")}
                                 </select></label>
                             </div>
-                        </details>
                     </article>
 
                     <article class="practice-instruction-card">
@@ -4267,10 +4264,7 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
                         <p class="practice-main-instruction">${esc(step[1])}</p>
                         <div class="practice-look-for"><strong>What should I look for?</strong><p>${esc(step[2])}</p></div>
 
-                        <details class="practice-help-fold">
-                            <summary>Need help? Show a hint</summary>
-                            <p>${esc(hint)}</p>
-                        </details>
+                        
 
                         <label class="practice-understand-check">
                             <input type="checkbox" onchange="toggleStepComplete(this.checked)" ${understood ? "checked" : ""}>
@@ -4286,17 +4280,30 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
                     </article>
                 </div>
 
-                <details class="practice-extra-section">
-                    <summary>Optional: review tools & extra learning</summary>
-                    <div class="practice-extra-grid">
-                        <div><h3>Save this step</h3><p>Keep difficult steps in your Review List so you can return later.</p>${savedStepButton(selectedModule, currentStep)}</div>
-                        <div><h3>Continue learning</h3><div class="practice-extra-actions"><button type="button" class="secondary" onclick="openLesson(${selectedModule})">Read Lesson</button><button type="button" class="secondary" onclick="openGuidedOrder(${selectedModule})">What Comes Next?</button></div></div>
+                <button type="button" class="practice-more-help-button" onclick="togglePracticeHelp()" aria-expanded="false" aria-controls="practiceHelpPanel">⋯ More Help</button>
+                <aside id="practiceHelpPanel" class="practice-help-panel" hidden>
+                    <div class="practice-help-head"><div><span class="eyebrow">OPTIONAL SUPPORT</span><h3>More Help</h3></div><button type="button" class="secondary small-button" onclick="togglePracticeHelp()">Close ×</button></div>
+                    <div class="practice-help-grid">
+                        <div class="practice-help-item"><strong>Hint</strong><p>${esc(hint)}</p></div>
+                        <div class="practice-help-item"><strong>Visual controls</strong><div class="practice-help-actions"><button type="button" id="pauseActionButton" class="secondary" aria-pressed="false" onclick="pauseAction()">Pause / Resume</button><button type="button" id="zoomButton" class="secondary" aria-pressed="false" onclick="toggleZoom()">Close-up</button><label>Speed<select id="motionSpeed" onchange="setAnimationSpeed(Number(this.value))"><option value="0.5" ${animationSpeed===0.5?"selected":""}>Slow</option><option value="1" ${animationSpeed===1?"selected":""}>Normal</option><option value="1.5" ${animationSpeed===1.5?"selected":""}>Fast</option></select></label></div></div>
+                        <div class="practice-help-item"><strong>Review later</strong><p>Save this step if you want to return to it.</p>${savedStepButton(selectedModule, currentStep)}</div>
+                        <div class="practice-help-item"><strong>Continue learning</strong><div class="practice-help-actions"><button type="button" class="secondary" onclick="openLesson(${selectedModule})">Read Full Lesson</button><button type="button" class="secondary" onclick="openGuidedOrder(${selectedModule})">What Comes Next?</button></div></div>
                     </div>
-                </details>
+                </aside>
             </section>`;
 
         $("#visualStage")?.style.setProperty("--motion-duration", `${3 / animationSpeed}s`);
         zoomed = false;
+    }
+
+    function togglePracticeHelp() {
+        const panel = $("#practiceHelpPanel");
+        const button = document.querySelector(".practice-more-help-button");
+        if (!panel) return;
+        panel.hidden = !panel.hidden;
+        if (button) button.setAttribute("aria-expanded", String(!panel.hidden));
+        document.querySelectorAll(".practice-optional-control").forEach(el => el.hidden = panel.hidden);
+        if (!panel.hidden) panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
     }
 
     function jumpStep(step) {
