@@ -4248,13 +4248,6 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
                         <div id="visualStage" class="visual-stage practice-main-visual">${wireDiagram(selectedModule, currentStep, true)}</div>
                         <p class="practice-visual-note">Use the illustration as a guide. Focus only on the movement shown for this step.</p>
 
-                        <div class="practice-tool-row practice-optional-control" hidden>
-                                <button type="button" id="pauseActionButton" class="secondary" aria-pressed="false" onclick="pauseAction()">Pause / Resume</button>
-                                <button type="button" id="zoomButton" class="secondary" aria-pressed="false" onclick="toggleZoom()">Close-up</button>
-                                <label for="motionSpeed">Speed<select id="motionSpeed" onchange="setAnimationSpeed(Number(this.value))">
-                                    ${[[0.5,"0.5× Slow"],[1,"1× Normal"],[1.5,"1.5× Fast"]].map(([value,label])=>`<option value="${value}" ${animationSpeed===value?"selected":""}>${label}</option>`).join("")}
-                                </select></label>
-                            </div>
                     </article>
 
                     <article class="practice-instruction-card">
@@ -4296,14 +4289,15 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
         zoomed = false;
     }
 
-    function togglePracticeHelp() {
-        const panel = $("#practiceHelpPanel");
-        const button = document.querySelector(".practice-more-help-button");
+    function togglePracticeHelp(forceClose = false) {
+        const panel = document.getElementById("practiceHelpPanel");
+        const button = document.querySelector("#practiceContent .practice-more-help-button");
         if (!panel) return;
-        panel.hidden = !panel.hidden;
-        if (button) button.setAttribute("aria-expanded", String(!panel.hidden));
-        document.querySelectorAll(".practice-optional-control").forEach(el => el.hidden = panel.hidden);
-        if (!panel.hidden) panel.scrollIntoView({ behavior: "smooth", block: "nearest" });
+        const willOpen = forceClose ? false : panel.hidden;
+        panel.hidden = !willOpen;
+        panel.classList.toggle("open", willOpen);
+        document.body.classList.toggle("practice-help-open", willOpen);
+        if (button) button.setAttribute("aria-expanded", String(willOpen));
     }
 
     function jumpStep(step) {
@@ -4561,7 +4555,9 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
         toggleSavedStep, jumpStep, nextStep, stopPlayback, prepareNextQuestion,
         renderNextPractice, chooseGuidedAnswer, checkGuidedAnswer, answerNextStep,
         advanceNextQuestion, reviewGuidedStep, renderProgress, setProgressTab, openRubric,
-        saveRubric, closeRubric, updateChecklistCount
+        saveRubric, closeRubric, updateChecklistCount, togglePracticeHelp,
+        replayVisual, pauseAction, toggleZoom, setAnimationSpeed, previousStep,
+        selectPractice, openLesson, openGuidedOrder
     });
 
     // Give Guided Order its own active navigation state and resume an existing round.
