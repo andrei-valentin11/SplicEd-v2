@@ -43,7 +43,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/rat-tail-actual.webp",
             clip: "assets/media/gifs/rat-tail-demo.gif",
-            photoAlt: "AI-generated illustrative procedural reference of the Rat Tail / Pigtail Joint for visual learning support",
+            photoAlt: "Verified actual training-sample photo of the Rat Tail / Pigtail Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Rat Tail / Pigtail Joint"
         },
 
@@ -94,7 +94,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/western-union-short-tie-actual.webp",
             clip: "assets/media/gifs/western-union-short-tie-demo.gif",
-            photoAlt: "AI-generated illustrative procedural reference of the Western Union Short-Tie for visual learning support",
+            photoAlt: "Verified actual training-sample photo of the Western Union Short-Tie held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Western Union Short-Tie"
         },
 
@@ -150,7 +150,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/western-union-long-tie-actual.webp",
             clip: "assets/media/gifs/western-union-long-tie-demo.gif",
-            photoAlt: "AI-generated illustrative procedural reference of the Western Union Long-Tie for visual learning support",
+            photoAlt: "Verified actual training-sample photo of the Western Union Long-Tie held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Western Union Long-Tie"
         },
 
@@ -206,7 +206,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/plain-tap-actual.webp",
             clip: "assets/media/gifs/plain-tap-demo.gif",
-            photoAlt: "AI-generated illustrative procedural reference of the Plain Tap Joint for visual learning support",
+            photoAlt: "Verified actual training-sample photo of the Plain Tap Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Plain Tap Joint"
         },
 
@@ -262,7 +262,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/knotted-tap-actual.webp",
             clip: "assets/media/gifs/knotted-tap-demo.gif",
-            photoAlt: "AI-generated illustrative procedural reference of the Knotted Tap Joint for visual learning support",
+            photoAlt: "Verified actual training-sample photo of the Knotted Tap Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Knotted Tap Joint"
         },
 
@@ -318,7 +318,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/aerial-tap-actual.webp",
             clip: "assets/media/gifs/aerial-tap-demo.gif",
-            photoAlt: "AI-generated illustrative procedural reference of the Aerial Tap Joint for visual learning support",
+            photoAlt: "Verified actual training-sample photo of the Aerial Tap Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Aerial Tap Joint"
         },
 
@@ -374,7 +374,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/fixture-joint-actual.webp",
             clip: "assets/media/gifs/fixture-joint-demo.gif",
-            photoAlt: "AI-generated illustrative procedural reference of the Fixture Joint for visual learning support",
+            photoAlt: "Verified actual training-sample photo of the Fixture Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Fixture Joint"
         },
 
@@ -430,7 +430,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/cross-joint-actual.webp",
             clip: "assets/media/gifs/cross-joint-demo.gif",
-            photoAlt: "AI-generated illustrative procedural reference of the Cross Joint for visual learning support",
+            photoAlt: "Verified actual training-sample photo of the Cross Joint held for scale and visual reference",
             clipAlt: "Short looping procedural demonstration for Cross Joint"
         },
 
@@ -4067,6 +4067,8 @@ initialize();
 /* SplicEd: paste once at the END of your existing script.js. */
 (() => {
     "use strict";
+
+let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
     if (window.splicedInclusiveUIInstalled) return;
     window.splicedInclusiveUIInstalled = true;
     const originalNavigate = window.navigate;
@@ -4182,153 +4184,118 @@ initialize();
         currentStep = Math.max(0, Math.min(currentStep, module.steps.length - 1));
         const step = module.steps[currentStep];
         const host = $("#practiceContent");
-        const sameModule = host.dataset.module === String(selectedModule);
-        const openPanels = new Set(sameModule
-            ? [...host.querySelectorAll("details[open][data-panel]")].map(item => item.dataset.panel) : []);
-        const open = panel => openPanels.has(panel) ? "open" : "";
+
         if (currentUser) {
             if (!record.viewed.includes(currentStep)) record.viewed.push(currentStep);
             record.lastStep = currentStep;
             saveProgress();
         }
+
+        const understood = record.completedSteps.includes(currentStep);
+        const saved = record.review.includes(currentStep);
         const hint = currentStep
-            ? `Before this step: ${module.steps[currentStep - 1][0]}. ${module.steps[currentStep - 1][2]}`
-            : `Your goal: ${module.purpose}`;
+            ? `Remember the previous action: ${module.steps[currentStep - 1][0]}. ${module.steps[currentStep - 1][2]}`
+            : `Start with the purpose of this splice: ${module.purpose}`;
         const returnAction = sequenceReturnModule === selectedModule
             ? '<button type="button" class="secondary" onclick="returnToSequence()">Return to My Sequence</button>'
             : nextRound?.module === selectedModule
                 ? '<button type="button" class="secondary" onclick="resumeNextPractice()">Return to Guided Order</button>' : "";
-        const understood = record.completedSteps.includes(currentStep);
-        const safetyDone = record.safetyAccepted;
 
         host.dataset.module = selectedModule;
         host.innerHTML = `
-            <section class="practice-start-card panel" aria-labelledby="practiceStartTitle">
-                <div class="practice-start-copy">
-                    <span class="eyebrow">START HERE</span>
-                    <h2 id="practiceStartTitle">Practice one step at a time</h2>
-                    <p>You only need to do three things: confirm safety, study the current step, then mark it understood before moving forward.</p>
+            <div class="practice-simple-topbar">
+                <div class="practice-module-picker">
+                    <span class="practice-mini-label">1. Choose a splice or joint</span>
+                    ${moduleSelect("practiceModule", selectedModule, "selectPractice")}
                 </div>
-                <ol class="practice-mini-flow" aria-label="Practice flow">
-                    <li class="${safetyDone ? "done" : "active"}"><b>1</b><span>Safety<small>${safetyDone ? "Confirmed" : "Confirm first"}</small></span></li>
-                    <li class="${safetyDone ? "active" : ""}"><b>2</b><span>Study Step<small>Watch + read</small></span></li>
-                    <li class="${understood ? "done" : ""}"><b>3</b><span>Continue<small>Check + next</small></span></li>
-                </ol>
-            </section>
-
-            <div class="practice-setup-row">
-                ${moduleSelect("practiceModule", selectedModule, "selectPractice")}
-                <section class="practice-mode-compact" aria-label="Support level">
-                    <div><span class="eyebrow">SUPPORT LEVEL</span><strong>${learningMode === "guided" ? "Guided Mode" : "Independent Mode"}</strong></div>
-                    <div class="practice-mode-buttons">
-                        <button type="button" class="${learningMode === "guided" ? "primary" : "secondary"}" onclick="setLearningMode('guided')">Guided</button>
-                        <button type="button" class="${learningMode === "independent" ? "primary" : "secondary"}" onclick="setLearningMode('independent')">Independent</button>
-                    </div>
-                </section>
                 ${returnAction}
             </div>
 
-            <details class="practice-safety-card ${safetyDone ? "is-confirmed" : "needs-action"}" data-panel="safety"
-                ${!safetyDone ? "open" : open("safety")}>
-                <summary><span><b>${safetyDone ? "✓" : "1"}</b> Safety first</span><span id="safetyStatus" class="study-status">${safetyDone ? "Confirmed" : "Required"}</span></summary>
-                <div class="study-fold-body">
-                    <p>Use disconnected training wires, wear the required protective equipment, and follow your instructor. Never practise on a live circuit.</p>
-                    <label class="study-check compact-check"><input type="checkbox" onchange="acceptSafety(this.checked)" ${safetyDone ? "checked" : ""}>
-                        <span>I understand and will follow these safety reminders.</span></label>
-                </div>
-            </details>
-
-            <nav class="practice-step-strip panel" aria-label="Procedure steps">
-                <div class="practice-step-strip-heading">
-                    <div><span class="eyebrow">CHOOSE A STEP</span><strong>Step ${currentStep + 1} of ${module.steps.length}</strong></div>
-                    <span class="tag">${record.completedSteps.length}/${module.steps.length} understood</span>
-                </div>
-                <div class="practice-step-buttons">${module.steps.map((item,index)=>`
-                    <button type="button" class="practice-step-button ${index===currentStep?"active":""} ${record.completedSteps.includes(index)?"complete":""}"
-                        aria-current="${index===currentStep?"step":"false"}" onclick="jumpStep(${index})">
-                        <b>${record.completedSteps.includes(index)?"✓ ":""}Step ${index+1}</b>
-                        <span>${learningMode === "guided" ? esc(item[0]) : "Recall step"}</span>
-                    </button>`).join("")}</div>
-            </nav>
-
-            <article class="panel practice-focus-card">
-                <header class="practice-focus-head">
-                    <div><span class="eyebrow">2 — STUDY THIS STEP</span><h2 id="practiceStepTitle" tabindex="-1">${esc(step[0])}</h2></div>
-                    <span class="practice-step-badge">${currentStep + 1} / ${module.steps.length}</span>
+            <section class="practice-simple-shell" aria-label="Guided practice workspace">
+                <header class="practice-simple-header">
+                    <div>
+                        <span class="eyebrow">GUIDED PRACTICE</span>
+                        <h2>${esc(module.name)}</h2>
+                        <p>Follow one step at a time. The main controls you need are Previous, Replay, and Next.</p>
+                    </div>
+                    <div class="practice-progress-summary" aria-label="Practice progress">
+                        <strong>Step ${currentStep + 1} of ${module.steps.length}</strong>
+                        <span id="practiceCheckedCount">${record.completedSteps.length} understood</span>
+                    </div>
                 </header>
+                <progress id="practiceUnderstandingProgress" max="${module.steps.length}" value="${record.completedSteps.length}" aria-label="Practice progress"></progress>
 
-                <div class="practice-focus-grid">
-                    <section class="practice-visual-main" aria-label="Step illustration">
-                        <div class="wire-legend"><span class="wire-a">A: Main wire</span><span class="wire-b">B: Second / branch wire</span>${selectedModule === 7 ? '<span class="wire-c">C: Second branch</span>' : ""}</div>
-                        <div class="visual-reference-workspace simplified-visual-workspace">
-                            <div class="animated-illustration-panel">
-                                <span class="visual-panel-label">Step illustration</span>
-                                <div id="visualStage" class="visual-stage">${wireDiagram(selectedModule, currentStep, true)}</div>
-                            </div>
-                            <figure class="finished-splice-reference">
-                                <span class="visual-panel-label">Finished reference</span>
-                                <img src="${esc(module.media?.photo || '')}" alt="${esc(module.media?.photoAlt || (module.name + ' finished splice reference'))}" loading="lazy" onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
-                                <div class="finished-photo-placeholder" hidden><strong>${esc(module.name)}</strong><span>Finished-splice reference</span><small>Verified training-sample photo can be placed in images/modules/.</small></div>
-                                <figcaption>Use this only as a visual reference for the finished form.</figcaption>
-                            </figure>
-                        </div>
-                        <div class="practice-essential-controls" aria-label="Basic animation controls">
-                            <button type="button" class="secondary" onclick="replayVisual()">↻ Replay Step</button>
-                            <button type="button" id="pauseActionButton" class="secondary" aria-pressed="false" onclick="pauseAction()">Pause / Resume</button>
-                            <button type="button" id="zoomButton" class="secondary" aria-pressed="false" onclick="toggleZoom()">Close-up</button>
-                        </div>
-                    </section>
+                <nav class="practice-simple-steps" aria-label="Choose a procedure step">
+                    ${module.steps.map((item, index) => `
+                        <button type="button" class="practice-simple-step ${index === currentStep ? "active" : ""}"
+                            ${index === currentStep ? 'aria-current="step"' : ''} onclick="jumpStep(${index})">
+                            <span>${record.completedSteps.includes(index) ? "✓" : index + 1}</span>
+                            <small>Step ${index + 1}</small>
+                        </button>`).join("")}
+                </nav>
 
-                    <section class="practice-instruction-main">
-                        <span class="mode-pill">${learningMode === "guided" ? "Guided support is ON" : "Independent recall"}</span>
-                        ${learningMode === "guided" ? `
-                            <p class="practice-do-now"><strong>Do this:</strong> ${esc(step[1])}</p>
-                            <aside class="note practice-look-for"><strong>Look for this</strong><p>${esc(step[2])}</p></aside>
-                            <details class="study-fold" data-panel="hint" ${open("hint")}><summary>Need a hint?</summary><div class="study-fold-body"><p>${esc(hint)}</p></div></details>
-                        ` : `
-                            <p class="practice-do-now"><strong>Your task:</strong> Recall how this step should be performed using the illustration.</p>
-                            <button type="button" class="secondary full-width" onclick="setLearningMode('guided')">Show Guided Support</button>
-                        `}
-
-                        <div class="practice-complete-box ${understood ? "is-done" : ""}">
-                            <span class="eyebrow">3 — WHEN YOU'RE READY</span>
-                            <label class="study-check"><input type="checkbox" onchange="toggleStepComplete(this.checked)" ${understood ? "checked" : ""}>
-                                <span><strong>I understand this step.</strong><small>Check this to unlock the Next Step button.</small></span></label>
-                            <div class="study-actions">
-                                <button type="button" class="secondary" onclick="previousStep()" ${currentStep === 0 ? "disabled" : ""}>← Previous</button>
-                                <button type="button" id="practiceNext" class="primary" onclick="nextStep()" aria-describedby="practiceRequirement" ${!safetyDone || !understood ? "disabled" : ""}>${currentStep === module.steps.length - 1 ? "Continue to Guided Order →" : "Next Step →"}</button>
-                            </div>
-                            <p id="practiceRequirement" class="study-caption" role="status">${requirementText()}</p>
-                        </div>
-                    </section>
-                </div>
-            </article>
-
-            <section class="practice-secondary-tools" aria-label="Optional practice tools">
-                <details class="study-fold" data-panel="review" ${open("review")}>
-                    <summary>Save or review this step <span>Optional</span></summary>
-                    <div class="study-fold-body"><div class="study-review">${savedStepButton(selectedModule, currentStep)}<p class="study-caption">Saved steps appear in Progress → My Review List.</p></div></div>
-                </details>
-                <details class="study-fold" data-panel="controls" ${open("controls")}>
-                    <summary>More animation controls <span>Optional</span></summary>
-                    <div class="study-fold-body">
-                        <div class="study-tools">
-                            <label class="study-speed" for="motionSpeed">Animation speed<select id="motionSpeed" onchange="setAnimationSpeed(Number(this.value))">${[[0.5,"0.5×"],[1,"1×"],[1.5,"1.5×"]].map(([value,label])=>`<option value="${value}" ${animationSpeed===value?"selected":""}>${label}</option>`).join("")}</select></label>
-                            <button type="button" id="playStepsButton" class="secondary" aria-pressed="${Boolean(playbackTimer)}" onclick="togglePlayback()">${playbackTimer ? "Pause All Steps" : "Play All Steps"}</button>
-                        </div>
-                        ${playbackTimer ? '<p class="study-caption" role="status">Auto-play is currently on.</p>' : ''}
+                <details class="practice-safety-compact" ${record.safetyAccepted ? "" : "open"}>
+                    <summary><strong>Safety first</strong><span id="safetyStatus">${record.safetyAccepted ? "✓ Confirmed" : "Confirm before continuing"}</span></summary>
+                    <div class="practice-safety-body">
+                        <p>Use disconnected training wires, wear the required protective equipment, and follow your instructor. Never practise on a live circuit.</p>
+                        <label class="study-check"><input type="checkbox" onchange="acceptSafety(this.checked)" ${record.safetyAccepted ? "checked" : ""}><span>I understand and will follow these safety reminders.</span></label>
                     </div>
                 </details>
-                <details class="study-fold" data-panel="compare" ${open("compare")}>
-                    <summary>Compare before and after <span>Optional</span></summary>
-                    <div class="study-fold-body before-after"><figure><figcaption>Before this step</figcaption>${wireDiagram(selectedModule,currentStep-1)}</figure><figure><figcaption>After this step</figcaption>${wireDiagram(selectedModule,currentStep)}</figure></div>
-                </details>
-                <details class="study-fold" data-panel="resources" ${open("resources")}>
-                    <summary>More learning tools <span>Optional</span></summary>
-                    <div class="study-fold-body"><div class="study-actions"><button type="button" class="secondary" onclick="openLesson(${selectedModule})">Read the Lesson</button><button type="button" class="secondary" onclick="openGuidedOrder(${selectedModule})">What Comes Next?</button></div>${mediaReferenceCard(selectedModule,true)}</div>
+
+                <div class="practice-focus-grid">
+                    <article class="practice-visual-card">
+                        <div class="practice-card-label"><span>2. Watch the action</span><button type="button" class="secondary small-button" onclick="replayVisual()">↻ Replay</button></div>
+                        <div id="visualStage" class="visual-stage practice-main-visual">${wireDiagram(selectedModule, currentStep, true)}</div>
+                        <p class="practice-visual-note">Use the illustration as a guide. Focus only on the movement shown for this step.</p>
+
+                        <details class="practice-more-tools">
+                            <summary>More visual controls</summary>
+                            <div class="practice-tool-row">
+                                <button type="button" id="pauseActionButton" class="secondary" aria-pressed="false" onclick="pauseAction()">Pause / Resume</button>
+                                <button type="button" id="zoomButton" class="secondary" aria-pressed="false" onclick="toggleZoom()">Close-up</button>
+                                <label for="motionSpeed">Speed<select id="motionSpeed" onchange="setAnimationSpeed(Number(this.value))">
+                                    ${[[0.5,"0.5× Slow"],[1,"1× Normal"],[1.5,"1.5× Fast"]].map(([value,label])=>`<option value="${value}" ${animationSpeed===value?"selected":""}>${label}</option>`).join("")}
+                                </select></label>
+                            </div>
+                        </details>
+                    </article>
+
+                    <article class="practice-instruction-card">
+                        <span class="practice-mini-label">3. Read this step</span>
+                        <div class="practice-step-badge">STEP ${currentStep + 1}</div>
+                        <h2 id="practiceStepTitle" tabindex="-1">${esc(step[0])}</h2>
+                        <p class="practice-main-instruction">${esc(step[1])}</p>
+                        <div class="practice-look-for"><strong>What should I look for?</strong><p>${esc(step[2])}</p></div>
+
+                        <details class="practice-help-fold">
+                            <summary>Need help? Show a hint</summary>
+                            <p>${esc(hint)}</p>
+                        </details>
+
+                        <label class="practice-understand-check">
+                            <input type="checkbox" onchange="toggleStepComplete(this.checked)" ${understood ? "checked" : ""}>
+                            <span><strong>I understand this step</strong><small>Check this when you can explain what happens in this step.</small></span>
+                        </label>
+
+                        <div class="practice-main-actions">
+                            <button type="button" class="secondary" onclick="previousStep()" ${currentStep === 0 ? "disabled" : ""}>← Previous</button>
+                            <button type="button" class="secondary" onclick="replayVisual()">↻ Replay</button>
+                            <button type="button" id="practiceNext" class="primary" onclick="nextStep()" aria-describedby="practiceRequirement" ${!record.safetyAccepted || !understood ? "disabled" : ""}>${currentStep === module.steps.length - 1 ? "Try Guided Order →" : "Next →"}</button>
+                        </div>
+                        <p id="practiceRequirement" class="practice-requirement" role="status">${requirementText()}</p>
+                    </article>
+                </div>
+
+                <details class="practice-extra-section">
+                    <summary>Optional: review tools & extra learning</summary>
+                    <div class="practice-extra-grid">
+                        <div><h3>Save this step</h3><p>Keep difficult steps in your Review List so you can return later.</p>${savedStepButton(selectedModule, currentStep)}</div>
+                        <div><h3>Continue learning</h3><div class="practice-extra-actions"><button type="button" class="secondary" onclick="openLesson(${selectedModule})">Read Lesson</button><button type="button" class="secondary" onclick="openGuidedOrder(${selectedModule})">What Comes Next?</button></div></div>
+                    </div>
                 </details>
             </section>`;
-        $("#visualStage").style.setProperty("--motion-duration", `${3 / animationSpeed}s`);
+
+        $("#visualStage")?.style.setProperty("--motion-duration", `${3 / animationSpeed}s`);
         zoomed = false;
     }
 
@@ -4630,9 +4597,7 @@ function setLearningMode(mode) {
     if (!["guided", "independent"].includes(mode)) return;
     learningMode = mode;
     localStorage.setItem("splicedLearningMode", mode);
-    notify(mode === "guided"
-        ? "Guided Mode enabled — prompts, hints, and detailed step support are available."
-        : "Independent Mode enabled — prompts and explanatory cues are reduced for procedural recall.");
+    notify(mode === "guided" ? "Guided Mode enabled." : "Independent Mode enabled — explanatory cues are reduced.");
     if (currentPage === "learn" && $("#lessonViewer") && !$("#lessonViewer").hidden) openLesson(selectedModule);
     if (currentPage === "practice") renderPractice();
 }
@@ -4645,22 +4610,18 @@ function localProfileNames() {
 function summarizeProgressFor(username) {
     const saved = readJSON(progressKey(username), {});
     const learning = saved.learning || {};
-    const completedSequences = new Set(Array.isArray(saved.completedModules) ? saved.completedModules : []);
     let lessons = 0, viewed = 0, totalSteps = 0, sequencing = 0, assessments = 0, scoreSum = 0;
-    MODULES.forEach(module => {
-        const record = learning[module.name] || {};
-        if (record.lesson) lessons++;
-        viewed += Array.isArray(record.viewed) ? record.viewed.length : 0;
-        totalSteps += module.steps.length;
-        if (completedSequences.has(module.name)) sequencing++;
-        const attempts = Array.isArray(record.attempts) ? record.attempts : [];
-        if (attempts.length) {
-            const scores = attempts.map(a => Number(a.score)).filter(Number.isFinite);
-            if (scores.length) { assessments++; scoreSum += Math.max(...scores); }
-        }
+    MODULES.forEach(m => {
+        const r = learning[m.name] || {};
+        if (r.lesson) lessons++;
+        viewed += Array.isArray(r.viewed) ? r.viewed.length : 0;
+        totalSteps += m.steps.length;
+        if (r.sequenceCompleted || r.challengeCompleted || r.sequencing) sequencing++;
+        const q = r.quiz || r.assessment || {};
+        const score = Number(q.bestScore ?? q.score);
+        if (Number.isFinite(score)) { assessments++; scoreSum += score; }
     });
-    return { username, lessons, viewed, totalSteps, sequencing, assessments,
-        averageScore: assessments ? Number((scoreSum / assessments).toFixed(1)) : null };
+    return {username, lessons, viewed, totalSteps, sequencing, assessments, averageScore: assessments ? Math.round(scoreSum / assessments) : null};
 }
 
 function renderTeacherProgress() {
@@ -4668,25 +4629,22 @@ function renderTeacherProgress() {
     if (!host) return;
     const names = localProfileNames();
     if (!names.length) {
-        host.innerHTML = `<div class="panel"><p>No learner profiles are saved on this browser yet.</p><p class="small-text">This prototype reads local progress only from profiles stored on the current device and browser.</p></div>`;
+        host.innerHTML = `<div class="panel"><p>No learner profiles are saved on this browser yet.</p></div>`;
         return;
     }
     const rows = names.map(summarizeProgressFor);
-    host.innerHTML = `<div class="teacher-table-wrap"><table class="teacher-table"><thead><tr><th>Learner</th><th>Lessons</th><th>Viewed Steps</th><th>Sequencing</th><th>Assessments</th><th>Avg. Best Score</th></tr></thead><tbody>${rows.map(r => `<tr><td>${escapeHTML(r.username)}</td><td>${r.lessons}/${MODULES.length}</td><td>${r.viewed}/${r.totalSteps}</td><td>${r.sequencing}/${MODULES.length}</td><td>${r.assessments}/${MODULES.length}</td><td>${r.averageScore === null ? "—" : `${r.averageScore}/10`}</td></tr>`).join("")}</tbody></table></div><aside class="note"><strong>Prototype Limitation</strong><p>This view summarizes learner progress saved on the current browser and device only. It is not an authenticated cross-device or real-time learning analytics system.</p></aside>`;
+    host.innerHTML = `<div class="teacher-table-wrap"><table class="teacher-table"><thead><tr><th>Learner</th><th>Lessons</th><th>Viewed steps</th><th>Sequencing</th><th>Assessments</th><th>Avg. score</th></tr></thead><tbody>${rows.map(r => `<tr><td>${escapeHTML(r.username)}</td><td>${r.lessons}/8</td><td>${r.viewed}/${r.totalSteps}</td><td>${r.sequencing}/8</td><td>${r.assessments}/8</td><td>${r.averageScore === null ? "—" : r.averageScore}</td></tr>`).join("")}</tbody></table></div><p class="small-text">Prototype limitation: this is a local-device snapshot, not authenticated cross-device real-time analytics.</p>`;
 }
 
 function exportLocalProgressCSV() {
     const rows = localProfileNames().map(summarizeProgressFor);
     if (!rows.length) { notify("No local learner progress to export."); return; }
-    const header = ["Learner", "Lessons Completed", "Viewed Steps", "Total Steps", "Sequencing Completed", "Assessments", "Average Best Score"];
-    const csvRows = [header, ...rows.map(r => [r.username, r.lessons, r.viewed, r.totalSteps, r.sequencing, r.assessments, r.averageScore ?? ""])];
-    const csv = csvRows.map(row => row.map(value => `"${String(value).replaceAll('"', '""')}"`).join(",")).join("\n");
+    const csv = ["Learner,Lessons Completed,Viewed Steps,Total Steps,Sequencing Completed,Assessments,Average Score", ...rows.map(r => [r.username,r.lessons,r.viewed,r.totalSteps,r.sequencing,r.assessments,r.averageScore ?? ""].map(v => `"${String(v).replaceAll('"','""')}"`).join(","))].join("\
+");
     const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
-    const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = url; a.download = "SplicEd_Local_Progress.csv";
-    document.body.appendChild(a); a.click(); a.remove();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    a.href = URL.createObjectURL(blob); a.download = "SplicEd_Local_Progress.csv"; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }/* =========================================================
    SPLICED — REAL SUB-TABS
    Learn: Modules / Open Lesson
@@ -4885,27 +4843,3 @@ document.addEventListener(
 
     }
 );
-
-
-/* =========================================================
-   SPLICED — FINAL SUB-TAB SAFETY
-   Prevent blank Open Lesson panel before a module is opened.
-   ========================================================= */
-(() => {
-    "use strict";
-
-    const previousSetLearnTab = window.setLearnTab;
-
-    window.setLearnTab = function(tab) {
-        const viewer = document.getElementById("lessonViewer");
-
-        if (tab === "lesson" && (!viewer || !viewer.innerHTML.trim())) {
-            tab = "modules";
-            if (typeof notify === "function") {
-                notify("Open a module first to view its lesson.");
-            }
-        }
-
-        return previousSetLearnTab(tab);
-    };
-})();
