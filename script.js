@@ -6,6 +6,8 @@
 
 "use strict";
 
+let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
+
 /* =========================================================
    DOM HELPERS
    ========================================================= */
@@ -38,6 +40,13 @@ const MODULES = [
     {
         name: "Rat Tail / Pigtail Joint",
 
+        media: {
+            photo: "assets/images/actual/rat-tail-actual.webp",
+            clip: "assets/media/gifs/rat-tail-demo.gif",
+            photoAlt: "Verified actual training-sample photo of the Rat Tail / Pigtail Joint held for scale and visual reference",
+            clipAlt: "Short looping procedural demonstration for Rat Tail / Pigtail Joint"
+        },
+
         purpose:
             "Join conductor ends into one shared twisted tail.",
 
@@ -49,13 +58,6 @@ const MODULES = [
 
         check:
             "Both conductors share an even twist without a loose end.",
-
-        video: {
-            title: "How to make a Rat Tail Joint",
-            id: "rKo9cAE6mow",
-            focus:
-                "Observe how the prepared ends are brought together and twisted."
-        },
 
         steps: [
             [
@@ -89,6 +91,13 @@ const MODULES = [
     {
         name: "Western Union Short-Tie",
 
+        media: {
+            photo: "assets/images/actual/western-union-short-tie-actual.webp",
+            clip: "assets/media/gifs/western-union-short-tie-demo.gif",
+            photoAlt: "Verified actual training-sample photo of the Western Union Short-Tie held for scale and visual reference",
+            clipAlt: "Short looping procedural demonstration for Western Union Short-Tie"
+        },
+
         purpose:
             "Extend two conductor ends using a compact in-line splice.",
 
@@ -100,13 +109,6 @@ const MODULES = [
 
         check:
             "Both sides have close, orderly wraps and the standing wires remain in line.",
-
-        video: {
-            title: "How to make a Western Union Short Tie Splice",
-            id: "xDdd0nKSdaM",
-            focus:
-                "Focus on the compact interlock and the wraps on both sides."
-        },
 
         steps: [
             [
@@ -145,6 +147,13 @@ const MODULES = [
     {
         name: "Western Union Long-Tie",
 
+        media: {
+            photo: "assets/images/actual/western-union-long-tie-actual.webp",
+            clip: "assets/media/gifs/western-union-long-tie-demo.gif",
+            photoAlt: "Verified actual training-sample photo of the Western Union Long-Tie held for scale and visual reference",
+            clipAlt: "Short looping procedural demonstration for Western Union Long-Tie"
+        },
+
         purpose:
             "Extend conductor ends using an elongated central tie.",
 
@@ -156,13 +165,6 @@ const MODULES = [
 
         check:
             "The elongated center and both sets of end wraps are present.",
-
-        video: {
-            title: "How to make a Western Union Long Tie Splice",
-            id: "yvfDbxJu6JE",
-            focus:
-                "Compare the longer central tie with the short-tie module."
-        },
 
         steps: [
             [
@@ -201,6 +203,13 @@ const MODULES = [
     {
         name: "Plain Tap Joint",
 
+        media: {
+            photo: "assets/images/actual/plain-tap-actual.webp",
+            clip: "assets/media/gifs/plain-tap-demo.gif",
+            photoAlt: "Verified actual training-sample photo of the Plain Tap Joint held for scale and visual reference",
+            clipAlt: "Short looping procedural demonstration for Plain Tap Joint"
+        },
+
         purpose:
             "Connect one branch conductor to a continuous main conductor.",
 
@@ -212,14 +221,6 @@ const MODULES = [
 
         check:
             "The main stays continuous and the branch turns sit close together.",
-
-        video: {
-            title:
-                "Plain Tap Joint | Tap Joint | Tee Joint | Electrical Wire Joints",
-            id: "0iLMnMxsfOA",
-            focus:
-                "Follow the branch position and the turns around the main conductor."
-        },
 
         steps: [
             [
@@ -258,6 +259,13 @@ const MODULES = [
     {
         name: "Knotted Tap Joint",
 
+        media: {
+            photo: "assets/images/actual/knotted-tap-actual.webp",
+            clip: "assets/media/gifs/knotted-tap-demo.gif",
+            photoAlt: "Verified actual training-sample photo of the Knotted Tap Joint held for scale and visual reference",
+            clipAlt: "Short looping procedural demonstration for Knotted Tap Joint"
+        },
+
         purpose:
             "Form a branch connection with a locking knot before the turns.",
 
@@ -269,13 +277,6 @@ const MODULES = [
 
         check:
             "The locking knot is present and the following turns are orderly.",
-
-        video: {
-            title: "How to make a Knotted Tap Joint",
-            id: "LgutDYme_Ks",
-            focus:
-                "Watch the locking knot before the branch wrapping is completed."
-        },
 
         steps: [
             [
@@ -314,6 +315,13 @@ const MODULES = [
     {
         name: "Aerial Tap Joint",
 
+        media: {
+            photo: "assets/images/actual/aerial-tap-actual.webp",
+            clip: "assets/media/gifs/aerial-tap-demo.gif",
+            photoAlt: "Verified actual training-sample photo of the Aerial Tap Joint held for scale and visual reference",
+            clipAlt: "Short looping procedural demonstration for Aerial Tap Joint"
+        },
+
         purpose:
             "Study a tap configuration with a bent branch and short wrapped section.",
 
@@ -325,13 +333,6 @@ const MODULES = [
 
         check:
             "The branch bend is formed and the turns engage the main.",
-
-        video: {
-            title: "How to make an Aerial Tap Joint",
-            id: "vAGdDlnrJ-Y",
-            focus:
-                "Observe the branch bend and the following tap turns."
-        },
 
         steps: [
             [
@@ -370,6 +371,13 @@ const MODULES = [
     {
         name: "Fixture Joint",
 
+        media: {
+            photo: "assets/images/actual/fixture-joint-actual.webp",
+            clip: "assets/media/gifs/fixture-joint-demo.gif",
+            photoAlt: "Verified actual training-sample photo of the Fixture Joint held for scale and visual reference",
+            clipAlt: "Short looping procedural demonstration for Fixture Joint"
+        },
+
         purpose:
             "Join a fixture lead to a supporting branch conductor in a training sample.",
 
@@ -381,13 +389,6 @@ const MODULES = [
 
         check:
             "The fixture lead is wrapped and the supporting end is folded as demonstrated.",
-
-        video: {
-            title: "FIXTURE JOINT/SPLICE",
-            id: "OqFfzMWpRaU",
-            focus:
-                "Look for the fixture-wire wraps and the supporting conductor folded over them."
-        },
 
         steps: [
             [
@@ -426,6 +427,13 @@ const MODULES = [
     {
         name: "Cross Joint",
 
+        media: {
+            photo: "assets/images/actual/cross-joint-actual.webp",
+            clip: "assets/media/gifs/cross-joint-demo.gif",
+            photoAlt: "Verified actual training-sample photo of the Cross Joint held for scale and visual reference",
+            clipAlt: "Short looping procedural demonstration for Cross Joint"
+        },
+
         purpose:
             "Connect two branch conductors beside one another on one main.",
 
@@ -437,13 +445,6 @@ const MODULES = [
 
         check:
             "Both adjacent taps are complete and the main remains uncut.",
-
-        video: {
-            title: "How to make an Ordinary Cross Joint",
-            id: "_alUDl-Td4M",
-            focus:
-                "Identify the two adjacent branch connections on the main conductor."
-        },
 
         steps: [
             [
@@ -484,8 +485,8 @@ const MODULES = [
    APPLICATION STATE
    ========================================================= */
 
-const ACCOUNT_KEY = "splicedUser";
-const ACCOUNTS_KEY = "splicedAccountsV2";
+const PROFILES_KEY = "splicedLearnerProfilesV1";
+const LEGACY_PROFILE_KEYS = ["splicedUser", "splicedAccountsV2"];
 const SESSION_KEY = "splicedSession";
 const PROGRESS_KEY = "splicedProgress";
 
@@ -543,32 +544,87 @@ function progressKey(username) {
     return `${PROGRESS_KEY}_${username.toLowerCase()}`;
 }
 
-function getAccounts() {
-    const stored = readJSON(ACCOUNTS_KEY, []);
+function normalizeProfileName(value) {
+    return String(value || "")
+        .replace(/[\u0000-\u001f\u007f<>]/g, "")
+        .replace(/\s+/g, " ")
+        .trim()
+        .slice(0, 40);
+}
 
-    const accounts = Array.isArray(stored)
-        ? stored.filter(user =>
-            user &&
-            typeof user.username === "string" &&
-            typeof user.password === "string"
-        )
-        : [];
+function validProfileName(value) {
+    return value.length >= 2 && value.length <= 40;
+}
 
-    // Read the account used by the previous SplicEd version.
-    const legacy = readJSON(ACCOUNT_KEY);
+function profileFromStored(value) {
+    const candidate = typeof value === "string"
+        ? value
+        : value && typeof value === "object"
+            ? value.username || value.nickname
+            : "";
 
-    if (
-        legacy &&
-        typeof legacy.username === "string" &&
-        typeof legacy.password === "string" &&
-        !accounts.some(user =>
-            user.username.toLowerCase() === legacy.username.toLowerCase()
-        )
-    ) {
-        accounts.push(legacy);
+    const username = normalizeProfileName(candidate);
+
+    return validProfileName(username) ? { username } : null;
+}
+
+function removeStorageKey(key) {
+    try {
+        localStorage.removeItem(key);
+    } catch {
+        // A blocked storage area should not prevent the lesson from opening.
+    }
+}
+
+function getProfiles() {
+    const current = readJSON(PROFILES_KEY, null);
+    const candidates = Array.isArray(current) ? [...current] : [];
+
+    // Migrate only the learner name from the previous prototype. Obsolete
+    // account fields are intentionally ignored and then removed after a
+    // successful write. Existing progress keys continue to use the name.
+    const legacyList = readJSON(LEGACY_PROFILE_KEYS[1], []);
+    if (Array.isArray(legacyList)) {
+        candidates.push(...legacyList);
+    }
+    candidates.push(readJSON(LEGACY_PROFILE_KEYS[0], null));
+
+    const profiles = [];
+    const seen = new Set();
+
+    candidates.forEach(value => {
+        const profile = profileFromStored(value);
+        if (!profile) {
+            return;
+        }
+
+        const key = profile.username.toLowerCase();
+        if (!seen.has(key)) {
+            seen.add(key);
+            profiles.push(profile);
+        }
+    });
+
+    const legacyExists = LEGACY_PROFILE_KEYS.some(key => {
+        try {
+            return localStorage.getItem(key) !== null;
+        } catch {
+            return false;
+        }
+    });
+
+    if (JSON.stringify(current) !== JSON.stringify(profiles) || legacyExists) {
+        if (writeJSON(PROFILES_KEY, profiles)) {
+            LEGACY_PROFILE_KEYS.forEach(removeStorageKey);
+        }
     }
 
-    return accounts;
+    return profiles;
+}
+
+// Keep the old function name available for any locally cached page code.
+function getAccounts() {
+    return getProfiles();
 }
 
 function defaultRecord() {
@@ -875,149 +931,77 @@ function closeRubric() {
    AUTHENTICATION
    ========================================================= */
 
-function showAuthForm(type) {
-    const login = type === "login";
-
-    $("#loginForm").hidden = !login;
-    $("#registerForm").hidden = login;
-
-    $("#loginTab").classList.toggle("active", login);
-    $("#registerTab").classList.toggle("active", !login);
-
-    $("#loginMessage").textContent = "";
-    $("#registerMessage").textContent = "";
-}
-
 function formMessage(id, message, type = "error") {
     const element = document.getElementById(id);
+
+    if (!element) {
+        return;
+    }
 
     element.textContent = message;
     element.className = `form-message ${type}`;
 }
 
-function togglePassword(id, button) {
-    const input = document.getElementById(id);
-    const show = input.type === "password";
+function renderProfileChoices() {
+    const list = $("#returningProfiles");
+    const buttons = $("#profileButtons");
 
-    input.type = show ? "text" : "password";
-    button.textContent = show ? "Hide" : "Show";
+    if (!list || !buttons) {
+        return;
+    }
 
-    button.setAttribute(
-        "aria-label",
-        show ? "Hide password" : "Show password"
-    );
+    const profiles = getProfiles();
+    buttons.replaceChildren();
+    list.hidden = profiles.length === 0;
+
+    profiles.forEach(profile => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "secondary profile-choice";
+        button.textContent = `Continue as ${profile.username}`;
+        button.addEventListener("click", () => startLearner(profile.username));
+        buttons.append(button);
+    });
 }
 
-function handleRegister(event) {
-    event.preventDefault();
-
-    const username = $("#registerUsername").value.trim();
-    const confirmUsername = $("#confirmUsername").value.trim();
-
-    const password = $("#registerPassword").value;
-    const confirmPassword = $("#confirmPassword").value;
-
-    const gender = $("#gender").value;
-    const email = $("#personalEmail").value.trim();
-
-    if (username.length < 3) {
-        formMessage(
-            "registerMessage",
-            "Username must contain at least 3 characters."
-        );
-        return;
+function showAuthForm() {
+    const form = $("#profileForm");
+    if (form) {
+        form.hidden = false;
     }
-
-    if (username.toLowerCase() !== confirmUsername.toLowerCase()) {
-        formMessage("registerMessage", "Usernames do not match.");
-        return;
-    }
-
-    if (password.length < 6) {
-        formMessage(
-            "registerMessage",
-            "Password must contain at least 6 characters."
-        );
-        return;
-    }
-
-    if (password !== confirmPassword) {
-        formMessage("registerMessage", "Passwords do not match.");
-        return;
-    }
-
-    const accounts = getAccounts();
-
-    if (
-        accounts.some(user =>
-            user.username.toLowerCase() === username.toLowerCase()
-        )
-    ) {
-        formMessage(
-            "registerMessage",
-            "This username is already registered on this browser."
-        );
-        return;
-    }
-
-    accounts.push({
-        username,
-        password,
-        gender,
-        email,
-        createdAt: new Date().toISOString()
-    });
-
-    if (!writeJSON(ACCOUNTS_KEY, accounts)) {
-        return;
-    }
-
-    $("#registerForm").reset();
-    $("#loginUsername").value = username;
-
-    showAuthForm("login");
-
-    formMessage(
-        "loginMessage",
-        "Account created. You can now log in.",
-        "success"
-    );
+    renderProfileChoices();
 }
 
-function handleLogin(event) {
-    event.preventDefault();
+function startLearner(name) {
+    const username = normalizeProfileName(name);
 
-    const username = $("#loginUsername").value.trim();
-    const password = $("#loginPassword").value;
-
-    const account = getAccounts().find(user =>
-        user.username.toLowerCase() === username.toLowerCase() &&
-        user.password === password
-    );
-
-    if (!account) {
+    if (!validProfileName(username)) {
         formMessage(
-            "loginMessage",
-            "Incorrect username or password."
+            "profileMessage",
+            "Use a nickname with 2–40 characters."
         );
         return;
     }
 
-    currentUser = account;
+    const profiles = getProfiles();
+    const existing = profiles.find(profile =>
+        profile.username.toLowerCase() === username.toLowerCase()
+    );
 
-    writeJSON(SESSION_KEY, {
-        username: account.username
-    });
+    if (!existing) {
+        profiles.push({ username });
+        writeJSON(PROFILES_KEY, profiles);
+    }
 
+    currentUser = existing || { username };
+    writeJSON(SESSION_KEY, { username: currentUser.username });
     loadProgress();
     openApplication();
 }
 
-function forgotPassword() {
-    formMessage(
-        "loginMessage",
-        "This browser-only prototype does not provide email password recovery. Ask your instructor for assistance or use another demo account."
-    );
+function handleProfileStart(event) {
+    event.preventDefault();
+    startLearner($("#profileName").value);
 }
 
 function openApplication() {
@@ -1040,6 +1024,9 @@ function logout() {
 
     currentUser = null;
     learning = {};
+    points = 0;
+    badges = 0;
+    completedModules = new Set();
     quizDrafts = {};
     sequenceDrafts = {};
     nextRound = null;
@@ -1048,8 +1035,12 @@ function logout() {
     $("#mainApplication").hidden = true;
     $("#authPage").hidden = false;
 
-    $("#loginPassword").value = "";
-    showAuthForm("login");
+    const form = $("#profileForm");
+    if (form) {
+        form.reset();
+    }
+    formMessage("profileMessage", "");
+    showAuthForm();
 }
 
 function restoreSession() {
@@ -1059,7 +1050,7 @@ function restoreSession() {
         return;
     }
 
-    const account = getAccounts().find(user =>
+    const account = getProfiles().find(user =>
         user.username.toLowerCase() === session.username.toLowerCase()
     );
 
@@ -1123,6 +1114,10 @@ function navigate(page) {
 
     if (page === "progress") {
         renderProgress();
+    }
+
+    if (page === "teacher") {
+        renderTeacherProgress();
     }
 
     if (page === "nextPractice") {
@@ -1210,6 +1205,43 @@ function learningPathComplete(index) {
    MODULE CARDS AND LESSONS
    ========================================================= */
 
+function diagramWithReference(moduleIndex, stepIndex, animate = false) {
+    const module = MODULES[moduleIndex];
+    const media = module?.media || {};
+    const image = media.photo || "";
+    const alt = `Illustrative finished-splice reference for ${module?.name || "selected module"}`;
+
+    return `
+        <div class="diagram-hover-reference" tabindex="0" aria-label="Illustration. Hover or focus to view the illustrative finished-splice reference.">
+            ${wireDiagram(moduleIndex, stepIndex, animate)}
+            <div class="diagram-hover-card" role="img" aria-label="${escapeHTML(alt)}">
+                <span class="hover-reference-label">Illustrative Reference</span>
+                <img src="${escapeHTML(image)}" alt="${escapeHTML(alt)}" loading="lazy" decoding="async">
+                <small>${escapeHTML(module?.name || "")}</small>
+            </div>
+            <span class="hover-reference-hint">Hover / focus for finished-splice reference</span>
+        </div>
+    `;
+}
+
+function jumpToLessonStep(stepIndex) {
+    const target = document.getElementById(`lesson-step-${stepIndex}`);
+    if (!target) return;
+    target.open = true;
+    target.scrollIntoView({behavior: "smooth", block: "start"});
+}
+
+function setAboutTab(tab) {
+    document.querySelectorAll('[data-about-panel]').forEach(panel => {
+        panel.hidden = panel.dataset.aboutPanel !== tab;
+    });
+    document.querySelectorAll('[data-about-tab]').forEach(button => {
+        const active = button.dataset.aboutTab === tab;
+        button.classList.toggle('active', active);
+        button.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+}
+
 function renderModules() {
     $("#lessonCards").innerHTML = MODULES.map((module, index) => {
         const record = recordFor(index);
@@ -1227,7 +1259,7 @@ function renderModules() {
                 </span>
 
                 <div class="module-thumbnail">
-                    ${wireDiagram(index, module.steps.length - 1)}
+                    ${diagramWithReference(index, module.steps.length - 1)}
                 </div>
 
                 <h2>${escapeHTML(module.name)}</h2>
@@ -1247,36 +1279,59 @@ function renderModules() {
     }).join("");
 }
 
-function tutorialCard(index, compact = false) {
-    const video = MODULES[index].video;
-    const url = `https://www.youtube.com/watch?v=${video.id}`;
+function mediaReferenceCard(index, compact = false) {
+    const module = MODULES[index];
+    const media = module.media || {};
 
     return `
-        <aside class="tutorial-card">
-            <span class="eyebrow">RELATED VIDEO TUTORIAL</span>
+        <section class="media-reference-card" aria-label="Actual reference and short demonstration">
+            <div class="media-card-heading">
+                <div>
+                    <span class="eyebrow">ILLUSTRATIVE REFERENCE + SHORT DEMONSTRATION</span>
+                    <h3>Connect the illustration to the real wire</h3>
+                    <p>Compare the simplified diagram with a clearly labeled illustrative reference, then replay the short local demonstration before practice.</p>
+                </div>
+                <span class="offline-badge">No YouTube required</span>
+            </div>
 
-            <h3>${escapeHTML(video.title)}</h3>
-            <p>${escapeHTML(video.focus)}</p>
+            <div class="media-reference-grid">
+                <figure class="actual-photo-frame">
+                    <img
+                        src="${escapeHTML(media.photo || "")}" 
+                        alt="${escapeHTML(media.photoAlt || (module.name + " actual reference"))}"
+                        loading="lazy"
+                        onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
+                    >
+                    <div class="media-placeholder" hidden>
+                        <strong>Illustrative reference slot</strong>
+                        <span>${escapeHTML(module.name)}</span>
+                        <small>Add or replace with an instructor-verified training-sample photo when available.</small>
+                    </div>
+                    <figcaption>AI-generated illustrative reference • compare with instructor-verified samples</figcaption>
+                </figure>
 
-            <a
-                class="tutorial-link"
-                href="${url}"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                ▶ Watch on YouTube
-                <span>(new tab)</span>
-            </a>
+                <figure class="demo-clip-frame">
+                    <img
+                        src="${escapeHTML(media.clip || "")}" 
+                        alt="${escapeHTML(media.clipAlt || (module.name + " short demonstration"))}"
+                        loading="lazy"
+                        onerror="this.hidden=true; this.nextElementSibling.hidden=false;"
+                    >
+                    <div class="media-placeholder" hidden>
+                        <strong>10–15 second demo slot</strong>
+                        <span>${escapeHTML(module.name)}</span>
+                        <small>Add the module animated procedural illustration here. Show one major action at a time.</small>
+                    </div>
+                    <figcaption>Animated procedural illustration • loops automatically while visible</figcaption>
+                </figure>
+            </div>
 
             ${compact ? "" : `
-                <p class="small-text">
-                    Internet connection required. Pause and replay alongside
-                    the lesson. External demonstrations may use different
-                    dimensions or turn counts; follow your instructor's
-                    specifications.
+                <p class="small-text media-guidance">
+                    Use disconnected practice conductors only. The local clip is a review aid, not a substitute for instructor-supervised laboratory performance. Exact strip lengths, turns, conductor sizes, and finishing requirements should follow the validated class specification.
                 </p>
             `}
-        </aside>
+        </section>
     `;
 }
 
@@ -1307,9 +1362,23 @@ function openLesson(index) {
             <p>${escapeHTML(module.purpose)}</p>
         </header>
 
+        <nav class="lesson-step-quicknav panel" aria-label="Quick step navigation">
+            <div>
+                <span class="eyebrow">STEP-BY-STEP QUICK ACCESS</span>
+                <strong>Jump directly to a procedure step</strong>
+                <p class="small-text">Use this selector so you do not need to scroll through the whole lesson.</p>
+            </div>
+            <select aria-label="Choose a procedure step" onchange="jumpToLessonStep(Number(this.value))">
+                <option value="" selected disabled>Choose step…</option>
+                ${module.steps.map((item, stepIndex) => `
+                    <option value="${stepIndex}">Step ${stepIndex + 1}: ${escapeHTML(item[0])}</option>
+                `).join("")}
+            </select>
+        </nav>
+
         <div class="lesson-layout">
             <figure>
-                ${wireDiagram(index, module.steps.length - 1)}
+                ${diagramWithReference(index, module.steps.length - 1)}
                 <figcaption>
                     Completed configuration • schematic, not to scale
                 </figcaption>
@@ -1345,20 +1414,20 @@ function openLesson(index) {
             </p>
         </aside>
 
-        ${tutorialCard(index)}
+        ${mediaReferenceCard(index)}
 
         <h2>Read the Procedure</h2>
 
         <div class="lesson-steps">
             ${module.steps.map((step, stepIndex) => `
-                <details ${stepIndex === 0 ? "open" : ""}>
+                <details id="lesson-step-${stepIndex}" ${stepIndex === 0 ? "open" : ""}>
                     <summary>
                         ${stepIndex + 1}. ${escapeHTML(step[0])}
                     </summary>
 
                     <div class="lesson-step-body">
                         <figure>
-                            ${wireDiagram(index, stepIndex)}
+                            ${diagramWithReference(index, stepIndex)}
                             <figcaption>${escapeHTML(step[2])}</figcaption>
                         </figure>
 
@@ -1389,18 +1458,22 @@ function openLesson(index) {
             </aside>
         </div>
 
-        <p class="small-text">
-            Terminology reference:
-            <a
-                href="https://sites.google.com/bicol-u.edu.ph/tle7/lesson-1/learning-outcome-1/common-wire-splices-and-joints"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                TLE 7 — Common Wire Splices and Joints
-            </a>.
-            These simplified learning diagrams follow the module sequence.
-            Exact construction follows the instructor's demonstration.
-        </p>
+        <aside class="curriculum-note">
+            <strong>Competency alignment</strong>
+            <p><strong>CHED/TUP:</strong> higher-education and local course context. <strong>DepEd EIM:</strong> baseline instructional curriculum reference where applicable. <strong>TESDA EIM NC II:</strong> technical competency/performance-standard reference. Exact construction and safety requirements follow the instructor-validated procedure.</p>
+        </aside>
+
+        <section class="mode-selector panel">
+            <div>
+                <span class="eyebrow">DIFFERENTIATED LEARNING</span>
+                <h3>Choose your support level</h3>
+                <p><strong>Guided Mode</strong> keeps prompts and learning support visible. <strong>Independent Mode</strong> reduces explanatory cues so you can recall the procedure with less support.</p>
+            </div>
+            <div class="button-row">
+                <button class="${learningMode === "guided" ? "primary" : "secondary"}" onclick="setLearningMode('guided')">Guided Mode</button>
+                <button class="${learningMode === "independent" ? "primary" : "secondary"}" onclick="setLearningMode('independent')">Independent Mode</button>
+            </div>
+        </section>
 
         <div class="button-row">
             <button class="primary" onclick="markLessonRead(${index})">
@@ -1492,6 +1565,40 @@ function renderPractice() {
             selectedModule,
             "selectPractice"
         )}
+
+        <section class="practice-step-dock panel" aria-label="Step-by-step procedure">
+            <div class="practice-step-dock-head">
+                <div>
+                    <span class="eyebrow">STEP-BY-STEP PROCEDURE</span>
+                    <strong>Choose a step — visible immediately</strong>
+                </div>
+                <span class="tag">Step ${currentStep + 1} of ${module.steps.length}</span>
+            </div>
+            <div class="practice-step-tabs" role="tablist">
+                ${module.steps.map((item,index)=>`
+                    <button type="button" role="tab"
+                        class="practice-step-tab ${index===currentStep?"current":""}"
+                        aria-selected="${index===currentStep}"
+                        onclick="jumpStep(${index})">
+                        <span>Step ${index+1}</span>
+                        <small>${escapeHTML(item[0])}</small>
+                    </button>`).join("")}
+            </div>
+            <div class="practice-current-instruction">
+                <div>
+                    <span class="eyebrow">CURRENT STEP</span>
+                    <h2>${escapeHTML(step[0])}</h2>
+                    <p>${escapeHTML(step[1])}</p>
+                </div>
+                <div class="button-row">
+                    <button class="secondary" onclick="previousStep()" ${currentStep===0?"disabled":""}>← Previous</button>
+                    <button class="secondary" onclick="replayVisual()">↻ Replay</button>
+                    <button class="primary" onclick="nextStep()" ${!stepComplete||!safetyAccepted?"disabled":""}>
+                        ${currentStep===module.steps.length-1?"What Comes Next? →":"Next Step →"}
+                    </button>
+                </div>
+            </div>
+        </section>
 
         <aside class="safety-panel">
             <strong>Safety reminder before practical work</strong>
@@ -1655,7 +1762,7 @@ function renderPractice() {
                 </section>
 
                 <section class="practice-section step-navigation">
-                    <h3 class="practice-section-title">Step Navigation</h3>
+                    <h3 class="practice-section-title">Detailed Step List (Optional)</h3>
 
                     <div class="step-list">
                     ${module.steps.map((item, index) => `
@@ -1780,7 +1887,7 @@ function renderPractice() {
                     </div>
                 </aside>
 
-                ${tutorialCard(selectedModule, true)}
+                ${mediaReferenceCard(selectedModule, true)}
             </article>
         </div>
     `;
@@ -2023,6 +2130,25 @@ function wireDiagram(moduleIndex, stepIndex, animate = false) {
     function coilTail(x, y, count, direction = 1) {
         return coil(x, y, count, direction)
             .replace(/^M\s+[\d.-]+\s+[\d.-]+/, "");
+    }
+
+    // Motion/angle guides make the intended hand movement easier to read.
+    // Numeric angles are shown only when the module text specifies them.
+    function motionGuide(data, text, x, y, numericAngle = "") {
+        parts.push(`
+            <path d="${data}" class="motion-guide ${animate ? "motion-guide-active" : ""}" marker-end="url(#motionArrow)" />
+            <g class="motion-guide-label">
+                <rect x="${x - 8}" y="${y - 19}" width="${Math.max(92, (text + numericAngle).length * 7.2 + 18)}" height="28" rx="8" />
+                <text x="${x}" y="${y}" class="motion-guide-text">${escapeHTML(text)}${numericAngle ? ` • ${escapeHTML(numericAngle)}` : ""}</text>
+            </g>
+        `);
+    }
+
+    function angleGuide(cx, cy, radius, startX, startY, endX, endY, text, tx, ty) {
+        parts.push(`
+            <path d="M ${startX} ${startY} A ${radius} ${radius} 0 0 1 ${endX} ${endY}" class="angle-guide ${animate ? "motion-guide-active" : ""}" marker-end="url(#motionArrow)" />
+            <text x="${tx}" y="${ty}" class="angle-guide-text">${escapeHTML(text)}</text>
+        `);
     }
 
     // RAT TAIL / PIGTAIL
@@ -2288,6 +2414,40 @@ function wireDiagram(moduleIndex, stepIndex, animate = false) {
         }
     }
 
+    // STEP-SPECIFIC MOVEMENT GUIDES
+    // These overlays clarify direction, bend, wrap, and the one explicit angle
+    // stated in the lesson content. They are schematic—not measurement tools.
+    if (moduleIndex === 0) {
+        if (step === 2) motionGuide("M 330 245 Q 375 210 420 185", "Bring ends together", 330, 275);
+        if (step === 3) motionGuide("M 335 120 C 385 82 455 105 460 160", "Twist together", 345, 92);
+    } else if (moduleIndex === 1 || moduleIndex === 2) {
+        if (step === 1) motionGuide("M 300 92 Q 340 132 365 170", "Cross / overlap", 300, 72);
+        if (step === 2) motionGuide("M 300 112 C 345 82 390 112 382 160", moduleIndex === 2 ? "Form long tie" : "Form interlock", 300, 88);
+        if (step === 3) motionGuide("M 410 105 C 465 105 475 170 430 194", "Wrap A around B", 410, 82);
+        if (step === 4) motionGuide("M 225 250 C 165 245 160 180 205 160", "Wrap B around A", 90, 270);
+    } else if (moduleIndex === 3) {
+        if (step === 2) angleGuide(285,160,48,285,112,333,160,"≈ 90°",338,130);
+        if (step === 3) motionGuide("M 245 105 C 330 80 365 125 330 165", "Start wrap", 220, 78);
+        if (step === 4) motionGuide("M 325 105 C 390 110 405 170 360 195", "Continue close turns", 350, 82);
+    } else if (moduleIndex === 4) {
+        if (step === 1) motionGuide("M 220 245 Q 250 195 282 165", "Position branch", 155, 270);
+        if (step === 2) motionGuide("M 225 135 C 235 80 330 82 335 145", "Form locking loop", 205, 78);
+        if (step === 3) motionGuide("M 330 105 C 395 105 410 170 365 195", "Wrap after knot", 355, 82);
+    } else if (moduleIndex === 5) {
+        if (step === 1) motionGuide("M 205 250 Q 245 205 292 165", "Approach at class angle", 115, 275);
+        if (step === 2) motionGuide("M 285 100 C 335 70 365 115 335 160", "Bend over main", 275, 75);
+        if (step === 3) motionGuide("M 345 105 C 400 110 410 170 370 195", "Wrap tap", 370, 82);
+    } else if (moduleIndex === 6) {
+        if (step === 1) motionGuide("M 250 235 C 205 195 220 145 265 150", "Wrap fixture lead", 145, 250);
+        if (step === 2) motionGuide("M 430 105 Q 400 135 365 150", "Fold supporting end", 390, 82);
+        if (step === 3) motionGuide("M 300 105 C 350 85 390 120 365 165", "Complete wraps", 300, 80);
+    } else if (moduleIndex === 7) {
+        if (step === 1) motionGuide("M 190 245 Q 210 195 230 165", "Position first tap", 115, 270);
+        if (step === 2) motionGuide("M 245 105 C 300 105 315 165 270 195", "Wrap first tap", 255, 82);
+        if (step === 3) motionGuide("M 440 95 Q 415 125 395 158", "Position second tap", 420, 72);
+        if (step === 4) motionGuide("M 410 105 C 465 105 480 165 435 195", "Wrap second tap", 430, 82);
+    }
+
     if (step === last) {
         parts.push(`
             <rect
@@ -2321,6 +2481,12 @@ function wireDiagram(moduleIndex, stepIndex, animate = false) {
             <title>
                 ${escapeHTML(module.name + ": " + description)}
             </title>
+
+            <defs>
+                <marker id="motionArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
+                    <path d="M0,0 L0,6 L9,3 z" class="motion-arrow-head" />
+                </marker>
+            </defs>
 
             <rect
                 width="640"
@@ -2477,7 +2643,7 @@ function renderNextPractice() {
 
             <div class="next-layout">
                 <figure>
-                    ${wireDiagram(round.module, round.index)}
+                    ${diagramWithReference(round.module, round.index)}
 
                     <figcaption>
                         Current step: ${escapeHTML(current[0])}
@@ -2879,12 +3045,12 @@ function showMistakeSimulation() {
 
         <div class="mistake-simulation-grid">
             <figure>
-                ${wireDiagram(selectedModule, Math.max(0, module.steps.length - 2))}
+                ${diagramWithReference(selectedModule, Math.max(0, module.steps.length - 2))}
                 <figcaption>Review the step before final inspection.</figcaption>
             </figure>
 
             <figure>
-                ${wireDiagram(selectedModule, module.steps.length - 1)}
+                ${diagramWithReference(selectedModule, module.steps.length - 1)}
                 <figcaption>Expected construction for inspection.</figcaption>
             </figure>
         </div>
@@ -3956,3 +4122,786 @@ function initialize() {
 }
 
 initialize();
+
+/* SplicEd: paste once at the END of your existing script.js. */
+(() => {
+    "use strict";
+
+let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
+    if (window.splicedInclusiveUIInstalled) return;
+    window.splicedInclusiveUIInstalled = true;
+    const originalNavigate = window.navigate;
+    const originalProgress = window.renderProgress;
+    const esc = escapeHTML;
+    const count = index => rubricScore(index);
+
+    // Change these paths when you add the actual member photographs.
+    const team = [
+        ["Andrei N. Valentin", "Leader", "AV", "images/andrei.jpg"],
+        ["Chrizmhelo S. Santos", "Member", "CS", "images/chrizmhelo.jpg"],
+        ["John Joven C. Baguisa", "Member", "JB", "images/john-joven.jpg"],
+        ["Mark John G. Valenzuela", "Member", "MV", "images/mark-john.jpg"],
+        ["Neinard D. Ignacio", "Member", "NI", "images/neinard.jpg"]
+    ];
+    const checklistItems = [
+        ["safety", "Safety", "Use disconnected samples and follow the safety reminders."],
+        ["preparation", "Preparation", "Prepare the conductor ends and the required tools."],
+        ["sequence", "Step order", "Follow the procedure from the first step to the last."],
+        ["technique", "Technique", "Position, bend, wrap, and trim as demonstrated."],
+        ["inspection", "Final check", "Inspect the completed joint and its finishing method."]
+    ];
+
+    function focusOn(selector) {
+        const element = $(selector);
+        if (element) {
+            element.focus({ preventScroll: true });
+            element.scrollIntoView({ block: "nearest", behavior: "auto" });
+        }
+    }
+
+    function navigate(page) {
+        originalNavigate(page);
+        if (currentPage !== page) return;
+        $$("nav button[data-page]").forEach(button => {
+            const active = button.dataset.page === page;
+            button.classList.toggle("active", active);
+            if (active) button.setAttribute("aria-current", "page");
+            else button.removeAttribute("aria-current");
+        });
+        if (page === "practice") focusOn("#practiceStepTitle");
+        if (page === "nextPractice") focusOn("#guidedTitle");
+    }
+
+    function openGuidedOrder(index = selectedModule) {
+        if (nextRound?.module === index) {
+            selectedModule = index;
+            navigate("nextPractice");
+        } else startNextPractice(index);
+    }
+
+    function requirementText() {
+        const record = recordFor(selectedModule);
+        const checked = record.completedSteps.includes(currentStep);
+        if (!record.safetyAccepted && !checked)
+            return "Confirm the safety reminder above, then tick ‘I understand this step’.";
+        if (!record.safetyAccepted) return "Confirm the safety reminder above to continue.";
+        if (!checked) return "When you are ready, tick ‘I understand this step’ to continue.";
+        return currentStep === MODULES[selectedModule].steps.length - 1
+            ? "Ready? Try choosing the next step in Guided Order."
+            : "You can now move to the next step.";
+    }
+
+    function syncPractice() {
+        const record = recordFor(selectedModule);
+        const next = $("#practiceNext");
+        if (!next) return;
+        next.disabled = !record.safetyAccepted || !record.completedSteps.includes(currentStep);
+        $("#practiceRequirement").textContent = requirementText();
+        $("#safetyStatus").textContent = record.safetyAccepted ? "Confirmed" : "Please confirm";
+        $("#practiceCheckedCount").textContent = `${record.completedSteps.length} of ${MODULES[selectedModule].steps.length} steps checked`;
+        $("#practiceUnderstandingProgress").value = record.completedSteps.length;
+    }
+
+    function acceptSafety(value) {
+        recordFor(selectedModule).safetyAccepted = Boolean(value);
+        saveProgress();
+        syncPractice();
+    }
+
+    function toggleStepComplete(value) {
+        const record = recordFor(selectedModule);
+        record.completedSteps = record.completedSteps.filter(step => step !== currentStep);
+        if (value) record.completedSteps.push(currentStep);
+        record.completedSteps.sort((a, b) => a - b);
+        saveProgress();
+        syncPractice();
+        const status = $(`#practiceStepStatus${currentStep}`);
+        if (status) status.textContent = value ? "Checked" : "Viewed";
+    }
+
+    function toggleSavedStep(index, step, button) {
+        const record = recordFor(index);
+        const saved = record.review.includes(step);
+        record.review = saved ? record.review.filter(item => item !== step)
+            : [...record.review, step].sort((a, b) => a - b);
+        saveProgress();
+        button.textContent = saved ? "Save Step for Review" : "Saved — Remove from Review";
+        button.setAttribute("aria-pressed", String(!saved));
+        notify(saved ? "Step removed from My Review List." : "Step saved. Find My Review List in Progress.");
+    }
+
+    function savedStepButton(index, step) {
+        const saved = recordFor(index).review.includes(step);
+        return `<button type="button" class="secondary" aria-pressed="${saved}"
+            onclick="toggleSavedStep(${index}, ${step}, this)">
+            ${saved ? "Saved — Remove from Review" : "Save Step for Review"}</button>`;
+    }
+
+    function renderPractice() {
+        const module = MODULES[selectedModule];
+        const record = recordFor(selectedModule);
+        currentStep = Math.max(0, Math.min(currentStep, module.steps.length - 1));
+        const step = module.steps[currentStep];
+        const host = $("#practiceContent");
+
+        if (currentUser) {
+            if (!record.viewed.includes(currentStep)) record.viewed.push(currentStep);
+            record.lastStep = currentStep;
+            saveProgress();
+        }
+
+        const understood = record.completedSteps.includes(currentStep);
+        const saved = record.review.includes(currentStep);
+        const hint = currentStep
+            ? `Remember the previous action: ${module.steps[currentStep - 1][0]}. ${module.steps[currentStep - 1][2]}`
+            : `Start with the purpose of this splice: ${module.purpose}`;
+        const returnAction = sequenceReturnModule === selectedModule
+            ? '<button type="button" class="secondary" onclick="returnToSequence()">Return to My Sequence</button>'
+            : nextRound?.module === selectedModule
+                ? '<button type="button" class="secondary" onclick="resumeNextPractice()">Return to Guided Order</button>' : "";
+
+        host.dataset.module = selectedModule;
+        host.innerHTML = `
+            <div class="practice-simple-topbar">
+                <div class="practice-module-picker">
+                    <span class="practice-mini-label">1. Choose a splice or joint</span>
+                    ${moduleSelect("practiceModule", selectedModule, "selectPractice")}
+                </div>
+                ${returnAction}
+            </div>
+
+            <section class="practice-simple-shell" aria-label="Guided practice workspace">
+                <header class="practice-simple-header">
+                    <div>
+                        <span class="eyebrow">GUIDED PRACTICE</span>
+                        <h2>${esc(module.name)}</h2>
+                        <p>Follow one step at a time. The main controls you need are Previous, Replay, and Next.</p>
+                    </div>
+                    <div class="practice-progress-summary" aria-label="Practice progress">
+                        <strong>Step ${currentStep + 1} of ${module.steps.length}</strong>
+                        <span id="practiceCheckedCount">${record.completedSteps.length} understood</span>
+                    </div>
+                </header>
+                <progress id="practiceUnderstandingProgress" max="${module.steps.length}" value="${record.completedSteps.length}" aria-label="Practice progress"></progress>
+
+                <nav class="practice-simple-steps" aria-label="Choose a procedure step">
+                    ${module.steps.map((item, index) => `
+                        <button type="button" class="practice-simple-step ${index === currentStep ? "active" : ""}"
+                            ${index === currentStep ? 'aria-current="step"' : ''} onclick="jumpStep(${index})">
+                            <span>${record.completedSteps.includes(index) ? "✓" : index + 1}</span>
+                            <small>Step ${index + 1}</small>
+                        </button>`).join("")}
+                </nav>
+
+                <section class="practice-safety-compact">
+                    <div class="practice-safety-title"><strong>Safety first</strong><span id="safetyStatus">${record.safetyAccepted ? "✓ Confirmed" : "Confirm before continuing"}</span></div>
+                    <div class="practice-safety-body">
+                        <p>Use disconnected training wires, wear the required protective equipment, and follow your instructor. Never practise on a live circuit.</p>
+                        <label class="study-check"><input type="checkbox" onchange="acceptSafety(this.checked)" ${record.safetyAccepted ? "checked" : ""}><span>I understand and will follow these safety reminders.</span></label>
+                    </div>
+                </section>
+
+                <div class="practice-focus-grid">
+                    <article class="practice-visual-card">
+                        <div class="practice-card-label"><span>2. Watch the action</span><button type="button" class="secondary small-button" onclick="replayVisual()">↻ Replay</button></div>
+                        <div id="visualStage" class="visual-stage practice-main-visual">${wireDiagram(selectedModule, currentStep, true)}</div>
+                        <p class="practice-visual-note">Use the illustration as a guide. Focus only on the movement shown for this step.</p>
+
+                    </article>
+
+                    <article class="practice-instruction-card">
+                        <span class="practice-mini-label">3. Read this step</span>
+                        <div class="practice-step-badge">STEP ${currentStep + 1}</div>
+                        <h2 id="practiceStepTitle" tabindex="-1">${esc(step[0])}</h2>
+                        <p class="practice-main-instruction">${esc(step[1])}</p>
+                        <div class="practice-look-for"><strong>What should I look for?</strong><p>${esc(step[2])}</p></div>
+
+                        
+
+                        <label class="practice-understand-check">
+                            <input type="checkbox" onchange="toggleStepComplete(this.checked)" ${understood ? "checked" : ""}>
+                            <span><strong>I understand this step</strong><small>Check this when you can explain what happens in this step.</small></span>
+                        </label>
+
+                        <div class="practice-main-actions">
+                            <button type="button" class="secondary" onclick="previousStep()" ${currentStep === 0 ? "disabled" : ""}>← Previous</button>
+                            <button type="button" class="secondary" onclick="replayVisual()">↻ Replay</button>
+                            <button type="button" id="practiceNext" class="primary" onclick="nextStep()" aria-describedby="practiceRequirement" ${!record.safetyAccepted || !understood ? "disabled" : ""}>${currentStep === module.steps.length - 1 ? "Try Guided Order →" : "Next →"}</button>
+                        </div>
+                        <p id="practiceRequirement" class="practice-requirement" role="status">${requirementText()}</p>
+                    </article>
+                </div>
+
+                <button type="button" class="practice-more-help-button" onclick="togglePracticeHelp()" aria-expanded="false" aria-controls="practiceHelpPanel">⋯ More Help</button>
+                <aside id="practiceHelpPanel" class="practice-help-panel" hidden>
+                    <div class="practice-help-head"><div><span class="eyebrow">OPTIONAL SUPPORT</span><h3>More Help</h3></div><button type="button" class="secondary small-button" onclick="togglePracticeHelp()">Close ×</button></div>
+                    <div class="practice-help-grid">
+                        <div class="practice-help-item"><strong>Hint</strong><p>${esc(hint)}</p></div>
+                        <div class="practice-help-item"><strong>Visual</strong><div class="practice-help-actions"><button type="button" id="pauseActionButton" class="secondary" aria-pressed="false" onclick="pauseAction()">Pause / Resume</button><button type="button" id="zoomButton" class="secondary" aria-pressed="false" onclick="toggleZoom()">Close-up</button><label>Speed<select id="motionSpeed" onchange="setAnimationSpeed(Number(this.value))"><option value="0.5" ${animationSpeed===0.5?"selected":""}>Slow</option><option value="1" ${animationSpeed===1?"selected":""}>Normal</option><option value="1.5" ${animationSpeed===1.5?"selected":""}>Fast</option></select></label></div></div>
+                        <div class="practice-help-item"><strong>Review</strong><p>Save this step and return to it later.</p>${savedStepButton(selectedModule, currentStep)}</div>
+                        <div class="practice-help-item"><strong>Next activity</strong><div class="practice-help-actions"><button type="button" class="secondary" onclick="openLesson(${selectedModule})">Read Full Lesson</button><button type="button" class="secondary" onclick="openGuidedOrder(${selectedModule})">What Comes Next?</button></div></div>
+                    </div>
+                </aside>
+            </section>`;
+
+        $("#visualStage")?.style.setProperty("--motion-duration", `${3 / animationSpeed}s`);
+        zoomed = false;
+    }
+
+    function togglePracticeHelp(forceClose = false) {
+        const panel = document.getElementById("practiceHelpPanel");
+        const button = document.querySelector("#practiceContent .practice-more-help-button");
+        if (!panel) return;
+        const willOpen = forceClose ? false : panel.hidden;
+        panel.hidden = !willOpen;
+        panel.classList.toggle("open", willOpen);
+        document.body.classList.toggle("practice-help-open", willOpen);
+        if (button) button.setAttribute("aria-expanded", String(willOpen));
+    }
+
+    function jumpStep(step) {
+        if (!MODULES[selectedModule].steps[step]) return;
+        stopPlayback();
+        currentStep = step;
+        renderPractice();
+        focusOn("#practiceStepTitle");
+    }
+
+    function nextStep() {
+        stopPlayback();
+        const record = recordFor(selectedModule);
+        if (!record.safetyAccepted || !record.completedSteps.includes(currentStep)) {
+            syncPractice();
+            return;
+        }
+        if (currentStep < MODULES[selectedModule].steps.length - 1) jumpStep(currentStep + 1);
+        else openGuidedOrder(selectedModule);
+    }
+
+    // Preserve the existing auto-play engine; keep the visible pause control in sync.
+    const originalStopPlayback = window.stopPlayback;
+    function stopPlayback() {
+        originalStopPlayback();
+        $(".study-autoplay")?.remove();
+    }
+
+    function prepareNextQuestion() {
+        if (!nextRound) return;
+        const round = nextRound;
+        const target = round.index + 1;
+        if (target >= MODULES[round.module].steps.length) return;
+        const others = MODULES[round.module].steps.map((_, index) => index)
+            .filter(index => index !== target && index !== round.index);
+        round.choices = shuffle([target, ...shuffle(others).slice(0, 2)]);
+        round.choice = null;
+        round.solved = false;
+        round.tries = 0;
+        round.message = "";
+        round.resultType = "";
+    }
+
+    function renderNextPractice() {
+        if (!nextRound) { startNextPractice(selectedModule); return; }
+        const round = nextRound;
+        const module = MODULES[round.module];
+        const total = module.steps.length - 1;
+        const host = $("#nextPracticeContent");
+        const selector = moduleSelect("guidedModule", round.module, "openGuidedOrder");
+        if (round.index >= total) {
+            host.innerHTML = `${selector}<article class="panel study-finish">
+                <h2 id="guidedTitle" tabindex="-1">Guided Order Complete</h2>
+                <p>${esc(module.name)}</p>
+                <p>You answered all ${total} questions. Next, try arranging all the steps in order.</p>
+                <div class="study-actions"><button type="button" class="primary"
+                    onclick="startSequencingChallenge(${round.module}, true)">Arrange All Steps</button>
+                    <button type="button" class="secondary" onclick="startNextPractice(${round.module})">Practise Again</button></div>
+                <p class="study-caption">This guided activity is recorded separately from your module assessment.</p>
+            </article>`;
+            return;
+        }
+        const current = module.steps[round.index];
+        const completed = round.index + (round.solved ? 1 : 0);
+        host.innerHTML = `${selector}<article class="panel study-workbench">
+            <div class="study-position"><strong>Question ${round.index + 1} of ${total}</strong>
+                <span>${completed} of ${total} answered correctly this round</span></div>
+            <progress max="${total}" value="${completed}" aria-label="Guided questions completed this round"></progress>
+            <div class="study-columns guided-columns">
+                <div class="study-current"><span class="eyebrow">CURRENT STEP ${round.index + 1}</span>
+                    <h2 id="guidedTitle" tabindex="-1">${esc(current[0])}</h2>
+                    <figure>${diagramWithReference(round.module, round.index)}
+                        <figcaption>${esc(current[2])}</figcaption></figure>
+                    <p>${esc(current[1])}</p>
+                </div>
+                <div class="study-question">
+                    <fieldset class="guided-answers" aria-describedby="guidedInstruction">
+                        <legend>What comes next?</legend>
+                        <p id="guidedInstruction">Select one answer, then choose Check Answer.</p>
+                        ${round.choices.map((choice, index) => `<label class="guided-option ${round.choice === choice ? "is-selected" : ""}">
+                            <input type="radio" name="guidedAnswer" value="${choice}"
+                                onchange="chooseGuidedAnswer(${choice})" ${round.choice === choice ? "checked" : ""}
+                                ${round.solved ? "disabled" : ""}>
+                            <span><strong>${String.fromCharCode(65 + index)}.</strong> ${esc(module.steps[choice][0])}
+                                ${round.solved && round.choice === choice ? '<small>Correct answer</small>' : ""}</span>
+                        </label>`).join("")}
+                    </fieldset>
+                    <div id="nextFeedback" class="feedback ${round.resultType}" role="status" tabindex="-1"
+                        ${round.message ? "" : "hidden"}>${round.message}</div>
+                    <div class="study-actions guided-primary">
+                        ${round.solved
+                            ? `<button type="button" class="primary" onclick="advanceNextQuestion()">${round.index === total - 1 ? "Finish Guided Order" : "Next Question"}</button>`
+                            : `<button type="button" id="checkGuidedAnswer" class="primary" onclick="checkGuidedAnswer()"
+                                aria-describedby="guidedActionHint" ${Number.isInteger(round.choice) ? "" : "disabled"}>Check Answer</button>`}
+                    </div>
+                    <p id="guidedActionHint" class="study-caption" role="status">${round.solved ? "Continue when you are ready."
+                        : Number.isInteger(round.choice) ? "Your answer is selected. Choose Check Answer when ready." : "Select an answer to enable Check Answer."}</p>
+                    <details class="study-fold"><summary>Need Help with This Step?</summary>
+                        <div class="study-fold-body"><div class="study-actions">
+                            <button type="button" class="secondary" onclick="reviewGuidedStep(${round.index})">Review Current Step</button>
+                            ${savedStepButton(round.module, round.index)}
+                        </div><p class="study-caption">You can return to this question after reviewing.</p></div>
+                    </details>
+                </div>
+            </div>
+        </article>`;
+    }
+
+    function chooseGuidedAnswer(choice) {
+        if (!nextRound || nextRound.solved || !nextRound.choices.includes(choice)) return;
+        nextRound.choice = choice;
+        nextRound.message = "";
+        nextRound.resultType = "";
+        $$(".guided-option").forEach(label => {
+            label.classList.toggle("is-selected", Number(label.querySelector("input").value) === choice);
+        });
+        $("#nextFeedback").hidden = true;
+        $("#checkGuidedAnswer").disabled = false;
+        $("#guidedActionHint").textContent = "Your answer is selected. Choose Check Answer when ready.";
+    }
+
+    function checkGuidedAnswer() {
+        if (Number.isInteger(nextRound?.choice)) answerNextStep(nextRound.choice);
+    }
+
+    function answerNextStep(choice) {
+        if (!nextRound || nextRound.solved || !nextRound.choices.includes(choice)) return;
+        const round = nextRound;
+        const module = MODULES[round.module];
+        const target = round.index + 1;
+        round.choice = choice;
+        round.tries++;
+        if (choice === target) {
+            round.solved = true;
+            round.resultType = "success";
+            if (!recordFor(round.module).nextSolved.includes(target)) recordFor(round.module).nextSolved.push(target);
+            round.message = `<strong>Correct — ${esc(module.steps[target][0])}</strong><p>${esc(module.steps[target][1])}</p>`;
+            saveProgress();
+        } else {
+            round.resultType = "warning";
+            round.message = `<strong>Not yet — try another answer.</strong>
+                <p>“${esc(module.steps[choice][0])}” is step ${choice + 1}. You need the step after
+                    “${esc(module.steps[round.index][0])}”.</p>
+                <p><strong>Hint:</strong> ${esc(module.steps[target][2])}</p>
+                <div class="study-actions"><button type="button" class="secondary"
+                    onclick="reviewGuidedStep(${target})">Review Related Step</button>
+                    ${savedStepButton(round.module, target)}</div>`;
+        }
+        renderNextPractice();
+        focusOn("#nextFeedback");
+    }
+
+    function advanceNextQuestion() {
+        if (!nextRound?.solved) return;
+        nextRound.index++;
+        prepareNextQuestion();
+        renderNextPractice();
+        focusOn("#guidedTitle");
+    }
+
+    function reviewGuidedStep(step) {
+        if (!nextRound || !MODULES[nextRound.module].steps[step]) return;
+        selectedModule = nextRound.module;
+        currentStep = step;
+        sequenceReturnModule = null;
+        navigate("practice");
+    }
+
+    let progressTab = "overview";
+    function setProgressTab(tab) {
+        progressTab = tab;
+        renderProgress();
+        const target = document.querySelector(`[data-progress-panel="${tab}"]`);
+        if (target) target.focus({preventScroll:true});
+    }
+
+    function renderProgress() {
+        originalProgress();
+        $$("#progressContent th").forEach(cell => {
+            if (cell.textContent.trim() === "Practical Rubric") cell.textContent = "Practical Checklist";
+        });
+        $$('#progressContent button[onclick^="openRubric("]').forEach((button, index) => {
+            button.id = `openChecklist${index}`;
+            button.textContent = `Open Checklist · ${count(index)}/5 checked`;
+            button.setAttribute("aria-label", `Practical checklist for ${MODULES[index].name}: ${count(index)} of 5 items checked`);
+        });
+
+        const host = $("#progressContent");
+        const children = [...host.children];
+        const stats = children.find(el => el.classList?.contains("stats-grid"));
+        const summary = children.find(el => el.matches?.("article.panel"));
+        const tableWrap = children.find(el => el.classList?.contains("table-wrap"));
+        const history = children.find(el => el.classList?.contains("history"));
+        const review = children.find(el => el.textContent?.includes("My Review List"));
+        const guidedText = children.find(el => el !== review && el.textContent?.includes("Guided ordering:"));
+
+        const bucket = document.createElement("div");
+        bucket.className = "progress-tab-shell";
+        bucket.innerHTML = `<div class="progress-tabs" role="tablist" aria-label="Progress sections">
+            <button role="tab" class="${progressTab==='overview'?'active':''}" aria-selected="${progressTab==='overview'}" onclick="setProgressTab('overview')">Overview</button>
+            <button role="tab" class="${progressTab==='modules'?'active':''}" aria-selected="${progressTab==='modules'}" onclick="setProgressTab('modules')">Module Progress</button>
+            <button role="tab" class="${progressTab==='review'?'active':''}" aria-selected="${progressTab==='review'}" onclick="setProgressTab('review')">Review & History</button>
+        </div>
+        <section class="progress-tab-panel" data-progress-panel="${progressTab}" tabindex="-1"></section>`;
+        const panel=bucket.querySelector('.progress-tab-panel');
+        const add=el=>{if(el) panel.appendChild(el)};
+        if(progressTab==='overview'){ add(stats); add(summary); }
+        if(progressTab==='modules'){ add(tableWrap); }
+        if(progressTab==='review'){ add(review); add(guidedText); add(history); }
+        host.replaceChildren(bucket);
+    }
+
+    function openRubric(index) {
+        if (!MODULES[index]) return;
+        const dialog = $("#rubricModal");
+        const saved = recordFor(index).rubric || {};
+        dialog.innerHTML = `<form onsubmit="event.preventDefault();saveRubric(${index})">
+            <h2 id="checklistTitle">Practical Checklist</h2>
+            <p><strong>${esc(MODULES[index].name)}</strong></p>
+            <p id="checklistDescription">Tick the items you have checked during practical work.
+                Use this for self-review or together with your instructor.</p>
+            <fieldset class="checklist-items"><legend>Practical work checks</legend>
+                ${checklistItems.map(([key, title, description]) => `<label class="study-check">
+                    <input type="checkbox" data-rubric="${key}" onchange="updateChecklistCount()" ${saved[key] ? "checked" : ""}>
+                    <span><strong>${title}</strong><br>${description}</span></label>`).join("")}
+            </fieldset>
+            <p id="checklistCount" role="status">${count(index)} of 5 items checked.</p>
+            <div class="study-actions"><button type="submit" class="primary">Save Checklist</button>
+                <button type="button" class="secondary" onclick="closeRubric()">Cancel</button></div>
+            <p class="study-caption">This checklist does not change your assessment score.</p>
+        </form>`;
+        dialog.showModal();
+    }
+
+    function updateChecklistCount() {
+        $("#checklistCount").textContent = `${$$("#rubricModal input:checked").length} of 5 items checked.`;
+    }
+
+    function saveRubric(index) {
+        const saved = {};
+        $$("#rubricModal [data-rubric]").forEach(input => { saved[input.dataset.rubric] = input.checked; });
+        // Retain the old storage key so existing saved checkmarks still load.
+        recordFor(index).rubric = saved;
+        saveProgress();
+        closeRubric();
+        renderProgress();
+        focusOn(`#openChecklist${index}`);
+        notify(`Practical checklist saved: ${count(index)} of 5 items checked.`);
+    }
+
+    function closeRubric() { $("#rubricModal").close(); }
+
+    Object.assign(window, {
+        navigate, openGuidedOrder, renderPractice, acceptSafety, toggleStepComplete,
+        toggleSavedStep, jumpStep, nextStep, stopPlayback, prepareNextQuestion,
+        renderNextPractice, chooseGuidedAnswer, checkGuidedAnswer, answerNextStep,
+        advanceNextQuestion, reviewGuidedStep, renderProgress, setProgressTab, openRubric,
+        saveRubric, closeRubric, updateChecklistCount, togglePracticeHelp,
+        replayVisual, pauseAction, toggleZoom, setAnimationSpeed, previousStep,
+        selectPractice, openLesson, openGuidedOrder
+    });
+
+    // Give Guided Order its own active navigation state and resume an existing round.
+    const guidedNav = $$("nav button").find(button => button.textContent.trim() === "Guided Order");
+    if (guidedNav) {
+        guidedNav.dataset.page = "nextPractice";
+        guidedNav.setAttribute("onclick", "openGuidedOrder(selectedModule)");
+    }
+    $("#practice .section-heading h1").textContent = "Step-by-Step Practice";
+    $("#practice .section-heading p").textContent = "Study the diagram, read the instruction, then move to the next step at your own pace.";
+    $("#nextPractice .section-heading p").textContent = "Choose which step comes next. You can review and try again whenever you need to.";
+    $("#practice").classList.add("study-page");
+    $("#nextPractice").classList.add("study-page");
+
+    // A native dialog provides keyboard focus containment and Escape to close.
+    const dialog = document.createElement("dialog");
+    dialog.id = "rubricModal";
+    dialog.className = "practical-checklist-dialog";
+    dialog.setAttribute("aria-labelledby", "checklistTitle");
+    dialog.setAttribute("aria-describedby", "checklistDescription");
+    $("#rubricModal").replaceWith(dialog);
+
+    $("#about .team-grid").innerHTML = team.map(([name, role, initials, path]) => `
+        <article class="team-card ${role === "Leader" ? "leader-card" : ""}">
+            <div class="team-photo"><span aria-hidden="true">${initials}</span>
+                <img src="${esc(path)}" alt="${esc(name)}" width="160" height="160"
+                    loading="lazy" decoding="async" onerror="this.hidden=true"></div>
+            <span class="eyebrow">${role}</span><h3>${esc(name)}</h3>
+        </article>`).join("");
+
+    // Refresh a currently open page when this update is pasted into the full source.
+    if (currentUser && ["practice", "nextPractice", "progress"].includes(currentPage)) navigate(currentPage);
+})();
+
+
+/* =========================================================
+   DIFFERENTIATION + EDUCATOR SUPPORT
+   ========================================================= */
+function setLearningMode(mode) {
+    if (!["guided", "independent"].includes(mode)) return;
+    learningMode = mode;
+    localStorage.setItem("splicedLearningMode", mode);
+    notify(mode === "guided" ? "Guided Mode enabled." : "Independent Mode enabled — explanatory cues are reduced.");
+    if (currentPage === "learn" && $("#lessonViewer") && !$("#lessonViewer").hidden) openLesson(selectedModule);
+    if (currentPage === "practice") renderPractice();
+}
+
+function localProfileNames() {
+    const profiles = readJSON(PROFILES_KEY, []);
+    return Array.isArray(profiles) ? profiles.map(p => typeof p === "string" ? p : (p.username || p.name)).filter(Boolean) : [];
+}
+
+function summarizeProgressFor(username) {
+    const saved = readJSON(progressKey(username), {});
+    const learning = saved.learning || {};
+    let lessons = 0, viewed = 0, totalSteps = 0, sequencing = 0, assessments = 0, scoreSum = 0;
+    MODULES.forEach(m => {
+        const r = learning[m.name] || {};
+        if (r.lesson) lessons++;
+        viewed += Array.isArray(r.viewed) ? r.viewed.length : 0;
+        totalSteps += m.steps.length;
+        if (r.sequenceCompleted || r.challengeCompleted || r.sequencing) sequencing++;
+        const q = r.quiz || r.assessment || {};
+        const score = Number(q.bestScore ?? q.score);
+        if (Number.isFinite(score)) { assessments++; scoreSum += score; }
+    });
+    return {username, lessons, viewed, totalSteps, sequencing, assessments, averageScore: assessments ? Math.round(scoreSum / assessments) : null};
+}
+
+function renderTeacherProgress() {
+    const host = $("#teacherProgressContent");
+    if (!host) return;
+    const names = localProfileNames();
+    if (!names.length) {
+        host.innerHTML = `<div class="panel"><p>No learner profiles are saved on this browser yet.</p></div>`;
+        return;
+    }
+    const rows = names.map(summarizeProgressFor);
+    host.innerHTML = `<div class="teacher-table-wrap"><table class="teacher-table"><thead><tr><th>Learner</th><th>Lessons</th><th>Viewed steps</th><th>Sequencing</th><th>Assessments</th><th>Avg. score</th></tr></thead><tbody>${rows.map(r => `<tr><td>${escapeHTML(r.username)}</td><td>${r.lessons}/8</td><td>${r.viewed}/${r.totalSteps}</td><td>${r.sequencing}/8</td><td>${r.assessments}/8</td><td>${r.averageScore === null ? "—" : r.averageScore}</td></tr>`).join("")}</tbody></table></div><p class="small-text">Prototype limitation: this is a local-device snapshot, not authenticated cross-device real-time analytics.</p>`;
+}
+
+function exportLocalProgressCSV() {
+    const rows = localProfileNames().map(summarizeProgressFor);
+    if (!rows.length) { notify("No local learner progress to export."); return; }
+    const csv = ["Learner,Lessons Completed,Viewed Steps,Total Steps,Sequencing Completed,Assessments,Average Score", ...rows.map(r => [r.username,r.lessons,r.viewed,r.totalSteps,r.sequencing,r.assessments,r.averageScore ?? ""].map(v => `"${String(v).replaceAll('"','""')}"`).join(","))].join("\
+");
+    const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(blob); a.download = "SplicEd_Local_Progress.csv"; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}/* =========================================================
+   SPLICED — REAL SUB-TABS
+   Learn: Modules / Open Lesson
+   Teacher Guide: Teaching Guide / Local Progress
+   ========================================================= */
+
+let learnTab = "modules";
+let teacherTab = "guide";
+
+/* -------------------------
+   LEARN TABS
+   ------------------------- */
+
+function setLearnTab(tab) {
+    if (!["modules", "lesson"].includes(tab)) return;
+
+    learnTab = tab;
+
+    const modulesPanel = document.getElementById("lessonCards");
+    const lessonPanel = document.getElementById("lessonViewer");
+
+    const modulesButton = document.querySelector(
+        '[data-learn-tab="modules"]'
+    );
+
+    const lessonButton = document.querySelector(
+        '[data-learn-tab="lesson"]'
+    );
+
+    if (!modulesPanel || !lessonPanel) return;
+
+    const showingModules = tab === "modules";
+
+    modulesPanel.hidden = !showingModules;
+    lessonPanel.hidden = showingModules;
+
+    if (modulesButton) {
+        modulesButton.classList.toggle("active", showingModules);
+        modulesButton.setAttribute(
+            "aria-selected",
+            String(showingModules)
+        );
+    }
+
+    if (lessonButton) {
+        lessonButton.classList.toggle("active", !showingModules);
+        lessonButton.setAttribute(
+            "aria-selected",
+            String(!showingModules)
+        );
+    }
+}
+
+
+/* -------------------------
+   TEACHER GUIDE TABS
+   ------------------------- */
+
+function setTeacherTab(tab) {
+    if (!["guide", "progress"].includes(tab)) return;
+
+    teacherTab = tab;
+
+    const guidePanel = document.getElementById(
+        "teacherGuidePanel"
+    );
+
+    const progressPanel = document.getElementById(
+        "teacherProgressPanel"
+    );
+
+    const guideButton = document.querySelector(
+        '[data-teacher-tab="guide"]'
+    );
+
+    const progressButton = document.querySelector(
+        '[data-teacher-tab="progress"]'
+    );
+
+    if (!guidePanel || !progressPanel) return;
+
+    const showingGuide = tab === "guide";
+
+    guidePanel.hidden = !showingGuide;
+    progressPanel.hidden = showingGuide;
+
+    if (guideButton) {
+        guideButton.classList.toggle("active", showingGuide);
+        guideButton.setAttribute(
+            "aria-selected",
+            String(showingGuide)
+        );
+    }
+
+    if (progressButton) {
+        progressButton.classList.toggle(
+            "active",
+            !showingGuide
+        );
+
+        progressButton.setAttribute(
+            "aria-selected",
+            String(!showingGuide)
+        );
+    }
+
+    if (!showingGuide) {
+        renderTeacherProgress();
+    }
+}
+
+
+/* =========================================================
+   CONNECT EXISTING LESSON FUNCTIONS TO NEW TABS
+   ========================================================= */
+
+const splicedOriginalOpenLesson = window.openLesson;
+
+window.openLesson = function(index) {
+    if (!MODULES[index]) return;
+
+    /*
+       Run your existing Open Lesson function first.
+       This preserves all existing lesson content,
+       diagrams, objectives, media, etc.
+    */
+    splicedOriginalOpenLesson(index);
+
+    /*
+       Then switch the Learn page to Open Lesson.
+    */
+    learnTab = "lesson";
+    setLearnTab("lesson");
+};
+
+
+const splicedOriginalCloseLesson = window.closeLesson;
+
+window.closeLesson = function() {
+    /*
+       Run the existing closeLesson logic.
+    */
+    splicedOriginalCloseLesson();
+
+    /*
+       Return to Modules tab.
+    */
+    learnTab = "modules";
+    setLearnTab("modules");
+};
+
+
+/* =========================================================
+   KEEP TAB STATE WHEN NAVIGATING
+   ========================================================= */
+
+const splicedOriginalNavigateTabs = window.navigate;
+
+window.navigate = function(page) {
+
+    splicedOriginalNavigateTabs(page);
+
+    if (page === "learn") {
+
+        /*
+           If no lesson is currently open,
+           always show Modules.
+        */
+        const viewer = document.getElementById(
+            "lessonViewer"
+        );
+
+        if (!viewer || !viewer.innerHTML.trim()) {
+            learnTab = "modules";
+        }
+
+        setLearnTab(learnTab);
+    }
+
+    if (page === "teacher") {
+        setTeacherTab(teacherTab);
+    }
+};
+
+
+/* =========================================================
+   INITIAL TAB STATE
+   ========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        setLearnTab("modules");
+        setTeacherTab("guide");
+
+    }
+);
