@@ -2451,3 +2451,229 @@ progress {
 .independent-mode-note button { margin-top: .75rem; }
 .mode-selector .button-row { align-items: center; }
 .mode-selector button.primary { font-weight: 700; }
+
+
+/* =========================================================
+   PRACTICE V6 — SIMPLE, BEGINNER-FRIENDLY WORKFLOW
+   Scoped to Practice only. Other pages keep their existing design.
+   ========================================================= */
+#practice .section-heading{max-width:760px;margin-bottom:1.1rem}
+#practice .section-heading h1{margin-bottom:.55rem}
+.practice-simple-topbar{display:flex;align-items:end;gap:1rem;justify-content:space-between;margin-bottom:1rem}
+.practice-module-picker{flex:1;max-width:620px}.practice-module-picker .module-select{max-width:none;margin:.35rem 0 0}.practice-mini-label{display:block;color:var(--steel);font-size:.82rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase}
+.practice-simple-shell{display:grid;gap:1rem}.practice-simple-header{display:flex;align-items:flex-start;justify-content:space-between;gap:1.25rem;padding:1.15rem 1.25rem;border:1px solid var(--border);border-radius:14px;background:var(--surface)}
+.practice-simple-header h2{margin:.2rem 0 .35rem}.practice-simple-header p{margin:0;max-width:62ch}.practice-progress-summary{flex:0 0 auto;display:grid;gap:.15rem;text-align:right}.practice-progress-summary strong{color:var(--copper)}.practice-progress-summary span{font-size:.85rem;color:var(--muted)}
+.practice-simple-shell>progress{height:9px;margin:-.45rem 0 0}.practice-simple-steps{display:flex;gap:.5rem;overflow-x:auto;padding:.55rem;border:1px solid var(--border);border-radius:12px;background:var(--surface-soft)}
+.practice-simple-step{flex:1 0 72px;min-height:58px;display:grid;place-items:center;gap:.1rem;border:1px solid var(--border);border-radius:9px;background:var(--surface);color:var(--muted);padding:.45rem}.practice-simple-step>span{display:grid;place-items:center;width:27px;height:27px;border-radius:50%;background:var(--surface-raised);font-weight:800}.practice-simple-step small{font-size:.72rem}.practice-simple-step.active{border-color:var(--copper);background:var(--copper-soft);color:var(--text)}.practice-simple-step.active>span{background:var(--copper);color:#28221d}
+.practice-safety-compact{border:1px solid #755842;border-left:4px solid var(--copper);border-radius:10px;background:#302c29}.practice-safety-compact summary{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem 1rem;cursor:pointer}.practice-safety-compact summary span{font-size:.82rem;color:#f1c39f}.practice-safety-body{padding:0 1rem 1rem}.practice-safety-body p{margin:.2rem 0 .6rem}
+.practice-focus-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(310px,.65fr);gap:1rem;align-items:start}.practice-visual-card,.practice-instruction-card{border:1px solid var(--border);border-radius:14px;background:var(--surface);padding:1.15rem;box-shadow:var(--shadow)}
+.practice-card-label{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:.75rem}.practice-card-label>span{color:var(--steel);font-size:.82rem;font-weight:800;text-transform:uppercase;letter-spacing:.05em}.practice-main-visual{min-height:440px;display:grid;place-items:center;background:#202629}.practice-main-visual .wire-diagram{width:100%;height:100%;min-height:440px;max-height:560px;object-fit:contain;border:0}.practice-visual-note{font-size:.88rem;margin:.65rem 0 0}
+.practice-more-tools,.practice-help-fold,.practice-extra-section{margin-top:.8rem;border:1px solid var(--border);border-radius:10px;background:var(--surface-soft)}.practice-more-tools>summary,.practice-help-fold>summary,.practice-extra-section>summary{cursor:pointer;padding:.8rem 1rem;font-weight:700}.practice-tool-row{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;padding:0 1rem 1rem}.practice-tool-row label{margin:0;font-size:.82rem}.practice-tool-row select{margin-top:.25rem}
+.practice-step-badge{display:inline-block;margin:.8rem 0 .55rem;padding:.25rem .55rem;border-radius:6px;background:var(--copper-soft);color:#f1c39f;font-size:.78rem;font-weight:900}.practice-instruction-card h2{font-size:1.55rem;margin-bottom:.65rem}.practice-main-instruction{font-size:1.04rem;color:var(--text);line-height:1.7}.practice-look-for{margin:1rem 0;padding:.9rem 1rem;border-left:3px solid var(--copper);border-radius:8px;background:var(--surface-soft)}.practice-look-for p{margin:.25rem 0 0}.practice-help-fold p{padding:0 1rem 1rem;margin:0}
+.practice-understand-check{display:flex;align-items:flex-start;gap:.75rem;margin:1rem 0;padding:1rem;border:1px solid var(--border-strong);border-radius:10px;background:var(--surface-soft);cursor:pointer}.practice-understand-check input{width:22px;height:22px;min-height:0;flex:0 0 auto;margin-top:.15rem;accent-color:var(--copper)}.practice-understand-check span{display:grid}.practice-understand-check small{margin-top:.15rem;color:var(--muted);font-weight:400}.practice-main-actions{display:grid;grid-template-columns:1fr 1fr 1.2fr;gap:.55rem}.practice-main-actions button{min-height:50px}.practice-requirement{margin:.6rem 0 0;font-size:.82rem;text-align:center;color:var(--subtle)}
+.practice-extra-section{background:var(--surface)}.practice-extra-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding:0 1rem 1rem}.practice-extra-grid h3{margin-bottom:.25rem}.practice-extra-grid p{font-size:.88rem}.practice-extra-actions{display:flex;flex-wrap:wrap;gap:.55rem}.practice-extra-actions button{flex:1 1 140px}
+@media(max-width:980px){.practice-focus-grid{grid-template-columns:1fr}.practice-main-visual,.practice-main-visual .wire-diagram{min-height:340px}.practice-progress-summary{text-align:left}.practice-simple-header{display:grid}}
+@media(max-width:620px){.practice-simple-topbar{display:grid;align-items:stretch}.practice-simple-header{padding:1rem}.practice-simple-steps{padding:.4rem}.practice-simple-step{flex-basis:64px}.practice-safety-compact summary{align-items:flex-start;flex-direction:column;gap:.2rem}.practice-visual-card,.practice-instruction-card{padding:1rem}.practice-main-visual,.practice-main-visual .wire-diagram{min-height:280px}.practice-tool-row,.practice-main-actions,.practice-extra-grid{grid-template-columns:1fr}.practice-main-actions{gap:.45rem}.practice-card-label{align-items:flex-start}.practice-extra-grid{padding:.1rem .85rem .85rem}}
+
+/* === Practice Player UX refinement: scoped to Practice only === */
+#practiceContent .practice-player{max-width:1180px;margin:0 auto;display:grid;gap:18px}
+#practiceContent .practice-player-header{display:flex;justify-content:space-between;gap:24px;align-items:end;padding:22px 24px;border:1px solid var(--line,#d8dee6);border-radius:18px;background:var(--panel,#fff)}
+#practiceContent .practice-player-title h2{margin:4px 0 6px}.practice-player-title p{margin:0;color:var(--muted,#667085)}
+#practiceContent .practice-player-module{min-width:260px}#practiceContent .practice-player-module>label{display:block;font-size:.78rem;font-weight:800;margin-bottom:6px}
+#practiceContent .practice-path{display:flex;align-items:center;justify-content:center;padding:6px 12px;overflow-x:auto}
+#practiceContent .practice-path i{width:44px;height:2px;background:#d9dee6;flex:0 0 44px}
+#practiceContent .practice-path-step{border:0;background:transparent;display:grid;justify-items:center;gap:5px;min-width:56px;padding:5px;cursor:pointer;color:var(--muted,#667085)}
+#practiceContent .practice-path-step span{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:2px solid #cfd6df;background:#fff;font-weight:900}
+#practiceContent .practice-path-step.active span{border-color:var(--copper,#b96a32);box-shadow:0 0 0 4px rgba(185,106,50,.12)}
+#practiceContent .practice-path-step.done span{background:#eef8f1}.practice-path-step small{font-weight:800;white-space:nowrap}
+#practiceContent .practice-safety-banner{display:flex;justify-content:space-between;align-items:center;gap:20px;padding:14px 18px;border:1px solid #e7c889;border-radius:14px;background:#fff9e9}
+#practiceContent .practice-safety-banner>div{display:grid;gap:2px}.practice-safety-banner span{font-size:.9rem}.practice-safety-banner label{display:flex;gap:8px;align-items:center;font-weight:800;white-space:nowrap}
+#practiceContent .practice-safety-confirmed{justify-self:start;padding:8px 12px;border-radius:999px;background:#eef8f1;font-size:.86rem;font-weight:800}
+#practiceContent .practice-player-grid{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(330px,.75fr);gap:18px;align-items:stretch}
+#practiceContent .practice-player-visual,#practiceContent .practice-player-instruction{border:1px solid var(--line,#d8dee6);border-radius:18px;background:var(--panel,#fff);padding:20px}
+#practiceContent .practice-player-sectionhead{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.practice-player-sectionhead>div{display:grid}.practice-player-sectionhead span{font-weight:900}.practice-player-sectionhead small{color:var(--muted,#667085)}
+#practiceContent .practice-main-visual{min-height:390px}#practiceContent .practice-player-caption{text-align:center;margin:10px 0 0;color:var(--muted,#667085);font-size:.9rem}
+#practiceContent .practice-player-instruction{display:flex;flex-direction:column}.practice-step-kicker{font-size:.78rem;font-weight:900;letter-spacing:.08em;color:var(--copper,#b96a32)}
+#practiceContent .practice-player-instruction h2{margin:8px 0}.practice-main-instruction{font-size:1.06rem;line-height:1.65}
+#practiceContent .practice-look-card{padding:14px 16px;border-radius:12px;background:var(--soft,#f6f7f9);margin:10px 0 16px}.practice-look-card p{margin:5px 0 0}
+#practiceContent .practice-understand-main{margin-top:auto}.practice-player-actions{display:grid;grid-template-columns:1fr 1.25fr;gap:10px;margin-top:14px}
+#practiceContent .practice-one-note{text-align:center;font-size:.84rem;color:var(--muted,#667085);margin:8px 0 0}
+#practiceContent .practice-more-help-button{margin-top:14px;width:100%;background:transparent;border:1px dashed #b8c0cc;border-radius:10px;padding:10px;font-weight:800;color:var(--muted,#667085);cursor:pointer}
+#practiceContent .practice-help-panel{border:1px solid var(--line,#d8dee6);border-radius:18px;background:var(--panel,#fff);padding:20px}.practice-help-head{display:flex;justify-content:space-between;align-items:center}.practice-help-head h3{margin:2px 0 0}.practice-help-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.practice-help-item{padding:15px;border-radius:12px;background:var(--soft,#f6f7f9)}.practice-help-item p{margin:6px 0 10px}.practice-help-actions{display:flex;flex-wrap:wrap;gap:8px}.practice-help-actions label{display:flex;align-items:center;gap:6px}
+#practiceContent .practice-complete-card{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:18px 20px;border:1px solid #b9ddc4;border-radius:16px;background:#f2fbf5}.practice-complete-card>span{font-size:1.6rem}.practice-complete-card p{margin:4px 0 0}
+@media(max-width:820px){#practiceContent .practice-player-header{align-items:stretch;flex-direction:column}#practiceContent .practice-player-module{min-width:0}#practiceContent .practice-player-grid{grid-template-columns:1fr}#practiceContent .practice-main-visual{min-height:300px}#practiceContent .practice-help-grid{grid-template-columns:1fr}#practiceContent .practice-complete-card{grid-template-columns:auto 1fr}#practiceContent .practice-complete-card button{grid-column:1/-1}#practiceContent .practice-safety-banner{align-items:flex-start;flex-direction:column}}
+
+/* Practice-only post-defense simplification */
+#practiceContent .practice-safety-title{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:8px}
+#practiceContent .practice-more-help-button{width:100%;margin-top:14px;padding:11px 14px;border:1px dashed #aeb7c3;border-radius:12px;background:transparent;font-weight:850;color:var(--muted,#667085);cursor:pointer}
+#practiceContent .practice-help-panel{margin-top:12px;padding:18px;border:1px solid var(--line,#d8dee6);border-radius:16px;background:var(--panel,#fff)}
+#practiceContent .practice-help-head{display:flex;justify-content:space-between;align-items:center;gap:12px}.practice-help-head h3{margin:2px 0 0}
+#practiceContent .practice-help-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.practice-help-item{padding:14px;border-radius:12px;background:var(--soft,#f6f7f9)}.practice-help-item p{margin:6px 0 10px}.practice-help-actions{display:flex;gap:8px;flex-wrap:wrap;align-items:center}.practice-help-actions label{display:flex;gap:6px;align-items:center}
+#practiceContent details.practice-extra-section,#practiceContent details.practice-more-tools,#practiceContent details.practice-help-fold{display:none!important}
+@media(max-width:760px){#practiceContent .practice-help-grid{grid-template-columns:1fr}.practice-safety-title{align-items:flex-start;flex-direction:column}}
+
+/* =========================================================
+   PRACTICE V7 — COMPACT ONE-SCREEN PLAYER + HELP DRAWER
+   Practice-only overrides; no other page is changed.
+   ========================================================= */
+#practice .section-heading{margin-bottom:.55rem!important}
+#practice .section-heading .eyebrow{display:none}
+#practice .section-heading h1{font-size:clamp(1.55rem,2.4vw,2.05rem);margin:0 0 .2rem!important}
+#practice .section-heading p{font-size:.9rem;margin:0;max-width:60ch}
+#practiceContent .practice-simple-topbar{margin-bottom:.55rem;align-items:center}
+#practiceContent .practice-mini-label{font-size:.72rem}
+#practiceContent .practice-module-picker .module-select{margin-top:.2rem;min-height:40px}
+#practiceContent .practice-simple-shell{gap:.55rem}
+#practiceContent .practice-simple-header{padding:.65rem .85rem;align-items:center}
+#practiceContent .practice-simple-header .eyebrow,#practiceContent .practice-simple-header p{display:none}
+#practiceContent .practice-simple-header h2{font-size:1.05rem;margin:0}
+#practiceContent .practice-progress-summary{display:flex;gap:.7rem;align-items:center;font-size:.82rem}
+#practiceContent .practice-simple-shell>progress{height:6px;margin:-.25rem 0 0}
+#practiceContent .practice-simple-steps{padding:.3rem;gap:.3rem}
+#practiceContent .practice-simple-step{min-height:43px;flex-basis:55px;padding:.25rem}
+#practiceContent .practice-simple-step>span{width:23px;height:23px;font-size:.78rem}
+#practiceContent .practice-simple-step small{font-size:.65rem}
+#practiceContent .practice-safety-compact{padding:.48rem .7rem;display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+#practiceContent .practice-safety-title{margin:0;min-width:max-content}
+#practiceContent .practice-safety-title strong{font-size:.82rem}
+#practiceContent .practice-safety-title span{font-size:.7rem}
+#practiceContent .practice-safety-body{padding:0;display:flex;align-items:center;gap:.7rem;flex:1;justify-content:flex-end}
+#practiceContent .practice-safety-body p{display:none}
+#practiceContent .practice-safety-body .study-check{margin:0;padding:0;background:transparent;border:0;font-size:.78rem}
+#practiceContent .practice-safety-body .study-check input{width:18px;height:18px;min-height:0}
+#practiceContent .practice-focus-grid{grid-template-columns:minmax(0,1.18fr) minmax(320px,.82fr);gap:.65rem;align-items:stretch}
+#practiceContent .practice-visual-card,#practiceContent .practice-instruction-card{padding:.75rem;box-shadow:none}
+#practiceContent .practice-card-label{margin-bottom:.35rem}
+#practiceContent .practice-main-visual,#practiceContent .practice-main-visual .wire-diagram{min-height:300px!important;height:min(42vh,390px)!important;max-height:390px!important}
+#practiceContent .practice-visual-note{display:none}
+#practiceContent .practice-step-badge{margin:.15rem 0 .3rem;font-size:.68rem}
+#practiceContent .practice-instruction-card h2{font-size:1.2rem;margin:.15rem 0 .35rem}
+#practiceContent .practice-main-instruction{font-size:.94rem;line-height:1.45;margin:.2rem 0}
+#practiceContent .practice-look-for{margin:.45rem 0;padding:.55rem .7rem;font-size:.86rem}
+#practiceContent .practice-understand-check{margin:.45rem 0;padding:.55rem .65rem}
+#practiceContent .practice-understand-check small{display:none}
+#practiceContent .practice-main-actions{grid-template-columns:.85fr .85fr 1.2fr;gap:.4rem}
+#practiceContent .practice-main-actions button{min-height:40px;padding:.55rem .6rem}
+#practiceContent .practice-requirement{font-size:.72rem;margin:.3rem 0 0}
+#practiceContent .practice-more-help-button{position:fixed;right:22px;bottom:22px;width:auto!important;margin:0!important;z-index:1001;background:var(--copper)!important;color:#1f1b18!important;border:0!important;border-radius:999px!important;padding:.75rem 1rem!important;box-shadow:0 10px 30px rgba(0,0,0,.28);font-weight:900}
+#practiceContent .practice-help-panel{position:fixed;z-index:1002;right:18px;top:76px;bottom:18px;width:min(390px,calc(100vw - 36px));margin:0!important;padding:1rem!important;overflow:auto;background:var(--surface)!important;border:1px solid var(--border-strong)!important;box-shadow:0 18px 55px rgba(0,0,0,.42);transform:translateX(115%);opacity:0;transition:transform .2s ease,opacity .2s ease}
+#practiceContent .practice-help-panel.open{transform:translateX(0);opacity:1}
+#practiceContent .practice-help-grid{grid-template-columns:1fr!important;gap:.55rem!important;margin-top:.7rem!important}
+#practiceContent .practice-help-item{padding:.7rem!important}
+#practiceContent .practice-help-item p{font-size:.84rem;margin:.25rem 0 .5rem!important}
+body.practice-help-open::after{content:"";position:fixed;inset:0;background:rgba(0,0,0,.38);z-index:1000;pointer-events:none}
+@media(max-width:980px){#practiceContent .practice-focus-grid{grid-template-columns:1fr 1fr}#practiceContent .practice-main-visual,#practiceContent .practice-main-visual .wire-diagram{min-height:250px!important;height:32vh!important}}
+@media(max-width:760px){#practiceContent .practice-focus-grid{grid-template-columns:1fr}#practiceContent .practice-main-visual,#practiceContent .practice-main-visual .wire-diagram{height:280px!important}.practice-safety-compact{align-items:flex-start!important;flex-direction:column}.practice-safety-body{justify-content:flex-start!important}.practice-progress-summary{display:none!important}}
+
+/* =========================================================
+   PRACTICE V8 — POLISHED MORE HELP DRAWER
+   Scoped to Practice only.
+   ========================================================= */
+#practiceContent .practice-help-panel{
+    top:88px!important;
+    right:20px!important;
+    bottom:auto!important;
+    width:min(420px,calc(100vw - 32px))!important;
+    max-height:calc(100vh - 112px)!important;
+    padding:0!important;
+    overflow:hidden!important;
+    border:1px solid rgba(201,130,74,.38)!important;
+    border-radius:20px!important;
+    background:#20262b!important;
+    color:#f4efe9!important;
+    box-shadow:0 24px 70px rgba(0,0,0,.52)!important;
+}
+#practiceContent .practice-help-head{
+    position:sticky;top:0;z-index:2;
+    display:flex!important;align-items:center!important;justify-content:space-between!important;
+    gap:12px!important;padding:16px 18px 13px!important;
+    background:#20262b!important;border-bottom:1px solid rgba(255,255,255,.10)!important;
+}
+#practiceContent .practice-help-head .eyebrow{font-size:.68rem!important;letter-spacing:.14em!important;color:#d99a67!important}
+#practiceContent .practice-help-head h3{margin:2px 0 0!important;font-size:1.25rem!important;color:#fff!important}
+#practiceContent .practice-help-head .small-button{
+    min-height:36px!important;padding:.45rem .72rem!important;border-radius:10px!important;
+    background:#30383e!important;color:#fff!important;border:1px solid #59636b!important;font-size:.82rem!important;
+}
+#practiceContent .practice-help-grid{
+    display:grid!important;grid-template-columns:1fr!important;gap:0!important;
+    margin:0!important;padding:4px 18px 16px!important;overflow:auto!important;
+    max-height:calc(100vh - 190px)!important;
+}
+#practiceContent .practice-help-item{
+    display:grid!important;grid-template-columns:112px minmax(0,1fr)!important;
+    align-items:center!important;gap:12px!important;
+    padding:12px 0!important;border-radius:0!important;background:transparent!important;
+    border-bottom:1px solid rgba(255,255,255,.09)!important;color:#f4efe9!important;
+}
+#practiceContent .practice-help-item:last-child{border-bottom:0!important}
+#practiceContent .practice-help-item>strong{font-size:.88rem!important;color:#fff!important;line-height:1.25!important}
+#practiceContent .practice-help-item>p{grid-column:2!important;margin:0 0 7px!important;color:#bac2c8!important;font-size:.78rem!important;line-height:1.4!important}
+#practiceContent .practice-help-actions{grid-column:2!important;display:flex!important;align-items:center!important;gap:7px!important;flex-wrap:wrap!important}
+#practiceContent .practice-help-actions button,
+#practiceContent .practice-help-item>button{
+    min-height:36px!important;width:auto!important;margin:0!important;padding:.48rem .68rem!important;
+    border-radius:9px!important;background:#30383e!important;color:#fff!important;
+    border:1px solid #56616a!important;font-size:.78rem!important;font-weight:750!important;
+}
+#practiceContent .practice-help-actions button:hover,
+#practiceContent .practice-help-item>button:hover{background:#39434a!important;border-color:#d08b55!important}
+#practiceContent .practice-help-actions label{
+    margin:0!important;display:flex!important;align-items:center!important;gap:6px!important;
+    color:#cbd1d5!important;font-size:.76rem!important;font-weight:700!important;
+}
+#practiceContent .practice-help-actions select{
+    width:auto!important;min-width:88px!important;min-height:36px!important;margin:0!important;
+    padding:.38rem 1.7rem .38rem .58rem!important;border-radius:9px!important;
+    background:#30383e!important;color:#fff!important;border:1px solid #56616a!important;font-size:.78rem!important;
+}
+#practiceContent .practice-help-item .secondary[disabled]{opacity:.58!important}
+#practiceContent .practice-more-help-button{background:#c9824a!important;color:#17191b!important}
+body.practice-help-open{overflow:hidden}
+body.practice-help-open::after{backdrop-filter:blur(1px)}
+@media(max-width:560px){
+ #practiceContent .practice-help-panel{top:auto!important;right:10px!important;left:10px!important;bottom:10px!important;width:auto!important;max-height:72vh!important;border-radius:18px!important}
+ #practiceContent .practice-help-grid{max-height:calc(72vh - 72px)!important;padding:4px 14px 14px!important}
+ #practiceContent .practice-help-item{grid-template-columns:1fr!important;gap:6px!important;padding:11px 0!important}
+ #practiceContent .practice-help-item>p,#practiceContent .practice-help-actions{grid-column:1!important}
+}
+
+/* =========================================================
+   PROCEDURAL ILLUSTRATION V9 — MOVEMENT + ANGLE GUIDES
+   Adds readable direction cues without changing other pages.
+   ========================================================= */
+.wire-diagram .motion-guide,
+.wire-diagram .angle-guide{
+    fill:none;
+    stroke:#ffd27a;
+    stroke-width:4;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-dasharray:8 7;
+    opacity:.96;
+    filter:drop-shadow(0 2px 3px rgba(0,0,0,.45));
+}
+.wire-diagram .motion-arrow-head{fill:#ffd27a}
+.wire-diagram .motion-guide-label rect{
+    fill:#151a1d;
+    stroke:rgba(255,210,122,.62);
+    stroke-width:1;
+    opacity:.94;
+}
+.wire-diagram .motion-guide-text,
+.wire-diagram .angle-guide-text{
+    fill:#fff3d1;
+    font:700 14px Arial,sans-serif;
+    paint-order:stroke;
+    stroke:#151a1d;
+    stroke-width:3px;
+    stroke-linejoin:round;
+}
+.wire-diagram .angle-guide-text{font-size:16px;fill:#ffd27a}
+.wire-diagram .motion-guide-active{
+    stroke-dasharray:10 9;
+    animation:splicedGuideFlow 1.15s linear infinite;
+}
+@keyframes splicedGuideFlow{to{stroke-dashoffset:-38}}
+.motion-paused .motion-guide-active{animation-play-state:paused}
+@media (prefers-reduced-motion:reduce){.wire-diagram .motion-guide-active{animation:none}}
