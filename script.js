@@ -43,7 +43,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/rat-tail-actual.webp",
             clip: "assets/media/gifs/rat-tail-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Rat Tail / Pigtail Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Rat Tail / Pigtail Joint for visual learning support",
             clipAlt: "Short looping procedural demonstration for Rat Tail / Pigtail Joint"
         },
 
@@ -94,7 +94,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/western-union-short-tie-actual.webp",
             clip: "assets/media/gifs/western-union-short-tie-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Western Union Short-Tie held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Western Union Short-Tie for visual learning support",
             clipAlt: "Short looping procedural demonstration for Western Union Short-Tie"
         },
 
@@ -150,7 +150,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/western-union-long-tie-actual.webp",
             clip: "assets/media/gifs/western-union-long-tie-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Western Union Long-Tie held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Western Union Long-Tie for visual learning support",
             clipAlt: "Short looping procedural demonstration for Western Union Long-Tie"
         },
 
@@ -206,7 +206,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/plain-tap-actual.webp",
             clip: "assets/media/gifs/plain-tap-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Plain Tap Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Plain Tap Joint for visual learning support",
             clipAlt: "Short looping procedural demonstration for Plain Tap Joint"
         },
 
@@ -262,7 +262,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/knotted-tap-actual.webp",
             clip: "assets/media/gifs/knotted-tap-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Knotted Tap Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Knotted Tap Joint for visual learning support",
             clipAlt: "Short looping procedural demonstration for Knotted Tap Joint"
         },
 
@@ -318,7 +318,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/aerial-tap-actual.webp",
             clip: "assets/media/gifs/aerial-tap-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Aerial Tap Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Aerial Tap Joint for visual learning support",
             clipAlt: "Short looping procedural demonstration for Aerial Tap Joint"
         },
 
@@ -374,7 +374,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/fixture-joint-actual.webp",
             clip: "assets/media/gifs/fixture-joint-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Fixture Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Fixture Joint for visual learning support",
             clipAlt: "Short looping procedural demonstration for Fixture Joint"
         },
 
@@ -430,7 +430,7 @@ const MODULES = [
         media: {
             photo: "assets/images/actual/cross-joint-actual.webp",
             clip: "assets/media/gifs/cross-joint-demo.gif",
-            photoAlt: "Verified actual training-sample photo of the Cross Joint held for scale and visual reference",
+            photoAlt: "AI-generated illustrative procedural reference of the Cross Joint for visual learning support",
             clipAlt: "Short looping procedural demonstration for Cross Joint"
         },
 
@@ -2132,25 +2132,6 @@ function wireDiagram(moduleIndex, stepIndex, animate = false) {
             .replace(/^M\s+[\d.-]+\s+[\d.-]+/, "");
     }
 
-    // Motion/angle guides make the intended hand movement easier to read.
-    // Numeric angles are shown only when the module text specifies them.
-    function motionGuide(data, text, x, y, numericAngle = "") {
-        parts.push(`
-            <path d="${data}" class="motion-guide ${animate ? "motion-guide-active" : ""}" marker-end="url(#motionArrow)" />
-            <g class="motion-guide-label">
-                <rect x="${x - 8}" y="${y - 19}" width="${Math.max(92, (text + numericAngle).length * 7.2 + 18)}" height="28" rx="8" />
-                <text x="${x}" y="${y}" class="motion-guide-text">${escapeHTML(text)}${numericAngle ? ` • ${escapeHTML(numericAngle)}` : ""}</text>
-            </g>
-        `);
-    }
-
-    function angleGuide(cx, cy, radius, startX, startY, endX, endY, text, tx, ty) {
-        parts.push(`
-            <path d="M ${startX} ${startY} A ${radius} ${radius} 0 0 1 ${endX} ${endY}" class="angle-guide ${animate ? "motion-guide-active" : ""}" marker-end="url(#motionArrow)" />
-            <text x="${tx}" y="${ty}" class="angle-guide-text">${escapeHTML(text)}</text>
-        `);
-    }
-
     // RAT TAIL / PIGTAIL
 
     if (moduleIndex === 0) {
@@ -2414,40 +2395,6 @@ function wireDiagram(moduleIndex, stepIndex, animate = false) {
         }
     }
 
-    // STEP-SPECIFIC MOVEMENT GUIDES
-    // These overlays clarify direction, bend, wrap, and the one explicit angle
-    // stated in the lesson content. They are schematic—not measurement tools.
-    if (moduleIndex === 0) {
-        if (step === 2) motionGuide("M 330 245 Q 375 210 420 185", "Bring ends together", 330, 275);
-        if (step === 3) motionGuide("M 335 120 C 385 82 455 105 460 160", "Twist together", 345, 92);
-    } else if (moduleIndex === 1 || moduleIndex === 2) {
-        if (step === 1) motionGuide("M 300 92 Q 340 132 365 170", "Cross / overlap", 300, 72);
-        if (step === 2) motionGuide("M 300 112 C 345 82 390 112 382 160", moduleIndex === 2 ? "Form long tie" : "Form interlock", 300, 88);
-        if (step === 3) motionGuide("M 410 105 C 465 105 475 170 430 194", "Wrap A around B", 410, 82);
-        if (step === 4) motionGuide("M 225 250 C 165 245 160 180 205 160", "Wrap B around A", 90, 270);
-    } else if (moduleIndex === 3) {
-        if (step === 2) angleGuide(285,160,48,285,112,333,160,"≈ 90°",338,130);
-        if (step === 3) motionGuide("M 245 105 C 330 80 365 125 330 165", "Start wrap", 220, 78);
-        if (step === 4) motionGuide("M 325 105 C 390 110 405 170 360 195", "Continue close turns", 350, 82);
-    } else if (moduleIndex === 4) {
-        if (step === 1) motionGuide("M 220 245 Q 250 195 282 165", "Position branch", 155, 270);
-        if (step === 2) motionGuide("M 225 135 C 235 80 330 82 335 145", "Form locking loop", 205, 78);
-        if (step === 3) motionGuide("M 330 105 C 395 105 410 170 365 195", "Wrap after knot", 355, 82);
-    } else if (moduleIndex === 5) {
-        if (step === 1) motionGuide("M 205 250 Q 245 205 292 165", "Approach at class angle", 115, 275);
-        if (step === 2) motionGuide("M 285 100 C 335 70 365 115 335 160", "Bend over main", 275, 75);
-        if (step === 3) motionGuide("M 345 105 C 400 110 410 170 370 195", "Wrap tap", 370, 82);
-    } else if (moduleIndex === 6) {
-        if (step === 1) motionGuide("M 250 235 C 205 195 220 145 265 150", "Wrap fixture lead", 145, 250);
-        if (step === 2) motionGuide("M 430 105 Q 400 135 365 150", "Fold supporting end", 390, 82);
-        if (step === 3) motionGuide("M 300 105 C 350 85 390 120 365 165", "Complete wraps", 300, 80);
-    } else if (moduleIndex === 7) {
-        if (step === 1) motionGuide("M 190 245 Q 210 195 230 165", "Position first tap", 115, 270);
-        if (step === 2) motionGuide("M 245 105 C 300 105 315 165 270 195", "Wrap first tap", 255, 82);
-        if (step === 3) motionGuide("M 440 95 Q 415 125 395 158", "Position second tap", 420, 72);
-        if (step === 4) motionGuide("M 410 105 C 465 105 480 165 435 195", "Wrap second tap", 430, 82);
-    }
-
     if (step === last) {
         parts.push(`
             <rect
@@ -2481,12 +2428,6 @@ function wireDiagram(moduleIndex, stepIndex, animate = false) {
             <title>
                 ${escapeHTML(module.name + ": " + description)}
             </title>
-
-            <defs>
-                <marker id="motionArrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto" markerUnits="strokeWidth">
-                    <path d="M0,0 L0,6 L9,3 z" class="motion-arrow-head" />
-                </marker>
-            </defs>
 
             <rect
                 width="640"
@@ -4126,8 +4067,6 @@ initialize();
 /* SplicEd: paste once at the END of your existing script.js. */
 (() => {
     "use strict";
-
-let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
     if (window.splicedInclusiveUIInstalled) return;
     window.splicedInclusiveUIInstalled = true;
     const originalNavigate = window.navigate;
@@ -4243,18 +4182,17 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
         currentStep = Math.max(0, Math.min(currentStep, module.steps.length - 1));
         const step = module.steps[currentStep];
         const host = $("#practiceContent");
-
+        const sameModule = host.dataset.module === String(selectedModule);
+        const openPanels = new Set(sameModule
+            ? [...host.querySelectorAll("details[open][data-panel]")].map(item => item.dataset.panel) : []);
+        const open = panel => openPanels.has(panel) ? "open" : "";
         if (currentUser) {
             if (!record.viewed.includes(currentStep)) record.viewed.push(currentStep);
             record.lastStep = currentStep;
             saveProgress();
         }
-
-        const understood = record.completedSteps.includes(currentStep);
-        const saved = record.review.includes(currentStep);
-        const hint = currentStep
-            ? `Remember the previous action: ${module.steps[currentStep - 1][0]}. ${module.steps[currentStep - 1][2]}`
-            : `Start with the purpose of this splice: ${module.purpose}`;
+        const hint = currentStep ? `Before this step: ${module.steps[currentStep - 1][0]}. ${module.steps[currentStep - 1][2]}`
+            : `Your goal: ${module.purpose}`;
         const returnAction = sequenceReturnModule === selectedModule
             ? '<button type="button" class="secondary" onclick="returnToSequence()">Return to My Sequence</button>'
             : nextRound?.module === selectedModule
@@ -4262,101 +4200,128 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
 
         host.dataset.module = selectedModule;
         host.innerHTML = `
-            <div class="practice-simple-topbar">
-                <div class="practice-module-picker">
-                    <span class="practice-mini-label">1. Choose a splice or joint</span>
-                    ${moduleSelect("practiceModule", selectedModule, "selectPractice")}
-                </div>
+            <div class="study-topbar">
+                ${moduleSelect("practiceModule", selectedModule, "selectPractice")}
                 ${returnAction}
             </div>
-
-            <section class="practice-simple-shell" aria-label="Guided practice workspace">
-                <header class="practice-simple-header">
-                    <div>
-                        <span class="eyebrow">GUIDED PRACTICE</span>
-                        <h2>${esc(module.name)}</h2>
-                        <p>Follow one step at a time. The main controls you need are Previous, Replay, and Next.</p>
-                    </div>
-                    <div class="practice-progress-summary" aria-label="Practice progress">
-                        <strong>Step ${currentStep + 1} of ${module.steps.length}</strong>
-                        <span id="practiceCheckedCount">${record.completedSteps.length} understood</span>
-                    </div>
-                </header>
-                <progress id="practiceUnderstandingProgress" max="${module.steps.length}" value="${record.completedSteps.length}" aria-label="Practice progress"></progress>
-
-                <nav class="practice-simple-steps" aria-label="Choose a procedure step">
-                    ${module.steps.map((item, index) => `
-                        <button type="button" class="practice-simple-step ${index === currentStep ? "active" : ""}"
-                            ${index === currentStep ? 'aria-current="step"' : ''} onclick="jumpStep(${index})">
-                            <span>${record.completedSteps.includes(index) ? "✓" : index + 1}</span>
-                            <small>Step ${index + 1}</small>
-                        </button>`).join("")}
-                </nav>
-
-                <section class="practice-safety-compact">
-                    <div class="practice-safety-title"><strong>Safety first</strong><span id="safetyStatus">${record.safetyAccepted ? "✓ Confirmed" : "Confirm before continuing"}</span></div>
-                    <div class="practice-safety-body">
-                        <p>Use disconnected training wires, wear the required protective equipment, and follow your instructor. Never practise on a live circuit.</p>
-                        <label class="study-check"><input type="checkbox" onchange="acceptSafety(this.checked)" ${record.safetyAccepted ? "checked" : ""}><span>I understand and will follow these safety reminders.</span></label>
-                    </div>
-                </section>
-
-                <div class="practice-focus-grid">
-                    <article class="practice-visual-card">
-                        <div class="practice-card-label"><span>2. Watch the action</span><button type="button" class="secondary small-button" onclick="replayVisual()">↻ Replay</button></div>
-                        <div id="visualStage" class="visual-stage practice-main-visual">${wireDiagram(selectedModule, currentStep, true)}</div>
-                        <p class="practice-visual-note">Use the illustration as a guide. Focus only on the movement shown for this step.</p>
-
-                    </article>
-
-                    <article class="practice-instruction-card">
-                        <span class="practice-mini-label">3. Read this step</span>
-                        <div class="practice-step-badge">STEP ${currentStep + 1}</div>
-                        <h2 id="practiceStepTitle" tabindex="-1">${esc(step[0])}</h2>
-                        <p class="practice-main-instruction">${esc(step[1])}</p>
-                        <div class="practice-look-for"><strong>What should I look for?</strong><p>${esc(step[2])}</p></div>
-
-                        
-
-                        <label class="practice-understand-check">
-                            <input type="checkbox" onchange="toggleStepComplete(this.checked)" ${understood ? "checked" : ""}>
-                            <span><strong>I understand this step</strong><small>Check this when you can explain what happens in this step.</small></span>
-                        </label>
-
-                        <div class="practice-main-actions">
-                            <button type="button" class="secondary" onclick="previousStep()" ${currentStep === 0 ? "disabled" : ""}>← Previous</button>
-                            <button type="button" class="secondary" onclick="replayVisual()">↻ Replay</button>
-                            <button type="button" id="practiceNext" class="primary" onclick="nextStep()" aria-describedby="practiceRequirement" ${!record.safetyAccepted || !understood ? "disabled" : ""}>${currentStep === module.steps.length - 1 ? "Try Guided Order →" : "Next →"}</button>
-                        </div>
-                        <p id="practiceRequirement" class="practice-requirement" role="status">${requirementText()}</p>
-                    </article>
+            <nav class="practice-step-strip panel" aria-label="Step-by-step procedure">
+                <div class="practice-step-strip-heading"><div><span class="eyebrow">STEP-BY-STEP PROCEDURE</span><strong>Jump directly to any step</strong></div><span class="tag">Step ${currentStep + 1} of ${module.steps.length}</span></div>
+                <div class="practice-step-buttons">${module.steps.map((item,index)=>`<button type="button" class="practice-step-button ${index===currentStep?"active":""}" aria-current="${index===currentStep?"step":"false"}" onclick="jumpStep(${index})"><b>Step ${index+1}</b>${learningMode === "guided" ? `<span>${esc(item[0])}</span>` : `<span>Recall step</span>`}</button>`).join("")}</div>
+            </nav>
+            <details class="study-fold safety-fold" data-panel="safety"
+                ${!record.safetyAccepted ? "open" : open("safety")}>
+                <summary>Safety reminder <span id="safetyStatus" class="study-status">
+                    ${record.safetyAccepted ? "Confirmed" : "Please confirm"}</span></summary>
+                <div class="study-fold-body">
+                    <p>Use disconnected training wires, wear the required protective equipment,
+                    and follow your instructor. Never practise on a live circuit.</p>
+                    <label class="study-check"><input type="checkbox" onchange="acceptSafety(this.checked)"
+                        ${record.safetyAccepted ? "checked" : ""}>
+                        <span>I understand and will follow these safety reminders.</span></label>
                 </div>
-
-                <button type="button" class="practice-more-help-button" onclick="togglePracticeHelp()" aria-expanded="false" aria-controls="practiceHelpPanel">⋯ More Help</button>
-                <aside id="practiceHelpPanel" class="practice-help-panel" hidden>
-                    <div class="practice-help-head"><div><span class="eyebrow">OPTIONAL SUPPORT</span><h3>More Help</h3></div><button type="button" class="secondary small-button" onclick="togglePracticeHelp()">Close ×</button></div>
-                    <div class="practice-help-grid">
-                        <div class="practice-help-item"><strong>Hint</strong><p>${esc(hint)}</p></div>
-                        <div class="practice-help-item"><strong>Visual</strong><div class="practice-help-actions"><button type="button" id="pauseActionButton" class="secondary" aria-pressed="false" onclick="pauseAction()">Pause / Resume</button><button type="button" id="zoomButton" class="secondary" aria-pressed="false" onclick="toggleZoom()">Close-up</button><label>Speed<select id="motionSpeed" onchange="setAnimationSpeed(Number(this.value))"><option value="0.5" ${animationSpeed===0.5?"selected":""}>Slow</option><option value="1" ${animationSpeed===1?"selected":""}>Normal</option><option value="1.5" ${animationSpeed===1.5?"selected":""}>Fast</option></select></label></div></div>
-                        <div class="practice-help-item"><strong>Review</strong><p>Save this step and return to it later.</p>${savedStepButton(selectedModule, currentStep)}</div>
-                        <div class="practice-help-item"><strong>Next activity</strong><div class="practice-help-actions"><button type="button" class="secondary" onclick="openLesson(${selectedModule})">Read Full Lesson</button><button type="button" class="secondary" onclick="openGuidedOrder(${selectedModule})">What Comes Next?</button></div></div>
+            </details>
+            <article class="panel study-workbench">
+                <div class="study-position">
+                    <strong>Step ${currentStep + 1} of ${module.steps.length}</strong>
+                    <span id="practiceCheckedCount">${record.completedSteps.length} of ${module.steps.length} steps checked</span>
+                </div>
+                <progress id="practiceUnderstandingProgress" max="${module.steps.length}" value="${record.completedSteps.length}"
+                    aria-label="Steps marked understood in this module"></progress>
+                <div class="study-columns">
+                    <div class="study-demonstration">
+                        <div class="wire-legend"><span class="wire-a">A: Main wire</span>
+                            <span class="wire-b">B: Second / branch wire</span>
+                            ${selectedModule === 7 ? '<span class="wire-c">C: Second branch</span>' : ""}</div>
+                        <div class="visual-reference-workspace">
+                            <div class="animated-illustration-panel">
+                                <span class="visual-panel-label">Animated illustration</span>
+                                <div id="visualStage" class="visual-stage">${wireDiagram(selectedModule, currentStep, true)}</div>
+                            </div>
+                            <figure class="finished-splice-reference">
+                                <span class="visual-panel-label">Finished splice reference</span>
+                                <img src="${esc(module.media?.photo || '')}"
+                                    alt="${esc(module.media?.photoAlt || (module.name + ' finished splice reference'))}"
+                                    loading="lazy"
+                                    onerror="this.hidden=true; this.nextElementSibling.hidden=false;">
+                                <div class="finished-photo-placeholder" hidden>
+                                    <strong>${esc(module.name)}</strong>
+                                    <span>Actual finished-splice photo</span>
+                                    <small>Add the verified training-sample photo in <code>images/modules/</code>.</small>
+                                </div>
+                                <figcaption>Compare the simplified animation with the finished training sample.</figcaption>
+                            </figure>
+                        </div>
+                        <p class="study-caption">The animation simplifies the motion. Use the finished-splice reference to connect the illustration with the physical wire.</p>
+                        <button type="button" class="secondary" onclick="replayVisual()">Replay This Step</button>
+                        ${playbackTimer ? `<div class="study-autoplay" role="status">Auto-play is on.
+                            <button type="button" class="secondary" onclick="togglePlayback()">Pause Auto-play</button></div>` : ""}
+                        <div class="visual-tools-inline" aria-label="Animation controls">
+                            <div class="visual-tools-label"><strong>Animation controls</strong><span>Control the illustration while you study.</span></div>
+                            <div class="study-tools">
+                                <button type="button" id="pauseActionButton" class="secondary"
+                                    aria-pressed="false" onclick="pauseAction()">Pause / Resume</button>
+                                <button type="button" id="zoomButton" class="secondary"
+                                    aria-pressed="false" onclick="toggleZoom()">Close-up</button>
+                                <label class="study-speed" for="motionSpeed">Speed
+                                    <select id="motionSpeed" onchange="setAnimationSpeed(Number(this.value))">
+                                        ${[[0.5, "0.5×"], [1, "1×"], [1.5, "1.5×"]].map(([value, label]) =>
+                                            `<option value="${value}" ${animationSpeed === value ? "selected" : ""}>${label}</option>`).join("")}
+                                    </select>
+                                </label>
+                                <button type="button" id="playStepsButton" class="secondary"
+                                    aria-pressed="${Boolean(playbackTimer)}" onclick="togglePlayback()">
+                                    ${playbackTimer ? "Pause Steps" : "Play All Steps"}</button>
+                            </div>
+                        </div>
+                        <details class="study-fold" data-panel="compare" ${open("compare")}>
+                            <summary>Compare Before and After</summary>
+                            <div class="study-fold-body before-after">
+                                <figure><figcaption>Before this step</figcaption>${wireDiagram(selectedModule, currentStep - 1)}</figure>
+                                <figure><figcaption>After this step</figcaption>${wireDiagram(selectedModule, currentStep)}</figure>
+                            </div>
+                        </details>
                     </div>
-                </aside>
-            </section>`;
-
-        $("#visualStage")?.style.setProperty("--motion-duration", `${3 / animationSpeed}s`);
+                    <div class="study-instruction">
+                        <span class="eyebrow">${learningMode === "guided" ? "GUIDED MODE" : "INDEPENDENT MODE — REDUCED SUPPORT"}</span>
+                        <h2 id="practiceStepTitle" tabindex="-1">${esc(step[0])}</h2>
+                        ${learningMode === "guided" ? `
+                            <p>${esc(step[1])}</p>
+                            <aside class="note"><strong>Look for this</strong><p>${esc(step[2])}</p></aside>
+                            <details class="study-fold" data-panel="hint" ${open("hint")}>
+                                <summary>Show a Hint</summary><div class="study-fold-body"><p>${esc(hint)}</p></div>
+                            </details>
+                        ` : `
+                            <p class="study-caption">Recall how this action should be performed before revealing additional support.</p>
+                            <aside class="note independent-mode-note"><strong>Independent Recall</strong>
+                                <p>Detailed explanations, look-for cues, and hints are hidden in Independent Mode.</p>
+                                <button type="button" class="secondary" onclick="setLearningMode('guided')">I Need Support — Return to Guided Mode</button>
+                            </aside>
+                        `}
+                        <label class="study-check"><input type="checkbox" onchange="toggleStepComplete(this.checked)"
+                            ${record.completedSteps.includes(currentStep) ? "checked" : ""}>
+                            <span>I understand this step.</span></label>
+                        <div class="study-actions">
+                            <button type="button" class="secondary" onclick="previousStep()" ${currentStep === 0 ? "disabled" : ""}>Previous Step</button>
+                            <button type="button" id="practiceNext" class="primary" onclick="nextStep()"
+                                aria-describedby="practiceRequirement"
+                                ${!record.safetyAccepted || !record.completedSteps.includes(currentStep) ? "disabled" : ""}>
+                                ${currentStep === module.steps.length - 1 ? "Try Guided Order" : "Next Step"}</button>
+                        </div>
+                        <p id="practiceRequirement" class="study-caption" role="status">${requirementText()}</p>
+                        <div class="study-review">${savedStepButton(selectedModule, currentStep)}
+                            <p class="study-caption">Saved steps are in Progress → My Review List.</p></div>
+                    </div>
+                </div>
+            </article>
+            <details class="study-fold" data-panel="resources" ${open("resources")}>
+                <summary>Lesson, Tutorial and More Practice</summary>
+                <div class="study-fold-body"><div class="study-actions">
+                    <button type="button" class="secondary" onclick="openLesson(${selectedModule})">Read the Lesson</button>
+                    <button type="button" class="secondary" onclick="openGuidedOrder(${selectedModule})">What Comes Next?</button>
+                    </div>${mediaReferenceCard(selectedModule, true)}</div>
+            </details>`;
+        $("#visualStage").style.setProperty("--motion-duration", `${3 / animationSpeed}s`);
         zoomed = false;
-    }
-
-    function togglePracticeHelp(forceClose = false) {
-        const panel = document.getElementById("practiceHelpPanel");
-        const button = document.querySelector("#practiceContent .practice-more-help-button");
-        if (!panel) return;
-        const willOpen = forceClose ? false : panel.hidden;
-        panel.hidden = !willOpen;
-        panel.classList.toggle("open", willOpen);
-        document.body.classList.toggle("practice-help-open", willOpen);
-        if (button) button.setAttribute("aria-expanded", String(willOpen));
     }
 
     function jumpStep(step) {
@@ -4614,9 +4579,7 @@ let learningMode = localStorage.getItem("splicedLearningMode") || "guided";
         toggleSavedStep, jumpStep, nextStep, stopPlayback, prepareNextQuestion,
         renderNextPractice, chooseGuidedAnswer, checkGuidedAnswer, answerNextStep,
         advanceNextQuestion, reviewGuidedStep, renderProgress, setProgressTab, openRubric,
-        saveRubric, closeRubric, updateChecklistCount, togglePracticeHelp,
-        replayVisual, pauseAction, toggleZoom, setAnimationSpeed, previousStep,
-        selectPractice, openLesson, openGuidedOrder
+        saveRubric, closeRubric, updateChecklistCount
     });
 
     // Give Guided Order its own active navigation state and resume an existing round.
@@ -4659,7 +4622,9 @@ function setLearningMode(mode) {
     if (!["guided", "independent"].includes(mode)) return;
     learningMode = mode;
     localStorage.setItem("splicedLearningMode", mode);
-    notify(mode === "guided" ? "Guided Mode enabled." : "Independent Mode enabled — explanatory cues are reduced.");
+    notify(mode === "guided"
+        ? "Guided Mode enabled — prompts, hints, and detailed step support are available."
+        : "Independent Mode enabled — prompts and explanatory cues are reduced for procedural recall.");
     if (currentPage === "learn" && $("#lessonViewer") && !$("#lessonViewer").hidden) openLesson(selectedModule);
     if (currentPage === "practice") renderPractice();
 }
@@ -4672,18 +4637,22 @@ function localProfileNames() {
 function summarizeProgressFor(username) {
     const saved = readJSON(progressKey(username), {});
     const learning = saved.learning || {};
+    const completedSequences = new Set(Array.isArray(saved.completedModules) ? saved.completedModules : []);
     let lessons = 0, viewed = 0, totalSteps = 0, sequencing = 0, assessments = 0, scoreSum = 0;
-    MODULES.forEach(m => {
-        const r = learning[m.name] || {};
-        if (r.lesson) lessons++;
-        viewed += Array.isArray(r.viewed) ? r.viewed.length : 0;
-        totalSteps += m.steps.length;
-        if (r.sequenceCompleted || r.challengeCompleted || r.sequencing) sequencing++;
-        const q = r.quiz || r.assessment || {};
-        const score = Number(q.bestScore ?? q.score);
-        if (Number.isFinite(score)) { assessments++; scoreSum += score; }
+    MODULES.forEach(module => {
+        const record = learning[module.name] || {};
+        if (record.lesson) lessons++;
+        viewed += Array.isArray(record.viewed) ? record.viewed.length : 0;
+        totalSteps += module.steps.length;
+        if (completedSequences.has(module.name)) sequencing++;
+        const attempts = Array.isArray(record.attempts) ? record.attempts : [];
+        if (attempts.length) {
+            const scores = attempts.map(a => Number(a.score)).filter(Number.isFinite);
+            if (scores.length) { assessments++; scoreSum += Math.max(...scores); }
+        }
     });
-    return {username, lessons, viewed, totalSteps, sequencing, assessments, averageScore: assessments ? Math.round(scoreSum / assessments) : null};
+    return { username, lessons, viewed, totalSteps, sequencing, assessments,
+        averageScore: assessments ? Number((scoreSum / assessments).toFixed(1)) : null };
 }
 
 function renderTeacherProgress() {
@@ -4691,22 +4660,25 @@ function renderTeacherProgress() {
     if (!host) return;
     const names = localProfileNames();
     if (!names.length) {
-        host.innerHTML = `<div class="panel"><p>No learner profiles are saved on this browser yet.</p></div>`;
+        host.innerHTML = `<div class="panel"><p>No learner profiles are saved on this browser yet.</p><p class="small-text">This prototype reads local progress only from profiles stored on the current device and browser.</p></div>`;
         return;
     }
     const rows = names.map(summarizeProgressFor);
-    host.innerHTML = `<div class="teacher-table-wrap"><table class="teacher-table"><thead><tr><th>Learner</th><th>Lessons</th><th>Viewed steps</th><th>Sequencing</th><th>Assessments</th><th>Avg. score</th></tr></thead><tbody>${rows.map(r => `<tr><td>${escapeHTML(r.username)}</td><td>${r.lessons}/8</td><td>${r.viewed}/${r.totalSteps}</td><td>${r.sequencing}/8</td><td>${r.assessments}/8</td><td>${r.averageScore === null ? "—" : r.averageScore}</td></tr>`).join("")}</tbody></table></div><p class="small-text">Prototype limitation: this is a local-device snapshot, not authenticated cross-device real-time analytics.</p>`;
+    host.innerHTML = `<div class="teacher-table-wrap"><table class="teacher-table"><thead><tr><th>Learner</th><th>Lessons</th><th>Viewed Steps</th><th>Sequencing</th><th>Assessments</th><th>Avg. Best Score</th></tr></thead><tbody>${rows.map(r => `<tr><td>${escapeHTML(r.username)}</td><td>${r.lessons}/${MODULES.length}</td><td>${r.viewed}/${r.totalSteps}</td><td>${r.sequencing}/${MODULES.length}</td><td>${r.assessments}/${MODULES.length}</td><td>${r.averageScore === null ? "—" : `${r.averageScore}/10`}</td></tr>`).join("")}</tbody></table></div><aside class="note"><strong>Prototype Limitation</strong><p>This view summarizes learner progress saved on the current browser and device only. It is not an authenticated cross-device or real-time learning analytics system.</p></aside>`;
 }
 
 function exportLocalProgressCSV() {
     const rows = localProfileNames().map(summarizeProgressFor);
     if (!rows.length) { notify("No local learner progress to export."); return; }
-    const csv = ["Learner,Lessons Completed,Viewed Steps,Total Steps,Sequencing Completed,Assessments,Average Score", ...rows.map(r => [r.username,r.lessons,r.viewed,r.totalSteps,r.sequencing,r.assessments,r.averageScore ?? ""].map(v => `"${String(v).replaceAll('"','""')}"`).join(","))].join("\
-");
+    const header = ["Learner", "Lessons Completed", "Viewed Steps", "Total Steps", "Sequencing Completed", "Assessments", "Average Best Score"];
+    const csvRows = [header, ...rows.map(r => [r.username, r.lessons, r.viewed, r.totalSteps, r.sequencing, r.assessments, r.averageScore ?? ""])];
+    const csv = csvRows.map(row => row.map(value => `"${String(value).replaceAll('"', '""')}"`).join(",")).join("\n");
     const blob = new Blob([csv], {type:"text/csv;charset=utf-8"});
+    const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob); a.download = "SplicEd_Local_Progress.csv"; a.click();
-    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    a.href = url; a.download = "SplicEd_Local_Progress.csv";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
 }/* =========================================================
    SPLICED — REAL SUB-TABS
    Learn: Modules / Open Lesson
@@ -4905,3 +4877,157 @@ document.addEventListener(
 
     }
 );
+
+
+/* =========================================================
+   SPLICED — FINAL SUB-TAB SAFETY
+   Prevent blank Open Lesson panel before a module is opened.
+   ========================================================= */
+(() => {
+    "use strict";
+
+    const previousSetLearnTab = window.setLearnTab;
+
+    window.setLearnTab = function(tab) {
+        const viewer = document.getElementById("lessonViewer");
+
+        if (tab === "lesson" && (!viewer || !viewer.innerHTML.trim())) {
+            tab = "modules";
+            if (typeof notify === "function") {
+                notify("Open a module first to view its lesson.");
+            }
+        }
+
+        return previousSetLearnTab(tab);
+    };
+})();
+
+/* =========================================================
+   SPLICED — POSITION → ACTION → CHECK VISUAL UPGRADE
+   Added after panel feedback on clearer procedural movement,
+   orientation and wrap direction.  Numeric angles are NOT
+   claimed unless verified by the instructor/reference.
+   ========================================================= */
+(() => {
+    "use strict";
+
+    const PAC = {
+        0: [
+            ["Keep both conductors separate and easy to identify.", "Prepare the working ends before joining them.", "Exposed ends are clean and ready for alignment."],
+            ["Hold the two stripped ends beside each other.", "Bring the conductors to the same working area.", "Both working ends have enough exposed length for the joint."],
+            ["Place the exposed ends parallel and pointing in the same direction.", "Align the conductors before twisting.", "The ends sit evenly side-by-side without crossing early."],
+            ["Keep the aligned pair together at the base.", "Rotate the free ends together in one consistent wrap direction.", "The twist develops evenly from the base toward the tip."],
+            ["Keep the finished twisted tail centered.", "Tighten and finish the joint without leaving loose strands.", "The tail is compact, even, and has no sharp loose end."],
+            ["Hold the completed joint where the full twist is visible.", "Inspect the finished form before covering or using it.", "The joint is tight, neat, and matches the demonstrated form."]
+        ],
+        1: [
+            ["Keep the two conductors facing each other with prepared working ends.", "Expose the required working length on both conductors.", "Both ends are clean and ready to cross."],
+            ["Cross the conductors at the center to form an X-like working position.", "Bring each free end across the opposite conductor.", "The center crossing is stable and both ends can wrap around the opposite side."],
+            ["Hold the center crossing while keeping the main conductors nearly in line.", "Form the compact center tie before wrapping the free ends.", "The center connection stays aligned instead of opening apart."],
+            ["Keep the center steady and the first free end angled toward the opposite conductor.", "Wrap the first free end around the opposite conductor in one consistent direction.", "Wraps sit beside one another and do not overlap randomly."],
+            ["Keep the first side secure while positioning the second free end.", "Wrap the second free end around the opposite conductor.", "Both sides are tight and balanced around the center."],
+            ["Hold the finished splice along its main axis.", "Inspect and finish the exposed ends.", "The splice is compact, aligned, and free of loose sharp ends."]
+        ],
+        2: [
+            ["Face the two prepared conductors toward each other with longer working ends.", "Prepare enough exposed length for the longer tie.", "Both ends have sufficient working length for the extended wraps."],
+            ["Cross the conductors at the center while keeping the main runs aligned.", "Position each free end across the opposite conductor.", "The center crossing is stable and symmetrical."],
+            ["Hold the crossing and keep the center section elongated rather than bunched.", "Form the long center tie with the conductors following the same main axis.", "The center remains straight enough for the longer wrap pattern."],
+            ["Angle the first free end toward the opposite conductor while holding the center.", "Wrap the first free end around the opposite conductor with even spacing.", "The first set of turns is tight, adjacent, and controlled."],
+            ["Keep the first wrap secure and position the other free end for the opposite side.", "Wrap the second free end around the opposite conductor.", "Both wrap groups are even and the center remains aligned."],
+            ["Support the splice along its length.", "Finish and inspect the completed long-tie connection.", "The extended splice is neat, tight, and has no loose end." ]
+        ],
+        3: [
+            ["Keep the main conductor straight and continuous; position the branch below or beside the tap point.", "Prepare the branch working end and the tap area.", "The main conductor remains continuous and the branch is ready to wrap."],
+            ["Place the branch against the main conductor at the selected tap point.", "Bring the branch end around the main conductor.", "The branch contacts the main conductor firmly before wrapping."],
+            ["Hold the branch base steady while the free end points around the main conductor.", "Wrap the branch around the main conductor in one consistent direction.", "Turns sit next to each other and grip the main conductor."],
+            ["Keep tension on the completed wraps.", "Tighten and finish the branch end.", "The tap is compact and the branch does not loosen."],
+            ["Hold the main and branch so the T-shaped relationship is visible.", "Inspect the completed tap before covering it.", "The main remains continuous and the branch connection is tight and neat." ]
+        ],
+        4: [
+            ["Keep the main conductor straight and place the branch near the tap point.", "Prepare the working end and identify where the locking loop will form.", "The branch has enough working length for the knot and wraps."],
+            ["Bring the branch around the main conductor to start a locking loop.", "Form the knot/locking turn before the regular wraps.", "The loop locks against the main conductor instead of sliding freely."],
+            ["Hold the locking loop in place and direct the free end around the main conductor.", "Tighten the knot and begin the wrap in the same controlled direction.", "The locking section is secure before additional turns are made."],
+            ["Maintain tension at the knot while guiding the free end around the main.", "Continue the branch wraps beside the locking turn.", "Wraps are adjacent, tight, and do not cross over each other unnecessarily."],
+            ["Support the finished branch at the tap point.", "Finish and inspect the knotted tap.", "The locking turn and wraps are compact and the branch is secure." ]
+        ],
+        5: [
+            ["Keep the main conductor straight and position the branch for the aerial tap point.", "Prepare the conductors and working end for the supported tap.", "The branch is positioned without disturbing the main run."],
+            ["Bring the branch into contact with the main conductor at the tap point.", "Form the initial holding turn around the main conductor.", "The first turn holds the branch in position."],
+            ["Keep the branch under control while directing the free end around the main conductor.", "Continue the wrap in a consistent direction with even spacing.", "The branch stays supported and the wraps remain orderly."],
+            ["Maintain tension while completing the final turns.", "Tighten and finish the aerial tap connection.", "The connection is compact with no loose wrap."],
+            ["View the complete tap from the side and along the main conductor.", "Inspect the finished joint and branch orientation.", "The branch is secure and the main conductor remains properly aligned." ]
+        ],
+        6: [
+            ["Keep the main conductor accessible and position the fixture lead below the connection point.", "Prepare the working ends before joining.", "The fixture lead has enough exposed length for the connection."],
+            ["Bring the fixture lead up to the main conductor at the connection point.", "Place the lead against the conductor before wrapping.", "The two conductors make firm contact."],
+            ["Bend the main/fixture connection so the lead is mechanically supported.", "Form the securing bend shown in the illustration.", "The lead is held in position and does not pull straight out."],
+            ["Hold the bend steady and direct the fixture lead around the conductor.", "Wrap the fixture lead in one consistent direction around the connection.", "Turns are tight and placed beside one another."],
+            ["Support the finished connection while keeping the lead in its intended direction.", "Finish and inspect the fixture joint.", "The joint is secure, compact, and the lead is properly supported." ]
+        ],
+        7: [
+            ["Keep the main conductor straight and identify the crossing/branch locations.", "Prepare the conductors that will meet at the joint.", "All working ends are clean and have sufficient exposed length."],
+            ["Place the crossing conductor across the main at the intended intersection.", "Establish the cross position before making wraps.", "The intersection is centered and stable."],
+            ["Hold the intersection while directing the first free end around the main conductor.", "Make the first controlled wrap around the crossing point.", "The first side grips the intersection without shifting it."],
+            ["Keep the first side secure and position the second branch/free end.", "Wrap the opposite side in the demonstrated direction.", "Both sides hold the crossing evenly."],
+            ["Maintain the cross orientation while completing the remaining turns.", "Tighten and organize the wraps around the joint.", "Wraps are compact and the conductors remain in the intended cross arrangement."],
+            ["Hold the completed cross joint so all sides can be seen.", "Inspect and finish the joint before covering or using it.", "The intersection is tight, balanced, and has no loose sharp end." ]
+        ]
+    };
+
+    function pacFor(moduleIndex, stepIndex) {
+        const rows = PAC[moduleIndex] || [];
+        return rows[Math.max(0, Math.min(stepIndex, rows.length - 1))] || [
+            "Position the conductors as shown.",
+            "Perform the demonstrated action with controlled movement.",
+            "Check the result before continuing."
+        ];
+    }
+
+    window.splicedPAC = pacFor;
+
+    // Wrap every existing SVG illustration with consistent orientation/movement cues.
+    const originalWireDiagram = window.wireDiagram || wireDiagram;
+    window.wireDiagram = wireDiagram = function(moduleIndex, stepIndex, animate = false) {
+        let svg = originalWireDiagram(moduleIndex, stepIndex, animate);
+        if (stepIndex < 0) return svg;
+        const [position, action, check] = pacFor(moduleIndex, stepIndex);
+        const actionLower = action.toLowerCase();
+        const isWrap = /wrap|rotate|twist|turn|around|loop/.test(actionLower);
+        const isCross = /cross|intersection/.test(actionLower);
+        const cue = `
+            <g class="pac-svg-cue" aria-hidden="true">
+                <rect x="18" y="18" width="196" height="34" rx="17" fill="#11181c" fill-opacity=".90" stroke="#e0a16f"/>
+                <text x="34" y="40" fill="#f2e8df" font-size="14" font-family="Arial, sans-serif">${isWrap ? "↻ WRAP / ROTATE" : isCross ? "↗ CROSS / POSITION" : "→ ACTION DIRECTION"}</text>
+                ${isWrap ? `
+                    <path d="M535 92 A52 52 0 1 1 500 48" fill="none" stroke="#e0a16f" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 6" class="pac-motion-arrow"/>
+                    <path d="M500 48 l16 2 l-7 14" fill="none" stroke="#e0a16f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+                ` : `
+                    <path d="M500 72 L575 72" fill="none" stroke="#e0a16f" stroke-width="4" stroke-linecap="round" stroke-dasharray="8 6" class="pac-motion-arrow"/>
+                    <path d="M575 72 l-15 -10 v20 z" fill="#e0a16f"/>
+                `}
+            </g>`;
+        return svg.replace("</svg>", cue + "</svg>");
+    };
+
+    // Add a compact Position → Action → Check strip to Practice without adding more dropdowns.
+    const originalRenderPractice = window.renderPractice || renderPractice;
+    window.renderPractice = renderPractice = function() {
+        originalRenderPractice();
+        const host = document.getElementById("practiceContent");
+        if (!host) return;
+        const workbench = host.querySelector(".study-workbench");
+        const columns = workbench?.querySelector(".study-columns");
+        if (!workbench || !columns) return;
+        const [position, action, check] = pacFor(selectedModule, currentStep);
+        const strip = document.createElement("section");
+        strip.className = "pac-strip";
+        strip.setAttribute("aria-label", "Position Action Check guide");
+        strip.innerHTML = `
+            <div class="pac-card"><span class="pac-number">1</span><div><strong>POSITION</strong><p>${escapeHTML(position)}</p></div></div>
+            <div class="pac-arrow" aria-hidden="true">→</div>
+            <div class="pac-card"><span class="pac-number">2</span><div><strong>ACTION</strong><p>${escapeHTML(action)}</p><small>Follow the direction cue in the animation. Exact dimensions/angles should follow the instructor-approved specification.</small></div></div>
+            <div class="pac-arrow" aria-hidden="true">→</div>
+            <div class="pac-card"><span class="pac-number">3</span><div><strong>CHECK</strong><p>${escapeHTML(check)}</p></div></div>`;
+        workbench.insertBefore(strip, columns);
+    };
+})();
