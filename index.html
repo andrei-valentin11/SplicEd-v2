@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta name="google-site-verification" content="UtWwapqv9-n4_0UC2a3u9n4DhUMqULc14oYUTb9WJiA" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -17,7 +18,7 @@
 
 <body>
 
-    <!-- AUTHENTICATION -->
+    <!-- LEARNER START -->
 
     <main id="authPage" class="auth-page">
         <section class="auth-intro">
@@ -64,153 +65,38 @@
         </section>
 
         <section class="auth-card">
-            <span class="eyebrow">LEARNER ACCESS</span>
+            <span class="eyebrow">LEARNER START</span>
             <h2>Welcome to SplicEd</h2>
 
             <p class="muted">
-                Sign in to continue your saved learning progress.
+                Enter a nickname to open your lessons and continue progress saved on this browser.
             </p>
 
-            <div class="auth-tabs">
-                <button
-                    id="loginTab"
-                    class="auth-tab active"
-                    type="button"
-                    onclick="showAuthForm('login')"
+            <form id="profileForm" class="profile-form" onsubmit="handleProfileStart(event)">
+                <label for="profileName">Learner nickname</label>
+                <input
+                    id="profileName"
+                    name="profileName"
+                    autocomplete="nickname"
+                    maxlength="40"
+                    placeholder="e.g., Andrei"
+                    required
                 >
-                    Log In
+
+                <button class="primary full-width" type="submit">
+                    Start Learning →
                 </button>
 
-                <button
-                    id="registerTab"
-                    class="auth-tab"
-                    type="button"
-                    onclick="showAuthForm('register')"
-                >
-                    Register
-                </button>
+                <p id="profileMessage" class="form-message" role="status" aria-live="polite"></p>
+            </form>
+
+            <div id="returningProfiles" class="profile-list" hidden>
+                <p class="small-text">Saved learner profiles on this browser</p>
+                <div id="profileButtons" class="profile-buttons"></div>
             </div>
 
-            <form id="loginForm" onsubmit="handleLogin(event)">
-                <label for="loginUsername">Username</label>
-                <input
-                    id="loginUsername"
-                    name="username"
-                    autocomplete="username"
-                    required
-                >
-
-                <label for="loginPassword">Password</label>
-
-                <div class="password-field">
-                    <input
-                        id="loginPassword"
-                        name="password"
-                        type="password"
-                        autocomplete="current-password"
-                        required
-                    >
-
-                    <button
-                        class="password-toggle"
-                        type="button"
-                        aria-label="Show password"
-                        onclick="togglePassword('loginPassword', this)"
-                    >
-                        Show
-                    </button>
-                </div>
-
-                <button
-                    class="text-button"
-                    type="button"
-                    onclick="forgotPassword()"
-                >
-                    Forgot password?
-                </button>
-
-                <button class="primary full-width" type="submit">
-                    Log In →
-                </button>
-
-                <p id="loginMessage" class="form-message" role="status"></p>
-            </form>
-
-            <form
-                id="registerForm"
-                onsubmit="handleRegister(event)"
-                hidden
-            >
-                <div class="form-grid">
-                    <div>
-                        <label for="registerUsername">Preferred username</label>
-                        <input
-                            id="registerUsername"
-                            autocomplete="username"
-                            minlength="3"
-                            required
-                        >
-                    </div>
-
-                    <div>
-                        <label for="confirmUsername">Confirm username</label>
-                        <input
-                            id="confirmUsername"
-                            autocomplete="off"
-                            required
-                        >
-                    </div>
-
-                    <div>
-                        <label for="registerPassword">Preferred password</label>
-                        <input
-                            id="registerPassword"
-                            type="password"
-                            autocomplete="new-password"
-                            minlength="6"
-                            required
-                        >
-                    </div>
-
-                    <div>
-                        <label for="confirmPassword">Confirm password</label>
-                        <input
-                            id="confirmPassword"
-                            type="password"
-                            autocomplete="new-password"
-                            required
-                        >
-                    </div>
-                </div>
-
-                <label for="gender">Gender</label>
-                <select id="gender" required>
-                    <option value="">Select an option</option>
-                    <option>Male</option>
-                    <option>Female</option>
-                    <option>Non-binary</option>
-                    <option>Prefer to self-describe</option>
-                    <option>Prefer not to say</option>
-                </select>
-
-                <label for="personalEmail">Personal email</label>
-                <input
-                    id="personalEmail"
-                    type="email"
-                    autocomplete="email"
-                    required
-                >
-
-                <button class="primary full-width" type="submit">
-                    Create Account →
-                </button>
-
-                <p id="registerMessage" class="form-message" role="status"></p>
-            </form>
-
             <p class="small-text auth-note">
-                Browser-only learning prototype. Use a demo password.
-                Accounts and progress are stored on this browser.
+                SplicEd asks only for a nickname. Your nickname and learning progress stay in this browser; no password or personal email is needed.
             </p>
         </section>
     </main>
@@ -259,6 +145,10 @@
                     Progress
                 </button>
 
+                <button data-page="teacher" onclick="navigate('teacher')">
+                    Teacher Guide
+                </button>
+
                 <button data-page="about" onclick="navigate('about')">
                     About Us
                 </button>
@@ -267,7 +157,7 @@
             <div class="account-menu">
                 <span id="userLabel"></span>
                 <button class="secondary small-button" onclick="logout()">
-                    Log Out
+                    Change Learner
                 </button>
             </div>
         </header>
@@ -285,7 +175,7 @@
 
                         <h1>
                             Understand the steps.
-                            <span>Master the procedure.</span>
+                            <span>Build procedural understanding.</span>
                         </h1>
 
                         <p>
@@ -370,6 +260,29 @@
                     </p>
                 </div>
 
+                <nav class="sub-tabs" role="tablist" aria-label="Learn sections">
+                    <button
+                        class="sub-tab active"
+                        type="button"
+                        role="tab"
+                        data-learn-tab="modules"
+                        aria-selected="true"
+                        onclick="setLearnTab('modules')"
+                    >
+                        Modules
+                    </button>
+                    <button
+                        class="sub-tab"
+                        type="button"
+                        role="tab"
+                        data-learn-tab="lesson"
+                        aria-selected="false"
+                        onclick="setLearnTab('lesson')"
+                    >
+                        Open Lesson
+                    </button>
+                </nav>
+
                 <div id="lessonCards" class="lesson-grid"></div>
                 <div id="lessonViewer" hidden></div>
             </section>
@@ -378,12 +291,9 @@
 
             <section id="practice" class="page">
                 <div class="section-heading">
-                    <span class="eyebrow">OBSERVE • REPLAY • UNDERSTAND</span>
+                    <span class="eyebrow">ONE STEP AT A TIME</span>
                     <h1>Guided Practice</h1>
-                    <p>
-                        Study one action at a time.
-                        Save difficult steps to your review list.
-                    </p>
+                    <p>Choose a module, watch the action, read the short instruction, then move to the next step when you are ready.</p>
                 </div>
 
                 <div id="practiceContent"></div>
@@ -449,6 +359,91 @@
                 <div id="progressContent"></div>
             </section>
 
+            <!-- TEACHER GUIDE / LOCAL EDUCATOR VIEW -->
+
+            <section id="teacher" class="page">
+                <div class="section-heading">
+                    <span class="eyebrow">EDUCATOR SUPPORT</span>
+                    <h1>Teacher Guide & Local Progress View</h1>
+                    <p>
+                        Use SplicEd before or alongside supervised laboratory work.
+                        This prototype can summarize learner profiles saved on this browser;
+                        cross-device real-time monitoring requires an authenticated database/backend.
+                    </p>
+                </div>
+
+                <nav class="sub-tabs" role="tablist" aria-label="Teacher Guide sections">
+                    <button
+                        class="sub-tab active"
+                        type="button"
+                        role="tab"
+                        data-teacher-tab="guide"
+                        aria-selected="true"
+                        onclick="setTeacherTab('guide')"
+                    >
+                        Teaching Guide
+                    </button>
+                    <button
+                        class="sub-tab"
+                        type="button"
+                        role="tab"
+                        data-teacher-tab="progress"
+                        aria-selected="false"
+                        onclick="setTeacherTab('progress')"
+                    >
+                        Local Progress
+                    </button>
+                </nav>
+
+                <div id="teacherGuidePanel">
+                <div id="teacherGuideCards" class="teacher-grid">
+                    <article class="panel">
+                        <span class="step-number">01</span>
+                        <h3>Recommended lesson flow</h3>
+                        <p>Orient learners to safety and objectives → Learn/Reference → Guided Mode → Guided Order → Independent Challenge → Assessment → hands-on laboratory performance with instructor supervision.</p>
+                    </article>
+                    <article class="panel">
+                        <span class="step-number">02</span>
+                        <h3>Differentiation</h3>
+                        <p>Use Guided Mode for learners who need prompts, step labels, review, and feedback. Use Independent Mode when learners are ready for reduced cues and procedural recall.</p>
+                    </article>
+                    <article class="panel">
+                        <span class="step-number">03</span>
+                        <h3>How to interpret progress</h3>
+                        <p>Progress indicators show exposure, practice, sequencing attempts, and assessment results. They do not by themselves prove practical electrical competence or long-term mastery.</p>
+                    </article>
+                    <article class="panel">
+                        <span class="step-number">04</span>
+                        <h3>Practical boundary</h3>
+                        <p>Verify conductor preparation, turns, finishing, tool handling, and safety using the instructor-approved procedure and actual laboratory performance.</p>
+                    </article>
+                </div>
+
+                <section class="theory-section">
+                    <span class="eyebrow">CURRICULUM BASELINE ALIGNMENT</span>
+                    <h2>How SplicEd positions its content</h2>
+                    <div class="theory-grid">
+                        <article class="panel"><h3>CHED / TUP</h3><p>Defines the higher-education and Industrial Arts program context of the intended users and local course implementation.</p></article>
+                        <article class="panel"><h3>DepEd EIM</h3><p>Provides a baseline instructional curriculum reference for Electrical Installation and Maintenance concepts, terminology, and progression where applicable.</p></article>
+                        <article class="panel"><h3>TESDA EIM NC II</h3><p>Provides technical competency and performance-standard reference for electrical wiring termination/connection and splice-related competencies.</p></article>
+                        <article class="panel"><h3>Instructor validation</h3><p>Exact classroom procedures, strip lengths, turns, materials, and safety requirements follow the validated local instructional specification.</p></article>
+                    </div>
+                </section>
+                </div>
+
+                <div id="teacherProgressPanel" hidden>
+                <section class="theory-section">
+                    <div class="section-heading compact-heading">
+                        <span class="eyebrow">THIS BROWSER</span>
+                        <h2>Learner Progress Snapshot</h2>
+                        <p>For classroom demonstration and prototype evaluation only. Data shown here are stored locally on this device.</p>
+                    </div>
+                    <div class="button-row"><button class="secondary" onclick="exportLocalProgressCSV()">Export Local Progress CSV</button></div>
+                    <div id="teacherProgressContent"></div>
+                </section>
+                </div>
+            </section>
+
             <!-- ABOUT US -->
 
             <section id="about" class="page">
@@ -457,7 +452,14 @@
                     <h1>About Us</h1>
                 </div>
 
-                <div class="about-layout">
+                <div class="section-tabs about-tabs" role="tablist" aria-label="About SplicEd sections">
+                    <button class="active" data-about-tab="overview" role="tab" aria-selected="true" onclick="setAboutTab('overview')">Overview</button>
+                    <button data-about-tab="team" role="tab" aria-selected="false" onclick="setAboutTab('team')">Team</button>
+                    <button data-about-tab="alignment" role="tab" aria-selected="false" onclick="setAboutTab('alignment')">Curriculum Alignment</button>
+                    <button data-about-tab="design" role="tab" aria-selected="false" onclick="setAboutTab('design')">Design Basis</button>
+                </div>
+
+                <div data-about-panel="overview"><div class="about-layout">
                     <article class="panel">
                         <h2>Learning procedures, one step at a time.</h2>
 
@@ -483,7 +485,8 @@
                     </aside>
                 </div>
 
-                <section class="team-section">
+                </div>
+                <div data-about-panel="team" hidden><section class="team-section">
                     <h2>Meet the Team</h2>
 
                     <div class="team-grid">
@@ -514,7 +517,36 @@
                     </div>
                 </section>
 
-                <section class="theory-section">
+                </div>
+                <div data-about-panel="alignment" hidden><section class="theory-section">
+                    <span class="eyebrow">COMPETENCY-ALIGNED CONTENT</span>
+                    <h2>What the module content is anchored to</h2>
+                    <div class="theory-grid">
+                        <article class="panel">
+                            <span class="step-number">01</span>
+                            <h3>Higher-education context: CHED + TUP</h3>
+                            <p>SplicEd is designed for TUP Manila Industrial Arts students. CHED provides the higher-education program context, while the local course and instructor-validated procedure provide the immediate classroom basis.</p>
+                        </article>
+                        <article class="panel">
+                            <span class="step-number">02</span>
+                            <h3>Baseline instructional alignment: DepEd EIM</h3>
+                            <p>DepEd Electrical Installation and Maintenance curriculum materials are used as a baseline instructional reference for relevant concepts, terminology, and progression where the same electrical competencies are addressed.</p>
+                        </article>
+                        <article class="panel">
+                            <span class="step-number">03</span>
+                            <h3>Technical competency reference: TESDA EIM NC II</h3>
+                            <p>TESDA Electrical Installation and Maintenance NC II provides technical competency and performance-standard reference for terminating/connecting electrical wiring and splice-related competencies.</p>
+                        </article>
+                        <article class="panel">
+                            <span class="step-number">04</span>
+                            <h3>Practical boundary</h3>
+                            <p>SplicEd prepares learners cognitively. Actual competency still requires supervised hands-on performance, safety checks, and instructor assessment.</p>
+                        </article>
+                    </div>
+                </section>
+
+                </div>
+                <div data-about-panel="design" hidden><section class="theory-section">
                     <span class="eyebrow">THEORY-ALIGNED DESIGN</span>
                     <h2>Why SplicEd is designed this way</h2>
 
@@ -556,6 +588,7 @@
                         </article>
                     </div>
                 </section>
+            </div>
             </section>
         </main>
 
